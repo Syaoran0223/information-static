@@ -1,0 +1,36 @@
+<div>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th></th>
+      <th colspan="4" class="text-center">上午</th>
+      <th colspan="4" class="text-center">下午</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th class="text-center">第一节</th>
+      <th class="text-center">第二节</th>
+      <th class="text-center">第三节</th>
+      <th class="text-center">第四节</th>
+      <th class="text-center">第一节</th>
+      <th class="text-center">第二节</th>
+      <th class="text-center">第三节</th>
+      <th class="text-center">第四节</th>
+    </tr>
+    </thead>
+
+    <tr v-for="item in items">
+      <th>
+        星期{{item.title}}
+      </th>
+      <td v-for="day_cell in item.data">
+        <div v-if="day_cell.teacher">
+          <b>{{day_cell.scheduleData.subject | get_const_value 'subject'}}</b>
+          <div class="text-muted small">{{day_cell.scheduleData.teacherRealName}}</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+</div>

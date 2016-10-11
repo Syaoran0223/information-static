@@ -1,0 +1,78 @@
+<template>
+  <div class="teaching-calendar">
+
+    <div class="cal-toolbar clearfix">
+      <h4 class="pull-left">{{calendar_title}}</h4>
+      <div class="pull-right">
+        <div class="btn-group">
+          <button class="btn btn-default"
+              @click="go_prev">往后</button>
+          <button class="btn btn-default"
+              @click="go_today">今天</button>
+          <button class="btn btn-default"
+              @click="go_next">往前</button>
+        </div>
+        <div class=" btn-group
+          ">
+          <button class="btn btn-default"
+                  :class="{ 'active': viewport=='year' }"
+                  @click="set_vp('year')"
+              >年</button>
+          <button class="btn btn-default"
+                  :class="{ 'active': viewport=='month' }"
+                  @click="set_vp('month')"
+              >月</button>
+          <button class="btn btn-default"
+                  :class="{ 'active': viewport=='day' }"
+                  @click="set_vp('day')"
+              >日</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cal-viewports">
+
+      <div class="viewports-year" v-if="viewport=='year'"></div>
+      <div class="viewports-month" v-if="viewport=='month'">
+
+        <table class="cal-table">
+          <thead>
+            <tr>
+              <th v-for="w in weeks">星期{{w}}</th>
+            </tr>
+          </thead>
+          <tr v-for="row in day_arr">
+            <td v-for="d in row">
+
+              <div class="cal-row-cell"
+                :class="{
+                  'today': d.today,
+                  'highlight': d.highlight
+                }"
+                @click="on_cell_click(d)"
+                >
+                <div class="day-label">{{d.date}}</div>
+                <div class="cell-events">
+
+                </div>
+              </div>
+
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="viewports-day" v-if="viewport=='day'"></div>
+
+    </div>
+
+  </div>
+</template>
+<script type="text/babel">
+  import baseCalendar from 'components/teaching-calendar'
+
+  export default {
+    extends: baseCalendar
+  }
+
+</script>

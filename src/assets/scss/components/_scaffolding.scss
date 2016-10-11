@@ -1,0 +1,25 @@
+.center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1 1 auto;
+}
+.flex-2 {
+  flex: 2 2 auto;
+}
+
+.app-footer {
+  margin: 10px 0;
+  color: #999;
+  text-align: center;
+}
+
+.label-large {
+  display: inline-block;
+  padding-top: 0.3em;
+  font-size: 12px;
+}

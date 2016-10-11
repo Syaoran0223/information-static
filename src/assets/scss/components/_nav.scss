@@ -1,0 +1,25 @@
+.app-header {
+  border: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 0 1px 4px rgba(#000, .2);
+
+  .app-header-nav {
+    margin-left: 30px;
+  }
+}
+
+.nav-pills > li > a {
+  &.active,
+  &:hover {
+    color: #fff !important;
+    background-color: $brand-primary !important;
+  }
+}
+
+.app-page-navbar {
+  margin-bottom: 20px;
+  padding: 5px;
+  border: 1px solid $brand-border;
+  border-radius: $border-radius-base;
+}

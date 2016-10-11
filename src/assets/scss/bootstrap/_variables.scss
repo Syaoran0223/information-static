@@ -1,0 +1,50 @@
+//== Colors
+$brand-border:          #ddd;
+$gray-lightest:         #f3f3f3;
+
+$brand-primary:         #009588;
+$brand-success:         #5cb85c;
+$brand-info:            #00BFA5;
+$brand-warning:         #FF6D00;
+$brand-danger:          #ff3366;
+
+//== Scaffolding
+$body-bg:               #ececec;
+$link-color:            $brand-primary;
+
+//== Grid system
+$grid-gutter-width:     15px;
+
+//== Iconography
+$font-family-sans-serif:  Helvetica, Arial, STXihei, "Microsoft YaHei", sans-serif;
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+
+//== Component
+//$padding-base-vertical:     4px;
+//$padding-base-horizontal:   8px;
+
+//== Buttons
+$btn-default-border:             $brand-border;
+$btn-primary-bg:                 $brand-primary;
+
+//== Forms
+$input-border:                   $brand-border;
+
+//== Navbar
+$navbar-height:                    40px;
+$navbar-padding-vertical:          10px;
+$navbar-border-radius:             0;
+$navbar-default-color:             #333;
+$navbar-default-bg:                #fff;
+$navbar-default-link-color:                #333;
+$navbar-default-link-hover-bg:             $brand-primary;
+$navbar-default-link-active-color:         #fff;
+$navbar-default-link-active-bg:            $brand-primary;
+$navbar-default-brand-color:               $brand-primary;
+
+//== Modals
+//$modal-inner-padding:         10px;
+//$modal-title-padding:         10px;
+
+$base-box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+$base-box-shadow-hover: 0 3px 8px rgba(0, 0, 0, .2);

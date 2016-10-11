@@ -1,0 +1,37 @@
+.container {
+  margin-top: 5%;
+}
+
+.page-heading {
+  color: #009588;
+}
+
+.form-heading {
+  color: #317eac;
+}
+
+form, footer {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  padding: 15px 20px;
+  margin: 0 auto;
+  margin-bottom: 15px; }
+
+.logo {
+  width: 150px; }
+
+form {
+  margin-top: 20px; }
+
+#particles {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: -2; }

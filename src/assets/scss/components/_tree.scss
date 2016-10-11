@@ -1,0 +1,16 @@
+.tree-view {
+  td {
+    vertical-align: middle;
+  }
+
+  &__item {}
+  &__expander {
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
+}
+
+.tree-view__indent {
+  display: inline-block;
+  width: 2em;
+}

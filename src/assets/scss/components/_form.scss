@@ -1,0 +1,29 @@
+.tag-selector {
+  overflow: hidden;
+  &-item {
+    float: left;
+    line-height: $line-height-base;
+    padding: 6px 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    &.active {
+      background-color: $brand-primary;
+      color: #fff;
+    }
+  }
+}
+
+.form-horizontal .form-inline .form-group{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.form-inline {
+  .form-group {
+    margin-right: 20px;
+    margin-bottom: 5px;
+  }
+  .btn {
+    margin-bottom: 5px;
+  }
+}

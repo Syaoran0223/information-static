@@ -1,0 +1,84 @@
+.teaching-calendar {
+  $blue: #009588;
+  $blue-light: #e5f6f4;
+
+  .cal-toolbar {
+    margin-bottom: 10px;
+  }
+
+  .cal-table {
+    width: 100%;
+    table-layout: fixed;
+
+    thead{
+      border: 1px solid #e1e1e1;
+    }
+    th {
+      background-color: $blue-light;
+      text-align: center;
+      color: $blue;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+    td {
+      vertical-align: top;
+      border: 1px solid #e1e1e1;
+    }
+  }
+
+  .cal-row-cell {
+    position: relative;
+    min-height: 80px;
+
+    .cell-label {
+      padding-top: 5px;
+      padding-right: 5px;
+      text-align: right;
+      color: #aaa;
+      font-size: 1.2em;
+    }
+
+    .cell-events {
+      > div {
+        margin: 1px 2px 0;
+        padding: 0 5px;
+        overflow: hidden;
+        background-color: #e4f7f8;
+        border: 1px solid #9ae0e6;
+        border-radius: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: .85em;
+        cursor: pointer;
+
+        &.success {
+          background-color: lighten($brand-success, 20%);
+          border-color: $brand-success;
+        }
+        &.warning {
+          background-color: lighten($brand-warning, 20%);
+          border-color: $brand-warning;
+        }
+      }
+    }
+
+    &.today {
+      background-color: $blue-light;
+      border: 1px solid $blue;
+    }
+    &.highlight {
+      .cell-label {
+        color: #333;
+      }
+    }
+  }
+}
+
+.schedule-table {
+  td {
+    &:hover {
+      background-color: #eaeaea;
+    }
+  }
+}

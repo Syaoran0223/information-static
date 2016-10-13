@@ -60,6 +60,11 @@
       btnName: {
         type: String,
         default: '点击上传文件'
+      },
+      state: {
+        twoWay: true,
+        type: String,
+        default: 'done'
       }
     },
     data() {
@@ -127,6 +132,7 @@
         this.uploader.on('uploadStart', ( file )=> {
           let fileState = this.getFileState(file.id)
           fileState.status = 'uploading'
+          this.state = 'uploading'
         })
         // 上传成功
         this.uploader.on( 'uploadSuccess', ( file ) => {
@@ -135,6 +141,11 @@
             return
           }
           fileState.status = 'success'
+          this.uploader.removeFile(file.id)
+        })
+        // 上传结束
+        this.uploader.on('uploadFinished', (file) => {
+          this.state = 'done'
         })
         //接收服务端返回
         this.uploader.on('uploadAccept', (file, response) => {
@@ -175,7 +186,10 @@
           return f.id == file.id
         })
         this.items = files
-        if (file.status != 'complete') {
+        if (_.isEmpty(this.items)) {
+          this.state = 'done'
+        }
+        if (file.status != 'success') {
           this.uploader.removeFile(file.id)
         }
       },

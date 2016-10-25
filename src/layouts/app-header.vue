@@ -8,6 +8,11 @@
         <ul class="nav navbar-nav nav-pills app-header-nav">
           <li><a v-link="{ name: 'play' }">demo</a></li>
           <li><a v-link="{ name: 'home' }">待办</a></li>
+          <li><a v-link="{ name: 'PaperUpload' }">试卷上传</a></li>
+          <li><a v-link="{ name: 'PaperUploadList' }">上传记录</a></li>
+          <li><a v-link="{ name: 'WaitConfirm' }">待审核</a></li>
+          <li><a v-link="{ name: 'PaperConfirm' }">试卷审核</a></li>
+          <li><a v-link="{ name: 'ConfirmList' }">审核记录</a></li>
         </ul>
       </nav>
       <ul class="nav navbar-nav nav-pills navbar-right">

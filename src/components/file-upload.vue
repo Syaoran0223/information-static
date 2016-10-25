@@ -12,7 +12,7 @@
             <p class="title" style="z-index: 2000;">{{file.name}}</p>
             <p v-show="this.isTrue(file.can_preview) && (file.status=='success' || file.status=='complete')" class="imgWrap">
               <a v-bind:href="file.url" target="_blank">
-                <img v-bind:src="file.url+'?iopcmd=thumbnail&type=6&height=110&width=110'"/>
+                <img v-bind:src="file.url" width="110" height="110" />
               </a>
             </p>
             <p class="imgWrap" v-show="!this.isTrue(file.can_preview) && (file.status=='success' || file.status=='complete')">{{file.name}}</p>
@@ -20,7 +20,7 @@
             <p class="imgWrap" v-show="file.status=='pending'">等待上传...</p>
             <p class="imgWrap" v-show="file.status=='error'">{{file.error_msg}}</p>
             <span class="success" v-show="file.status=='success'"></span>
-            <div v-show="file.status=='uploading'" id="progress" class="progress img-progress"">
+            <div v-show="file.status=='uploading'" id="progress" class="progress img-progress">
               <div class="progress-bar progress-bar-success" v-bind:style="{ width: file.percentage }"></div>
             </div>
           </li>
@@ -80,7 +80,7 @@
           runtimeOrder: 'html5',
           chunked: false,
           chunkSize: 512 * 1024,
-          server: `${api_host}/teacher/uploads?module=teacher&dirname=${this.dirname}`,
+          server: `${api_host}/api/uploads`,
           // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
           disableGlobalDnd: true,
           fileNumLimit: 300,

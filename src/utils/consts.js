@@ -58,12 +58,18 @@ export const spec_type = {
 }
 
 export const grade = {
-  '一年级': '一年级',
-  '二年级': '二年级',
-  '三年级': '三年级',
-  '四年级': '四年级',
-  '五年级': '五年级',
-  '六年级': '六年级'
+  '1': '一年级',
+  '2': '二年级',
+  '3': '三年级',
+  '4': '四年级',
+  '5': '五年级',
+  '6': '六年级',
+  '7': '初一',
+  '8': '初二',
+  '9': '初三',
+  '10': '高一',
+  '11': '高二',
+  '12': '高三'
 }
 
 //TODO use section
@@ -305,4 +311,14 @@ export const excellent_type = {
   AREA_MS: '区名师',
   CITY_LEADER: '市学科带头人',
   PROVINCE_LEADER: '省学科带头人'
+}
+
+export const paper_type = {
+  PAPER_UNIT: '单元考',
+  PAPER_MIDLE_TERM: '半期考',
+  PAPER_LAST: '期末考',
+  PAPER_QULITY: '质检',
+  PAPER_MODEL: '模拟考',
+  PAPER_MIDLE: '中考',
+  PAPER_HIGH: '高考'
 }

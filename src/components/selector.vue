@@ -30,6 +30,7 @@
         type: String
       },
       remoteParams: {
+        twoWay: true,
         type: Object
       },
       const: {

@@ -9,7 +9,8 @@ const ajax = (url, {
   return new Promise((resolve, reject) => {
     $.ajax(url, {
       method,
-      data
+      data: JSON.stringify(data),
+      contentType: 'application/json; charset=utf-8'
     }).then((res) => {
       if (res.code == 201004) {
         window.location.replace(`${ api_host }/teacher/home/login`)

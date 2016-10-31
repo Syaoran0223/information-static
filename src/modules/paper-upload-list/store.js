@@ -1,7 +1,13 @@
 import createStore from 'store/createStore'
 
 const module_state = {
-    
+    config: {
+        api: 'api/paper/upload'
+    },
+    edit: {
+        is_new: true,
+        uploadState: 'done'
+    }
 }
 
 const module_actions = {

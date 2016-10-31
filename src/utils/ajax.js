@@ -6,10 +6,13 @@ const ajax = (url, {
   method='GET',
   data
 }) => {
+  if (method == 'POST' || method == 'PUT') {
+    data = JSON.stringify(data)
+  }
   return new Promise((resolve, reject) => {
     $.ajax(url, {
       method,
-      data: JSON.stringify(data),
+      data,
       contentType: 'application/json; charset=utf-8'
     }).then((res) => {
       if (res.code == 201004) {

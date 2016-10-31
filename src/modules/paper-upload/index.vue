@@ -50,7 +50,7 @@
                 <label for="" class="control-label col-sm-2">省</label>
                 <div class="col-sm-4">
                   <selector
-                    remote="api/province/"
+                    remote="api/province"
                     :value.sync="edit.formData.province_id"
                     :required="true"
                     width="100%"
@@ -59,7 +59,7 @@
                 <label for="" class="control-label col-sm-1">市</label>
                 <div class="col-sm-4">
                   <selector
-                    remote="api/city/"
+                    remote="api/city"
                     :remote-params.sync="cityForm"
                     :value.sync="edit.formData.city_id"
                     :required="true"
@@ -71,7 +71,7 @@
                 <label for="" class="control-label col-sm-2">县/区</label>
                 <div class="col-sm-4">
                   <selector
-                    remote="api/area/"
+                    remote="api/area"
                     :value.sync="edit.formData.area_id"
                     :remote-params.sync="areaForm"
                     :required="true"
@@ -81,7 +81,7 @@
                 <label for="" class="control-label col-sm-1">学校</label>
                 <div class="col-sm-4">
                   <selector
-                    remote="api/school/"
+                    remote="api/school"
                     :value.sync="edit.formData.school_id"
                     :remote-params.sync="schoolForm"
                     :required="true"

@@ -16,6 +16,20 @@ const module_actions = {
         router.go({
             name: 'PaperUploadList'
         })
+    },
+    parse_edit_submit_data ({ state }, customFormData) {
+        if (!!state.edit.formData.attachments) {
+            state.edit.formData.attachments = _.chain(state.edit.formData.attachments)
+                .filter((img)=> {
+                  return img.status == 'success'
+                })
+                .map((img)=> {
+                  img.id = _.uniqueId('upfile_')
+                  return img
+                })
+                .value()
+        }
+        return customFormData || state.edit.formData
     }
 }
 

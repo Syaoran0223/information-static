@@ -16,13 +16,7 @@
           <button class="btn btn-link"
               @click="on_item_edit_click(item)"
           >
-            <span v-if="item.state == 0 || item.state == 1">修改</span>
-            <span v-else>查看</span>
-          </button>
-
-          <button class="btn btn-link"
-              @click="on_item_remove_click(item)"
-          >删除
+            <span>我要审核</span>
           </button>
         </div>
       </div>

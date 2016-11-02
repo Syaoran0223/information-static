@@ -5,7 +5,7 @@
 
       <table-view></table-view>
       <edit-view></edit-view>
-
+      <confirm :open.sync="state.table.removeConfirm.open" @confirm="on_item_remove" :saving.sync="state.table.removeConfirm.saving"></confirm>
     </div>
   </div>
 

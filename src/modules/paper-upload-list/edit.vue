@@ -5,7 +5,7 @@
     <loading-state :loading="edit.loading">
       <div class="modal-header">
         <button type="button" class="close" @click="edit.open=false"><span>&times;</span></button>
-        <h4 class="modal-title">派车单<span v-if="!edit.is_new">({{ edit.formData.status | get_const_value 'commons_review_status' }})</span></h4>
+        <h4 class="modal-title">试卷</h4>
       </div>
 
       <div class="modal-body">
@@ -55,7 +55,7 @@
               <label for="" class="control-label col-sm-2">省</label>
               <div class="col-sm-4">
                 <selector
-                  remote="api/province/"
+                  remote="api/province"
                   :value.sync="edit.formData.province_id"
                   :required="true"
                   width="100%"
@@ -64,7 +64,7 @@
               <label for="" class="control-label col-sm-1">市</label>
               <div class="col-sm-4">
                 <selector
-                  remote="api/city/"
+                  remote="api/city"
                   :remote-params.sync="cityForm"
                   :value.sync="edit.formData.city_id"
                   :required="true"
@@ -76,7 +76,7 @@
               <label for="" class="control-label col-sm-2">县/区</label>
               <div class="col-sm-4">
                 <selector
-                  remote="api/area/"
+                  remote="api/area"
                   :value.sync="edit.formData.area_id"
                   :remote-params.sync="areaForm"
                   :required="true"
@@ -86,7 +86,7 @@
               <label for="" class="control-label col-sm-1">学校</label>
               <div class="col-sm-4">
                 <selector
-                  remote="api/school/"
+                  remote="api/school"
                   :value.sync="edit.formData.school_id"
                   :remote-params.sync="schoolForm"
                   :required="true"

@@ -1,7 +1,9 @@
 import createStore from 'store/createStore'
 
 const module_state = {
-    
+    config: {
+        api: 'api/paper/confirm/wait'
+    }
 }
 
 const module_actions = {

@@ -322,3 +322,9 @@ export const paper_type = {
   PAPER_MIDLE: '中考',
   PAPER_HIGH: '高考'
 }
+
+export const paper_state = {
+  0: '待审核',
+  1: '审核未通过',
+  2: '审核通过'
+}

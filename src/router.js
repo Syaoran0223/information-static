@@ -34,7 +34,7 @@ let map = {
     name: 'WaitConfirm',
     component: WaitConfirm
   },
-  '/paper-confirm': {
+  '/paper-confirm/:paper_id': {
     name: 'PaperConfirm',
     component: PaperConfirm
   },

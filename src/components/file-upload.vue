@@ -27,7 +27,7 @@
         </ul>
       </div>
     </div>
-    <div class="panel-footer clearfix">
+    <div class="panel-footer clearfix" v-if="!readonly">
       <div class="pull-right">
         <div id="{{ id }}"></div>
       </div>
@@ -65,6 +65,10 @@
         twoWay: true,
         type: String,
         default: 'done'
+      },
+      readonly: {
+        type: Boolean,
+        default: false
       }
     },
     data() {

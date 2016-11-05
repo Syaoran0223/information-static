@@ -70,3 +70,14 @@ export const parse_teachers = (teachers) => {
   })
   return data.join(',')
 }
+
+export const parse_timeout = (timeout) => {
+  let d = moment.duration(Number(timeout), 's')
+  let hour = d.hours()
+  hour = hour < 10 ? '0' + String(hour) : String(hour)
+  let minute = d.minutes()
+  minute = minute < 10 ? '0' + String(minute) : String(minute)
+  let second = d.seconds()
+  second = second < 10 ? '0' + String(second) : String(second)
+  return hour + ':' + minute + ':' + second
+}

@@ -1,7 +1,9 @@
 import createStore from 'store/createStore'
 
 const module_state = {
-    
+    conifg: {
+        api: 'api/examreview/list'
+    }
 }
 
 const module_actions = {

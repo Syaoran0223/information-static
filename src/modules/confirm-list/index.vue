@@ -3,7 +3,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
 
-      审核记录
+      <table-view></table-view>
 
     </div>
   </div>
@@ -12,6 +12,7 @@
 <script>
   import configBaseComponent from 'components/base/index'
   import { state, actions } from './store'
+  import TableView from './table'
 
   export default {
     name: 'ConfirmList',

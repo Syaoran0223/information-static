@@ -14,7 +14,7 @@
             <div>{{edit.formData.year | get_const_value 'school_years'}} {{edit.formData.section | get_const_value 'section'}} {{edit.formData.school_name}} {{edit.formData.grade | get_const_value 'grade'}} {{edit.formData.subject | get_const_value 'subject'}}</div>
           </div>
           <div class="col-sm-4">
-            剩余时间: {{timeout | parse_timeout}}
+            剩余时间: {{edit.formData.countdown | parse_timeout}}
           </div>
         </div>
       </div>
@@ -187,25 +187,17 @@
   export default {
     name: 'PaperConfirm',
     extends: configBaseComponent({ state, actions }),
-    data() {
-      return {
-        timeout: 0
-      }
-    },
     watch: {
-      timeout() {
-        if (this.timeout <= 0) {
+      'edit.formData.countdown'() {
+        if (this.edit.formData.countdown <= 0) {
           return
         }
         setTimeout(() =>{
-          this.timeout--
+          this.edit.formData.countdown--
         }, 1000)
       }
     },
     ready() {
-      if (this.timeout > 0) {
-        this.timeout--
-      }
       let id = this.$route.params.paper_id
       if (id != ':paper_id') {
         actions.on_item_edit_click({}, {id})

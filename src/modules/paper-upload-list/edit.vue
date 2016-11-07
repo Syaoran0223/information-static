@@ -127,7 +127,7 @@
 
           </div>
 
-          <div class="modal-footer">
+          <div class="modal-footer" v-if="edit.formData.state==0 || edit.formData.state==-1">
             <button type="submit" class="btn btn-primary"
                     :disabled="edit.saving || edit.uploadState == 'uploading'">
               <span v-if="edit.saving">保存中...</span>

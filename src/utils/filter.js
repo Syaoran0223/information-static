@@ -72,6 +72,9 @@ export const parse_teachers = (teachers) => {
 }
 
 export const parse_timeout = (timeout) => {
+  if (timeout <= 0) {
+    return '00:00:00'
+  }
   let d = moment.duration(Number(timeout), 's')
   let hour = d.hours()
   hour = hour < 10 ? '0' + String(hour) : String(hour)

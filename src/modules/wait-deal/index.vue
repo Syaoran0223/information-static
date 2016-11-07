@@ -3,7 +3,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
 
-      <table-view></table-view>
+      待处理记录
 
     </div>
   </div>
@@ -15,7 +15,7 @@
   import TableView from './table'
 
   export default {
-    name: 'ConfirmList',
+    name: 'WaitDeal',
     extends: configBaseComponent({ state, actions }),
     components: {
       TableView

@@ -13,6 +13,9 @@
           <li><a v-link="{ name: 'WaitConfirm' }">待审核</a></li>
           <li><a v-link="{ name: 'PaperConfirm' }">试卷审核</a></li>
           <li><a v-link="{ name: 'ConfirmList' }">审核记录</a></li>
+          <li><a v-link="{ name: 'WaitDeal' }">待处理</a></li>
+          <li><a v-link="{ name: 'PaperDeal' }">试卷预处理</a></li>
+          <li><a v-link="{ name: 'DealList' }">预处理记录</a></li>
         </ul>
       </nav>
       <ul class="nav navbar-nav nav-pills navbar-right">

@@ -13,6 +13,10 @@ import WaitConfirm from 'modules/wait-confirm/index.vue'
 import PaperConfirm from 'modules/paper-confirm/index.vue'
 import ConfirmList from 'modules/confirm-list/index.vue'
 
+import WaitDeal from 'modules/wait-deal/index.vue'
+import PaperDeal from 'modules/paper-deal/index.vue'
+import DealList from 'modules/deal-list/index.vue'
+
 const router = new VueRouter({
   linkActiveClass: 'active'
 })
@@ -41,6 +45,18 @@ let map = {
   '/confirm-list': {
     name: 'ConfirmList',
     component: ConfirmList
+  },
+  'wait-deal': {
+    name: 'WaitDeal',
+    component:WaitDeal
+  },
+  'paper-deal': {
+    name: 'PaperDeal',
+    component: PaperDeal
+  },
+  'deal-list': {
+    name: 'DealList',
+    component: DealList
   },
   '/play': {
     name: 'play',

@@ -11,20 +11,8 @@
         <div class="grid-cell cell-label">{{item.grade | get_const_value 'grade'}}</div>
         <div class="grid-cell">{{item.paper_types | get_const_value 'paper_type'}}</div>
         <div class="grid-cell">{{item.name}}</div>
-        <div class="grid-cell cell-label">{{item.state | get_const_value 'paper_state'}}</div>
         <div class="grid-cell cell-btn-group">
-          <button class="btn btn-link"
-              @click="on_item_edit_click(item)"
-          >
-            <span v-if="item.state == 0 || item.state == -1">修改</span>
-            <span v-else>查看</span>
-          </button>
-
-          <button class="btn btn-link"
-              @click="on_item_remove_click(item)"
-              v-if="item.state == 0 || item.state == -1"
-          >删除
-          </button>
+          <div class="grid-cell cell-label">{{item.state | get_const_value 'paper_state'}}</div>
         </div>
       </div>
     </div>

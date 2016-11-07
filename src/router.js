@@ -17,6 +17,11 @@ import WaitDeal from 'modules/wait-deal/index.vue'
 import PaperDeal from 'modules/paper-deal/index.vue'
 import DealList from 'modules/deal-list/index.vue'
 
+import UserManage from 'modules/user-manage/index.vue'
+import UserInfo from 'modules/user-manage/user-info/index.vue'
+import MessageList from 'modules/user-manage/message-list/index.vue'
+import ScoreList from 'modules/user-manage/score-list/index.vue'
+
 const router = new VueRouter({
   linkActiveClass: 'active'
 })
@@ -61,6 +66,24 @@ let map = {
   '/play': {
     name: 'play',
     component: Playground
+  },
+  '/user-manage': {
+    name: 'UserManage',
+    component: UserManage,
+    subRoutes: {
+      '/user_info': {
+        name: 'UserInfo',
+        component: UserInfo
+      },
+      '/score_list': {
+        name: 'ScoreList',
+        component: ScoreList
+      },
+      '/message_list': {
+        name: 'MessageList',
+        component: MessageList
+      }
+    }
   }
 }
 console.debug(map)

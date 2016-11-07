@@ -1,63 +1,27 @@
 <template>
-  <div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-body">
 
-    <div class="app-page-navbar navbar-default">
-      <ul class="nav nav-pills">
-        <ac id="teacherManage">
-          <li>
-            <a v-link="{
-                  name: 'teacherManage',
-                  exact: true }">
-              教师管理</a>
-          </li>
-        </ac>
-        <ac id="studentManage">
-          <li>
-            <a v-link="{
-                  name: 'studentManage'}">
-              学生管理</a>
-          </li>
-        </ac>
-        <ac id="classManage">
-          <li>
-            <a v-link="{
-                  name: 'classManage'}">
-              班级管理</a>
-          </li>
-        </ac>
-        <ac id="termManage">
-          <li>
-            <a v-link="{
-                  name: 'termManage'}">
-              学期管理</a>
-          </li>
-        </ac>
-        <ac id="guardianManage">
-          <li>
-            <a v-link="{
-                  name: 'guardianManage'}">
-              家长管理</a>
-          </li>
-        </ac>
-        <ac id="permissions">
-          <li>
-            <a v-link="{
-                  name: 'permissions'}">
-              权限管理</a>
-          </li>
-        </ac>
-        <ac id="roles">
-          <li>
-            <a v-link="{
-                  name: 'roles'}">
-              角色管理</a>
-          </li>
-        </ac>
-      </ul>
+          <ul class="nav nav-pills nav-stacked">
+              <li>
+                <a v-link="{ name: 'UserInfo', exact: true }">个人信息</a>
+              </li>
+              <li>
+                <a v-link="{ name: 'ScoreList', exact: true }">积分记录</a>
+              </li>
+              <li>
+                <a v-link="{ name: 'MessageList', exact: true }">消息记录</a>
+              </li>
+          </ul>
+
+        </div>
+      </div>
     </div>
-
-    <router-view></router-view>
-
+    <div class="col-sm-9">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>

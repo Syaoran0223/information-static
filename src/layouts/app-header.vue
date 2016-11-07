@@ -16,6 +16,7 @@
           <li><a v-link="{ name: 'WaitDeal' }">待处理</a></li>
           <li><a v-link="{ name: 'PaperDeal' }">试卷预处理</a></li>
           <li><a v-link="{ name: 'DealList' }">预处理记录</a></li>
+          <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>
       <ul class="nav navbar-nav nav-pills navbar-right">

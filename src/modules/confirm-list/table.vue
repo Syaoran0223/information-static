@@ -12,7 +12,7 @@
         <div class="grid-cell">{{item.paper_types | get_const_value 'paper_type'}}</div>
         <div class="grid-cell">{{item.name}}</div>
         <div class="grid-cell cell-btn-group">
-          <div class="grid-cell cell-label">{{item.state | get_const_value 'paper_state'}}</div>
+          <div class="grid-cell cell-label">{{item.review_state | get_const_value 'paper_state'}}</div>
         </div>
       </div>
     </div>

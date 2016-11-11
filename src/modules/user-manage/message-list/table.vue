@@ -7,12 +7,6 @@
     <div class="">
       <div class="flex-grid" v-for="item in table.items" track-by="id">
         <div class="grid-cell">{{item.title}}</div>
-        <div class="grid-cell">说明: {{item.info}}</div>
-        <div class="grid-cell">积分: 
-            <span v-if="item.type==-1">-</span>
-            <span v-if="item.type==1">+</span>
-            {{item.score}}
-        </div>
         <div class="grid-cell">{{item.created_at | date_format 'YYYY-MM-DD HH:mm:ss'}}</div>
       </div>
     </div>

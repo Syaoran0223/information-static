@@ -3,7 +3,9 @@ import createStore from 'store/createStore'
 import { GET } from 'utils/ajax'
 
 const module_state = {
-
+    config: {
+        api: 'api/user/score'
+    }
 }
 
 const module_actions = {

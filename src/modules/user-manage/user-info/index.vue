@@ -44,7 +44,10 @@
 									<input type="text" class="form-control" v-model="edit.formData.validCode">
 								</div>
 								<div class="col-sm-2">
-									<button class="btn btn-default">获取验证码</button>
+									<button class="btn btn-default" @click.prevent="sendValidCode(edit.formData.phone)" :disabled="validState.validating">
+										<span v-show="!validState.validating">获取验证码</span>
+										<span v-show="validState.validating">{{validState.timeout}}秒后重新发送</span>
+									</button>
 								</div>
 							</div>
 							<hr>
@@ -115,6 +118,7 @@
     },
     data() {
       return {
+				validState: state.validState,
         cityForm: {
           pro_id: 0
         },
@@ -125,6 +129,9 @@
           ctid: 0
         }
       }
-    }
+    },
+		methods: {
+			sendValidCode: actions.sendValidCode
+		}
   }
 </script>

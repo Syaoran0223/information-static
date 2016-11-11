@@ -16,7 +16,7 @@
           <button class="btn btn-link"
               @click="on_item_edit_click(item)"
           >
-            <span>我要审核</span>
+            <span>我要处理</span>
           </button>
         </div>
       </div>

@@ -3,7 +3,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
 
-      待处理记录
+      <table-view></table-view>
 
     </div>
   </div>

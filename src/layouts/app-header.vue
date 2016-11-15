@@ -8,14 +8,14 @@
         <ul class="nav navbar-nav nav-pills app-header-nav">
           <li><a v-link="{ name: 'play' }">demo</a></li>
           <li><a v-link="{ name: 'home' }">待办</a></li>
-          <li><a v-link="{ name: 'PaperUpload' }">试卷上传</a></li>
-          <li><a v-link="{ name: 'PaperUploadList' }">上传记录</a></li>
-          <li><a v-link="{ name: 'WaitConfirm' }">待审核</a></li>
-          <li><a v-link="{ name: 'PaperConfirm' }">试卷审核</a></li>
-          <li><a v-link="{ name: 'ConfirmList' }">审核记录</a></li>
-          <li><a v-link="{ name: 'WaitDeal' }">待处理</a></li>
-          <li><a v-link="{ name: 'PaperDeal' }">试卷预处理</a></li>
-          <li><a v-link="{ name: 'DealList' }">预处理记录</a></li>
+          <ac id="PaperUpload"><li><a v-link="{ name: 'PaperUpload' }">试卷上传</a></li></ac>
+          <ac id="PaperUploadList"><li><a v-link="{ name: 'PaperUploadList' }">上传记录</a></li></ac>
+          <ac id="WaitConfirm"><li><a v-link="{ name: 'WaitConfirm' }">待审核</a></li></ac>
+          <ac id="PaperConfirm"><li><a v-link="{ name: 'PaperConfirm' }">试卷审核</a></li></ac>
+          <ac id="ConfirmList"><li><a v-link="{ name: 'ConfirmList' }">审核记录</a></li></ac>
+          <ac id="WaitDeal"><li><a v-link="{ name: 'WaitDeal' }">待处理</a></li></ac>
+          <ac id="PaperDeal"><li><a v-link="{ name: 'PaperDeal' }">试卷预处理</a></li></ac>
+          <ac id="DealList"><li><a v-link="{ name: 'DealList' }">预处理记录</a></li></ac>
           <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>

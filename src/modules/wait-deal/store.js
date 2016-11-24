@@ -10,7 +10,7 @@ const module_state = {
 const module_actions = {
     on_item_edit_click({ state, actions }, item) {
         router.go({
-            name: 'PaperConfirm',
+            name: 'PaperDeal',
             params: {
                 paper_id: item.id
             }

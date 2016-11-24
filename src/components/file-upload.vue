@@ -4,7 +4,7 @@
       <div id="files" class="files">
         <ul v-for="file in items" class="filelist" style="display: block;">
           <li>
-            <div class="img-bar" v-show="file.status!='pending'">
+            <div class="img-bar" v-show="file.status!='pending' && !readonly">
               <a v-bind:href="file.url" target="_blank" v-show="file.status=='success'" style="cursor:pointer;"><span class="glyphicon glyphicon-download-alt img-tag"></span></a>
               <a @click.prevent="remove(file)" v-show="file.status!='pending'" style="cursor:pointer;"><span class="glyphicon glyphicon-trash img-tag"></span></a>
               <a @click.prevent="reupload(file.id)" v-show="file.status=='error'" style="cursor:pointer;"><span class="glyphicon glyphicon-repeat img-tag"></span></a>
@@ -19,7 +19,7 @@
             <p class="imgWrap" v-show="file.status=='uploading'">正在上传...</p>
             <p class="imgWrap" v-show="file.status=='pending'">等待上传...</p>
             <p class="imgWrap" v-show="file.status=='error'">{{file.error_msg}}</p>
-            <span class="success" v-show="file.status=='success'"></span>
+            <span class="success" v-show="file.status=='success' && !readonly"></span>
             <div v-show="file.status=='uploading'" id="progress" class="progress img-progress">
               <div class="progress-bar progress-bar-success" v-bind:style="{ width: file.percentage }"></div>
             </div>

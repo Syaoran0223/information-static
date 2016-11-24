@@ -13,15 +13,21 @@
             <h4>{{edit.formData.name}}</h4>
             <div>{{edit.formData.year | get_const_value 'school_years'}} {{edit.formData.section | get_const_value 'section'}} {{edit.formData.school_name}} {{edit.formData.grade | get_const_value 'grade'}} {{edit.formData.subject | get_const_value 'subject'}}</div>
           </div>
-          <div class="col-sm-4">
-            剩余时间: {{timeout | parse_timeout}}
-          </div>
         </div>
       </div>
     </div>
+    <file-upload
+      :items.sync="edit.formData.attachments"
+      :state.sync="edit.uploadState"
+      :readonly="true"
+    ></file-upload>
+    
+    <edit-view></edit-view>
     <div class="panel panel-default">
       <div class="panel-body">
-        试卷预处理
+        <div class="text-center">
+          <button type="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+        </div>
       </div>
     </div>
   </template>
@@ -32,38 +38,34 @@
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
   import router from 'router'
-  const { accept, reject } = actions
+  import EditView from './edit.vue'
 
   export default {
     name: 'PaperDeal',
     extends: configBaseComponent({ state, actions }),
     data() {
       return {
-        timeout: 0
+        questions: [
+          {
+            quest_no: 0,
+            quest_type_id: 1,
+            option_num: 0,
+            has_sub: false,
+            quest_images: [],
+            answer_images: []
+          }
+        ]
       }
     },
-    watch: {
-      timeout() {
-        if (this.timeout <= 0) {
-          return
-        }
-        setTimeout(() =>{
-          this.timeout--
-        }, 1000)
-      }
-    },
+    
     ready() {
-      if (this.timeout > 0) {
-        this.timeout--
-      }
       let id = this.$route.params.paper_id
       if (id != ':paper_id') {
         actions.on_item_edit_click({}, {id})
       }
     },
-    methods: {
-      accept,
-      reject
+    components: {
+      EditView
     }
   }
 </script>

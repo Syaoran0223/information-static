@@ -55,7 +55,7 @@ let map = {
     name: 'WaitDeal',
     component:WaitDeal
   },
-  'paper-deal': {
+  'paper-deal/:paper_id': {
     name: 'PaperDeal',
     component: PaperDeal
   },

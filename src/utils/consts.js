@@ -330,3 +330,8 @@ export const paper_state = {
   '1': '正在审核',
   '2': '审核通过'
 }
+
+export const has_sub = {
+  '0': '非套题',
+  '1': '套题'
+}

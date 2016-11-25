@@ -22,11 +22,14 @@
       :readonly="true"
     ></file-upload>
     
-    <edit-view></edit-view>
+    <template v-for="question in questions">
+      <edit-view :question.sync="question"></edit-view>
+    </template>
+    
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="text-center">
-          <button type="button" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          <button type="button" @click.prevent="add_question" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </div>
       </div>
     </div>
@@ -47,12 +50,17 @@
       return {
         questions: [
           {
-            quest_no: 0,
-            quest_type_id: 1,
-            option_num: 0,
-            has_sub: false,
-            quest_images: [],
-            answer_images: []
+            id: _.uniqueId(),
+            formData: {
+              quest_no: 0,
+              quest_type_id: 1,
+              option_num: 0,
+              has_sub: '0',
+              quest_images: [],
+              answer_images: []
+            },
+            saving: false,
+            uploadState: 'done'
           }
         ]
       }
@@ -66,6 +74,32 @@
     },
     components: {
       EditView
+    },
+    methods: {
+      add_question() {
+        this.questions.push({
+            id: _.uniqueId(),
+            formData: {
+              quest_no: 0,
+              quest_type_id: 1,
+              option_num: 0,
+              has_sub: '0',
+              quest_images: [],
+              answer_images: []
+            },
+            saving: false,
+            uploadState: 'done'
+        })
+      }
+    },
+    events: {
+      'remove-question': function (id) {
+        let questions = _.clone(this.questions)
+        _.remove(questions, (q) => {
+          return q.id == id
+        })
+        this.questions = questions
+      }
     }
   }
 </script>

@@ -1,5 +1,6 @@
 <template>
 <div class="panel panel-default" style="margin-top: 20px;">
+    <div class="success-tag" v-show="!!question.formData.id">保存成功</div>
     <div class="panel-body">
     <form class="form-horizontal">
 
@@ -68,13 +69,14 @@
             <span v-if="question.saving">保存中...</span>
             <span v-else>保存</span>
         </button>
-        <button class="btn btn-danger" @click.prevent="remove(question.id)">
+        <button class="btn btn-danger" @click.prevent="remove(question)">
             <span >删除</span>
         </button>
         </div>
     </form>
     </div>
 </div>
+<confirm :open.sync="removeConfirm.open" @confirm="on_item_remove" :saving.sync="removeConfirm.saving"></confirm>
 </template>
 
 <script>
@@ -88,10 +90,39 @@ export default {
             }
         }
     },
+    data() {
+        return {
+            removeConfirm: {
+                open: false,
+                saving: false,
+                current_id: 0
+            }
+        }
+    },
     methods: {
-        remove(id) {
-            this.$dispatch('remove-question', id)
+        remove(question) {
+            if (question.formData.id) {
+                this.removeConfirm.current_id = question.formData.id
+                this.removeConfirm.open = true
+                return
+            }
+            this.$dispatch('remove-question', question.id)
+        },
+        on_item_remove() {
+            // todo delete question
+            this.removeConfirm.saving = false
+            this.removeConfirm.open = false
+            
         }
     }
   }
 </script>
+
+<style>
+    .success-tag {
+        float: right;
+        padding: 3px;
+        background: #009588;
+        color: white;
+    }
+</style>

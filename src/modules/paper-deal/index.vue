@@ -30,6 +30,7 @@
       <div class="panel-body">
         <div class="text-center">
           <button type="button" @click.prevent="add_question" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          <button type="button" @click.prevent="complete" class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;<span>处理完成</span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </div>
       </div>
     </div>

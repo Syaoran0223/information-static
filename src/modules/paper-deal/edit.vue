@@ -26,7 +26,7 @@
             <div class="form-group" v-show="question.formData.quest_type_id==1">
                 <label for="" class="control-label col-sm-2">选项个数</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="number" v-model="question.formData.option_num">
+                    <input class="form-control" type="number" v-model="question.formData.option_count">
                 </div>
             </div>
             <div class="form-group">
@@ -128,14 +128,14 @@ export default {
             this.question.saving = true
             let data = this.question.formData
             data.exam_id = this.exam_id
-            let api_method = this.question.formData.id ? POST : PUT
+            let api_method = this.question.formData.id ? PUT : POST
             api_method(`${api_host}/api/paper/preprocess/view`, {
                 data
             }).then((res) => {
                 notify_ok({
                     title: '保存成功'
                 })
-                this.question.formData.id = res.id
+                this.question.formData = res
             }).catch(() => {
 
             }).then(() => {

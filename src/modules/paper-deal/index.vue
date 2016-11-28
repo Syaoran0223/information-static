@@ -49,22 +49,7 @@
     extends: configBaseComponent({ state, actions }),
     data() {
       return {
-        questions: [
-          {
-            id: _.uniqueId(),
-            formData: {
-              id: null,
-              quest_no: 0,
-              quest_type_id: 1,
-              option_num: 0,
-              has_sub: '0',
-              quest_image: [],
-              answer_image: []
-            },
-            saving: false,
-            uploadState: 'done'
-          }
-        ]
+        questions: state.questions
       }
     },
     
@@ -85,7 +70,7 @@
               id: null,
               quest_no: 0,
               quest_type_id: 1,
-              option_num: 0,
+              option_count: 0,
               has_sub: '0',
               quest_image: [],
               answer_image: []

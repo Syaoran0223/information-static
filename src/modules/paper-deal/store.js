@@ -28,6 +28,7 @@ const module_actions = {
           })
         } else {
             _.forEach(state.edit.formData.quest_list, (item) => {
+                item.has_sub = String(item.has_sub)
                 let data = {
                     id: _.uniqueId(),
                     formData: item,

@@ -30,7 +30,12 @@
       <div class="panel-body">
         <div class="text-center">
           <button type="button" @click.prevent="add_question" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
-          <button type="button" @click.prevent="complete" class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;<span>处理完成</span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          <button type="button" @click.prevent="complete" class="btn btn-success">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <span v-show="completeState.saving">正在处理...</span>
+          <span v-else>处理完成</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          </button>
         </div>
       </div>
     </div>
@@ -43,19 +48,27 @@
   import { state, actions } from './store'
   import router from 'router'
   import EditView from './edit.vue'
+  import { POST } from 'utils/ajax'
+  import { notify_ok } from 'utils/notification'
+  import { api_host } from 'config'
 
   export default {
     name: 'PaperDeal',
     extends: configBaseComponent({ state, actions }),
     data() {
       return {
-        questions: state.questions
+        questions: state.questions,
+        exam_id: null,
+        completeState: {
+          saving: false
+        }
       }
     },
     
     ready() {
       let id = this.$route.params.paper_id
       if (id != ':paper_id') {
+        this.exam_id = id
         actions.on_item_edit_click({}, {id})
       }
     },
@@ -78,6 +91,32 @@
             saving: false,
             uploadState: 'done'
         })
+      },
+      complete() {
+        if (!this.exam_id) {
+          return
+        }
+        let data = {
+          id: this.exam_id
+        }
+        this.completeState.saving = true
+        POST(`${api_host}/api/paper/preprocess/finish`, {
+              data
+          }).then((res) => {
+              notify_ok({
+                  title: '保存成功'
+              })
+              setTimeout(() => {
+                router.go({
+                    name: 'DealList'
+                })
+              }, 300)
+              
+          }).catch(() => {
+
+          }).then(() => {
+              this.completeState.saving = false
+          })
       }
     },
     events: {

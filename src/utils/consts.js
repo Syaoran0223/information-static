@@ -332,8 +332,8 @@ export const paper_state = {
 }
 
 export const has_sub = {
-  '0': '非套题',
-  '1': '套题'
+  '0' : '非套题',
+  '1' : '套题'
 }
 
 export const quest_types = {

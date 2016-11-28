@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { POST, PUT } from 'utils/ajax'
+import { POST, PUT, DELETE } from 'utils/ajax'
 import { api_host } from 'config'
 import { notify_ok, notify_error } from 'utils/notification'
 
@@ -120,13 +120,35 @@ export default {
         },
         on_item_remove() {
             // todo delete question
-            this.removeConfirm.saving = false
-            this.removeConfirm.open = false
-            
+            if (this.removeConfirm.saving) {
+                return
+            }
+            this.removeConfirm.saving = true
+            DELETE(`${api_host}/api/paper/preprocess/view/` + this.question.formData.id).then((res) => {
+                notify_ok({
+                    title: '操作成功'
+                })
+                this.$dispatch('remove-question', this.question.id)
+            }).catch((res) => {
+                notify_error({
+                    title: res.error
+                })
+            }).then(() => {
+                this.removeConfirm.saving = false
+                this.removeConfirm.open = false
+            })
         },
         submit_data() {
             this.question.saving = true
             let data = this.question.formData
+            data.quest_image = _.map(data.quest_image, (item)=> {
+                item.id = _.uniqueId('quest_img_')
+                return item
+            })
+            data.answer_image = _.map(data.answer_image, (item)=> {
+                item.id = _.uniqueId('answer_img_')
+                return item
+            })
             data.exam_id = this.exam_id
             let api_method = this.question.formData.id ? PUT : POST
             api_method(`${api_host}/api/paper/preprocess/view`, {
@@ -135,6 +157,7 @@ export default {
                 notify_ok({
                     title: '保存成功'
                 })
+                res.has_sub = String(res.has_sub)
                 this.question.formData = res
             }).catch(() => {
 

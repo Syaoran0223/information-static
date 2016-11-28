@@ -2,7 +2,7 @@
 <div class="panel panel-default" style="margin-top: 20px;">
     <div class="success-tag" v-show="!!question.formData.id">保存成功</div>
     <div class="panel-body">
-    <form class="form-horizontal">
+    <form class="form-horizontal" @submit.prevent="submit_data">
 
         <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
@@ -44,7 +44,7 @@
             <label for="" class="control-label col-sm-2">题目图片</label>
             <div class="col-sm-9">
                 <file-upload
-                :items.sync="question.formData.quest_images"
+                :items.sync="question.formData.quest_image"
                 :state.sync="question.uploadState"
                 ></file-upload>
             </div>
@@ -54,7 +54,7 @@
             <label for="" class="control-label col-sm-2">答案图片</label>
             <div class="col-sm-9">
                 <file-upload
-                :items.sync="question.formData.answer_images"
+                :items.sync="question.formData.answer_image"
                 :state.sync="question.uploadState"
                 ></file-upload>
             </div>
@@ -65,6 +65,7 @@
 
         <div class="modal-footer">
         <button class="btn btn-primary"
+                type="submit"
                 :disabled="question.saving || question.uploadState == 'uploading'">
             <span v-if="question.saving">保存中...</span>
             <span v-else>保存</span>
@@ -80,6 +81,10 @@
 </template>
 
 <script>
+import { POST, PUT } from 'utils/ajax'
+import { api_host } from 'config'
+import { notify_ok, notify_error } from 'utils/notification'
+
 export default {
     name: 'Edit',
     props: {
@@ -87,6 +92,11 @@ export default {
             twoWay: true,
             default() {
                 return {}
+            }
+        },
+        exam_id: {
+            default() {
+                return 0
             }
         }
     },
@@ -113,6 +123,24 @@ export default {
             this.removeConfirm.saving = false
             this.removeConfirm.open = false
             
+        },
+        submit_data() {
+            this.question.saving = true
+            let data = this.question.formData
+            data.exam_id = this.exam_id
+            let api_method = this.question.formData.id ? POST : PUT
+            api_method(`${api_host}/api/paper/preprocess/view`, {
+                data
+            }).then((res) => {
+                notify_ok({
+                    title: '保存成功'
+                })
+                this.question.formData.id = res.id
+            }).catch(() => {
+
+            }).then(() => {
+                this.question.saving = false
+            })
         }
     }
   }

@@ -23,7 +23,7 @@
     ></file-upload>
     
     <template v-for="question in questions">
-      <edit-view :question.sync="question"></edit-view>
+      <edit-view :question.sync="question" :exam_id="$route.params.paper_id"></edit-view>
     </template>
     
     <div class="panel panel-default">
@@ -53,12 +53,13 @@
           {
             id: _.uniqueId(),
             formData: {
+              id: null,
               quest_no: 0,
               quest_type_id: 1,
               option_num: 0,
               has_sub: '0',
-              quest_images: [],
-              answer_images: []
+              quest_image: [],
+              answer_image: []
             },
             saving: false,
             uploadState: 'done'
@@ -81,12 +82,13 @@
         this.questions.push({
             id: _.uniqueId(),
             formData: {
+              id: null,
               quest_no: 0,
               quest_type_id: 1,
               option_num: 0,
               has_sub: '0',
-              quest_images: [],
-              answer_images: []
+              quest_image: [],
+              answer_image: []
             },
             saving: false,
             uploadState: 'done'

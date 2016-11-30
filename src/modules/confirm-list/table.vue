@@ -7,10 +7,10 @@
     <div class="">
       <div class="flex-grid" v-for="item in table.items">
         <div class="grid-cell">{{item.school_name}}</div>
-        <div class="grid-cell cell-label">{{item.subject | get_const_value 'subject'}}</div>
-        <div class="grid-cell cell-label">{{item.grade | get_const_value 'grade'}}</div>
-        <div class="grid-cell">{{item.paper_types | get_const_value 'paper_type'}}</div>
-        <div class="grid-cell">{{item.name}}</div>
+        <div class="grid-cell cell-label">{{item.exam_subject | get_const_value 'subject'}}</div>
+        <div class="grid-cell cell-label">{{item.exam_grade | get_const_value 'grade'}}</div>
+        <div class="grid-cell">{{item.exam_paper_types | get_const_value 'paper_type'}}</div>
+        <div class="grid-cell">{{item.exam_name}}</div>
         <div class="grid-cell cell-btn-group">
           <div class="grid-cell cell-label">{{item.review_state | get_const_value 'paper_state'}}</div>
           <button v-if="item.review_state=='1'" class="btn btn-link"

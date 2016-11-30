@@ -4,7 +4,7 @@ import { notify_ok } from 'utils/notification'
 
 const module_state = {
     config: {
-        api: 'api/paper/confirm/review'
+        api: 'api/paper/confirm'
     },
     edit: {
         confirmData: {

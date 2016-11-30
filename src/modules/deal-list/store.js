@@ -2,7 +2,7 @@ import createStore from 'store/createStore'
 
 const module_state = {
     config: {
-        api: 'api/examreview/list'
+        api: 'api/paper/preprocess/list'
     }
 }
 

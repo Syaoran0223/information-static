@@ -11,6 +11,9 @@ const module_state = {
 
 const module_actions = {
     after_edit_data_init( {state} ) {
+        if (!_.isEmpty(state.questions)) {
+            state.questions = []
+        }
         if (_.isEmpty(state.edit.formData.quest_list)) {
           state.questions.push({
             id: _.uniqueId(),

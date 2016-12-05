@@ -17,6 +17,8 @@ import WaitDeal from 'modules/wait-deal/index.vue'
 import PaperDeal from 'modules/paper-deal/index.vue'
 import DealList from 'modules/deal-list/index.vue'
 
+import WaitInput from 'modules/wait-input/index.vue'
+
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
 import MessageList from 'modules/user-manage/message-list/index.vue'
@@ -62,6 +64,10 @@ let map = {
   'deal-list': {
     name: 'DealList',
     component: DealList
+  },
+  'wait-input': {
+    name: 'WaitInput',
+    component: WaitInput
   },
   '/play': {
     name: 'play',

@@ -334,6 +334,14 @@ export const paper_state = {
   '4': '预处理完成'
 }
 
+export const question_state = {
+  '-99': '已删除',
+  '0': '未处理',
+  '1': '正在录题',
+  '2': '审核不通过',
+  '3': '完成入题'
+}
+
 export const has_sub = {
   '0' : '非套题',
   '1' : '套题'

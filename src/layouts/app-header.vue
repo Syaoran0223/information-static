@@ -17,6 +17,7 @@
           <ac id="PaperDeal"><li><a v-link="{ name: 'PaperDeal' }">试卷预处理</a></li></ac>
           <ac id="DealList"><li><a v-link="{ name: 'DealList' }">预处理记录</a></li></ac>
           <ac id="WaitInput"><li><a v-link="{ name: 'WaitInput' }">待录题</a></li></ac>
+          <ac id="InputList"><li><a v-link="{ name: 'InputList' }">录题记录</a></li></ac>
           <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>

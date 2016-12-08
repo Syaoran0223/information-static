@@ -8,14 +8,14 @@ const module_state = {
 }
 
 const module_actions = {
-    // on_item_edit_click({ state, actions }, item) {
-    //     router.go({
-    //         name: 'PaperInput',
-    //         params: {
-    //             quest_id: item.quest_id
-    //         }
-    //     })
-    // }
+    on_item_edit_click({ state, actions }, item) {
+        router.go({
+            name: 'PaperInput',
+            params: {
+                quest_id: item.quest_id
+            }
+        })
+    }
 }
 
 const { state, actions } = createStore(module_state, module_actions)

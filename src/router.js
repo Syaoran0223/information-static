@@ -19,6 +19,7 @@ import DealList from 'modules/deal-list/index.vue'
 
 import WaitInput from 'modules/wait-input/index.vue'
 import InputList from 'modules/input-list/index.vue'
+import PaperInput from 'modules/paper-input/index.vue'
 
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
@@ -74,6 +75,11 @@ let map = {
     name: 'InputList',
     component: InputList
   },
+  'paper-input/:quest_id': {
+    name: 'PaperInput',
+    component: PaperInput
+  },
+
   '/play': {
     name: 'play',
     component: Playground

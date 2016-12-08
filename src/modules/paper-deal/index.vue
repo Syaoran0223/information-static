@@ -2,7 +2,7 @@
 
   <div class="panel panel-default" v-if="$route.params.paper_id == ':paper_id'">
     <div class="panel-body">
-      <p class="text-center">请前往待审核菜单选择试卷</p>
+      <p class="text-center">请前往待处理菜单选择试卷</p>
     </div>
   </div>
   <template v-else>

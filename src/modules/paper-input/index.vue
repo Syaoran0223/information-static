@@ -6,7 +6,20 @@
     </div>
   </div>
   <template v-else>
-    form
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div>{{edit.formData.exam.name}} -- {{edit.formData.exam.year | get_const_value 'school_years'}} {{edit.formData.exam.section | get_const_value 'section'}} {{edit.formData.exam.school_name}} {{edit.formData.exam.grade | get_const_value 'grade'}} {{edit.formData.exam.subject | get_const_value 'subject'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <file-upload
+      :items.sync="edit.formData.images"
+      :state.sync="edit.uploadState"
+      :readonly="true"
+    ></file-upload>
   </template>
   
 

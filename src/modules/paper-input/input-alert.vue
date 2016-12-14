@@ -13,6 +13,7 @@
       <div class="modal-body">
         <ckeditor
           :value.sync="value"
+          :origin_value.sync="origin_value"
         ></ckeditor>
       </div>
       <div class="modal-footer">
@@ -33,6 +34,10 @@
       },
       value: {
         twoWay: true
+      },
+      origin_value: {
+        twoWay: true,
+        default: ''
       }
     },
     data() {

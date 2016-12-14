@@ -25,6 +25,11 @@
         required: true,
         twoWay: true
       },
+      origin_value: {
+        required: true,
+        twoWay: true,
+        default: ''
+      },
       required: {}
     },
     data () {
@@ -72,6 +77,7 @@
         this.changing = true
 
         this.value = this.editor.getData()
+        this.origin_value = this.editor.document.getBody().getText()
 
         Vue.nextTick(() => {this.changing = false})
       }

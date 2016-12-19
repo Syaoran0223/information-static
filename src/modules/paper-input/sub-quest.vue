@@ -45,7 +45,7 @@
         </understand-quest>
       </div>
     </div>
-    <div><button calss="btn-btn-default btn-xs" @click.prevent="insert">新增</button></div>
+    <div><button class="btn btn-primary btn-xs" @click.prevent="insert">新增子题</button></div>
     <hr/>
 
     <div class="form-group">

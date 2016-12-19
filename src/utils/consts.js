@@ -343,13 +343,25 @@ export const question_state = {
 }
 
 export const has_sub = {
-  '0' : '非套题',
-  '1' : '套题'
+  '0' : '非大小题',
+  '1' : '大小题'
 }
 
 export const quest_types = {
   '1': '选择题',
   '2': '填空题',
-  '3': '判断题',
-  '4': '解答题'
+  '3': '解答题',
+  '4': '大小题'
+}
+
+export const sub_quest_types = {
+  '1': '选择题',
+  '2': '填空题',
+  '3': '解答题'
+}
+
+export const show_types = {
+  'A': '一行显示',
+  'B': '两行显示',
+  'C': '多行显示'
 }

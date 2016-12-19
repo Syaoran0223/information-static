@@ -3,7 +3,11 @@
     :data="table"
     @page-index-change="page_index_change"
   >
-    
+    <div class="panel panel-default" v-for="item in table.items">
+      <div class="panel-body">
+        <p>{{{item.qtxt}}}</p>
+      </div>
+    </div>
   <data-grid>
 </template>
 <script>

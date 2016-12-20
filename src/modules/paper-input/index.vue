@@ -32,6 +32,7 @@
 
               <select-quest
                 :value.sync="edit.formData"
+                :options.sync="edit.formData.options"
                 v-if="edit.formData.quest_type_id==1">
               </select-quest>
               <blank-quest
@@ -47,6 +48,13 @@
                 v-if="edit.formData.quest_type_id==4">
               </sub-quest>
 
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary"
+                      :disabled="edit.saving">
+                <span v-if="edit.saving">保存中...</span>
+                <span v-else>保存</span>
+              </button>
             </div>
           </form>
         </div>

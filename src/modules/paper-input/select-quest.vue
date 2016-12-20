@@ -19,7 +19,7 @@
     </div>
 
     <option-view
-        :value.sync="option_values">
+        :value.sync="options">
     </option-view>
 
     <div class="form-group" v-if="!isSub">
@@ -77,6 +77,10 @@
       isSub: {
         type: Boolean,
         default: false
+      },
+      options: {
+        type: Array,
+        twoWay: true
       }
     },
     data() {

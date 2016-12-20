@@ -12,7 +12,7 @@
     </div>
 
     <blank-answer
-      :value.sync="answer_list">
+      :value.sync="value.answer_list">
     </blank-answer>
     
 
@@ -71,16 +71,15 @@
       isSub: {
         type: Boolean,
         default: false
+      },
+      answer_list: {
+        twoWay: true,
+        type: Array
       }
     },
     components: {
       InputAlert,
       BlankAnswer
-    },
-    data() {
-      return {
-        answer_list: []
-      }
     }
   }
 </script>

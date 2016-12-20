@@ -59,8 +59,7 @@
         this.value.push(
           {
             content: '',
-            _id: _.uniqueId('b_answer_'),
-            _selected: false
+            _id: _.uniqueId('b_answer_')
           }
         )
       }

@@ -84,3 +84,8 @@ export const parse_timeout = (timeout) => {
   second = second < 10 ? '0' + String(second) : String(second)
   return hour + ':' + minute + ':' + second
 }
+
+
+export const trim = (value) => {
+  return value.replace(/\n[\s| | ]*\r/g,'\n'); //去除多余空行
+}

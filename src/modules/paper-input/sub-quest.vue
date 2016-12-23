@@ -12,7 +12,7 @@
     </div>
 
     <hr/>
-    <div class="panel panel-default" v-for="item in sub_items">
+    <div class="panel panel-default" v-for="item in value.sub_items">
       <div class="panel-body">
         <div class="close-position">
           <button type="button" class="close" @click.prevent="remove(item._id)">&times;</button>
@@ -28,12 +28,14 @@
 
         <select-quest
           :value.sync="item"
+          :options.sync="item.options"
           v-if="item.quest_type_id==1"
           :is-sub="true">
         </select-quest>
 
         <blank-quest
           :value.sync="item"
+          :answer_list="item.answer_list"
           v-if="item.quest_type_id==2"
           :is-sub="true">>
         </blank-quest>
@@ -120,21 +122,16 @@
       BlankQuest,
       UnderstandQuest
     },
-    data() {
-      return {
-        sub_items: [default_item]
-      }
-    },
     watch: {
-      sub_items(val) {
-        _.forEach(this.sub_items, (item, key) => {
+      'value.sub_items'(val) {
+        _.forEach(this.value.sub_items, (item, key) => {
           item.sort = key + 1
         })
       }
     },
     methods: {
       insert() {
-        this.sub_items.push(
+        this.value.sub_items.push(
           {
             sort: 0,
             quest_type_id: 0,
@@ -142,16 +139,18 @@
             quest_content: '',
             quest_option_html: '',
             quest_answer: '',
+            answer_list: [],
+            options: [],
             _id: _.uniqueId('sub_item_')
           }
         )
       },
       remove(_id) {
-        let items = _.clone(this.sub_items)
+        let items = _.clone(this.value.sub_items)
         _.remove(items, (d)=> {
           return d._id == _id
         })
-        this.sub_items = items
+        this.value.sub_items = items
       }
     }
   }

@@ -3,9 +3,17 @@
     :data="table"
     @page-index-change="page_index_change"
   >
-    <div class="panel panel-default" v-for="item in table.items">
+    <div class="panel panel-default panel-hover" v-for="item in table.items" @click="select_quest(item.qid)">
+      <div class="success-tag" v-show="selected_id == item.qid">选中</div>
       <div class="panel-body">
         <p>{{{item.qtxt}}}</p>
+        <div v-for="d in item.qopt">
+          <span style="float: left">{{d.Key}}:&nbsp;&nbsp;</span> {{{d.Value | trim}}}
+        </div>
+        <p class="text-right">
+          <button class="btn btn-primary btn-xs">{{item.name}}</button>
+          <button class="btn btn-primary btn-xs">{{item.subject_name}}</button>
+        </p>
       </div>
     </div>
   <data-grid>
@@ -21,6 +29,9 @@
     props: {
       value: {
         twoWay: true
+      },
+      selected_id: {
+        twoWay: true
       }
     },
     watch: {
@@ -35,6 +46,13 @@
           q: val
         }
         this.table_query()
+      },
+      select_quest(qid) {
+        if (qid == this.selected_id) {
+          this.selected_id = 0
+        } else {
+          this.selected_id = qid
+        }
       }
     },
     data() {
@@ -44,4 +62,8 @@
     }
   }
 </script>
-            
+<style scoped>
+   .panel-hover {
+      cursor:pointer;
+   }
+</style>            

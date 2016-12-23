@@ -27,6 +27,8 @@ const module_actions = {
             _selected: false
           }
         ]
+        data.selected_id = 0
+        data.sub_items = []
         data.answer_list = []
         return data
     },
@@ -47,6 +49,30 @@ const module_actions = {
                 return item.content
             })
             state.edit.formData.correct_answer = correct_answer
+        }
+        if (state.edit.formData.quest_type_id == '4') {
+            _.forEach(state.edit.formData.sub_items, (item)=> {
+                if (item.quest_type_id == '1') {
+                    let correct_answer = _.chain(item.options)
+                        .filter((d) => {
+                            return d._selected
+                        })
+                        .map((d)=> {
+                            return d.sort
+                        })
+                        .value()
+                    item.correct_answer = correct_answer.join('')
+                }
+                if (item.quest_type_id == '2') {
+                    let correct_answer = _.map(item.answer_list, (d)=> {
+                        return d.content
+                    })
+                    item.correct_answer = correct_answer
+                }
+                if (item.quest_type_id == '3') {
+                    item.correct_answer = item.quest_answer
+                }
+            })
         }
         return customFormData || state.edit.formData
     },
@@ -77,6 +103,21 @@ const module_actions = {
             state.edit.saving = false
             state.edit.open = false
         })
+    },
+    parse_table_query_fetched ({ state }, data) {
+        let items = _.map(data.items, (item)=> {
+            if (item.qopt) {
+                item.qopt = JSON.parse(item.qopt)
+            } else {
+                item.qopt = []
+            }
+            return item
+        })
+        return {
+            items: items,
+            totalCount: data.totalCount,
+            totalPage: data.totalPage
+        }
     }
 }
 

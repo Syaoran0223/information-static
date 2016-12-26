@@ -3,14 +3,14 @@ import router from 'router'
 
 const module_state = {
     config: {
-        api: 'api/paper/input/wait'
+        api: 'api/paper/answer/wait'
     }
 }
 
 const module_actions = {
     on_item_edit_click({ state, actions }, item) {
         router.go({
-            name: 'PaperInput',
+            name: 'PaperAnswer',
             params: {
                 quest_id: item.id
             }

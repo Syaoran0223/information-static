@@ -21,6 +21,8 @@ import WaitInput from 'modules/wait-input/index.vue'
 import InputList from 'modules/input-list/index.vue'
 import PaperInput from 'modules/paper-input/index.vue'
 
+import WaitAnswer from 'modules/wait-answer/index.vue'
+
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
 import MessageList from 'modules/user-manage/message-list/index.vue'
@@ -78,6 +80,10 @@ let map = {
   'paper-input/:quest_id': {
     name: 'PaperInput',
     component: PaperInput
+  },
+  'wait-answer': {
+    name: 'WaitAnswer',
+    component: WaitAnswer
   },
 
   '/play': {

@@ -339,7 +339,8 @@ export const question_state = {
   '0': '未处理',
   '1': '正在录题',
   '2': '审核不通过',
-  '3': '完成入题'
+  '3': '完成录题',
+  '4': '待解答'
 }
 
 export const has_sub = {

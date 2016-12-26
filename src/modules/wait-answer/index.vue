@@ -15,7 +15,7 @@
   import TableView from './table'
 
   export default {
-    name: 'WaitInput',
+    name: 'WaitAnswer',
     extends: configBaseComponent({ state, actions }),
     components: {
       TableView

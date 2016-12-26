@@ -19,6 +19,7 @@
           <ac id="WaitInput"><li><a v-link="{ name: 'WaitInput' }">待录题</a></li></ac>
           <ac id="PaperInput"><li><a v-link="{ name: 'PaperInput' }">题目录入</a></li></ac>
           <ac id="InputList"><li><a v-link="{ name: 'InputList' }">录题记录</a></li></ac>
+          <ac id="WaitAnswer"><li><a v-link="{ name: 'WaitAnswer' }">待解答</a></li></ac>
           <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>

@@ -13,6 +13,7 @@ function register_component(components) {
 }
 register_component(require.context('./layouts', false, /\.vue$/))
 register_component(require.context('./components', false, /\.vue$/))
+register_component(require.context('./components/question', false, /\.vue$/))
 
 require('bootstrap/dist/js/bootstrap')
 require('bootstrap-notify')

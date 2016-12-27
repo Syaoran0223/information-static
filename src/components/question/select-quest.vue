@@ -3,7 +3,11 @@
     <div class="form-group">
       <label for="" class="control-label col-sm-1">题目:</label>
       <div class="col-sm-11">
+        <div class="mg-t-7" v-if="readonly">
+          <p>{{{value.quest_content_html}}}</p>
+        </div>
         <input-alert
+            v-else
             :value.sync="value.quest_content_html"
             :origin_value.sync="value.quest_content"
             placehold="点击此处输入题干">
@@ -11,10 +15,17 @@
       </div>
     </div>
 
-    <blank-answer
-      :value.sync="value.answer_list">
-    </blank-answer>
-    
+    <div class="form-group" v-if="!isSub && !readonly">
+      <label for="" class="control-label col-sm-2">选项显示方式:</label>
+      <div class="col-sm-10">
+        <tag-selector const="show_types" :value.sync="value.show_type" :required="true"></tag-selector>
+      </div>
+    </div>
+
+    <option-view
+        :readonly="readonly"
+        :value.sync="options">
+    </option-view>
 
     <div class="form-group" v-if="!isSub">
       <label for="" class="control-label col-sm-1">解答:</label>
@@ -59,10 +70,10 @@
 </template>
 <script>
   import InputAlert from './input-alert.vue'
-  import BlankAnswer from './blank-answer.vue'
+  import OptionView from './option-view.vue'
 
   export default {
-    name: 'BlankQuest',
+    name: 'SelectQuest',
     props: {
       value: {
         type: Object,
@@ -72,14 +83,36 @@
         type: Boolean,
         default: false
       },
-      answer_list: {
-        twoWay: true,
-        type: Array
+      options: {
+        type: Array,
+        twoWay: true
+      },
+      readonly: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        option_values: [
+          {
+            sort: 'A',
+            content: '',
+            _id: _.uniqueId('option_'),
+            _selected: false
+          },
+          {
+            sort: 'B',
+            content: '',
+            _id: _.uniqueId('option_'),
+            _selected: false
+          }
+        ]
       }
     },
     components: {
       InputAlert,
-      BlankAnswer
+      OptionView
     }
   }
 </script>

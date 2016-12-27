@@ -30,17 +30,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="" class="control-label col-sm-2">是否套题</label>
-                <div class="col-sm-4">
-                    <tag-selector
-                    const="has_sub"
-                    :value.sync="question.formData.has_sub"
-                    :required="true"
-                    ></tag-selector>
-                </div>
-            </div>
-
-            <div class="form-group">
             <label for="" class="control-label col-sm-2">题目图片</label>
             <div class="col-sm-9">
                 <file-upload
@@ -157,7 +146,6 @@ export default {
                 notify_ok({
                     title: '保存成功'
                 })
-                res.has_sub = String(res.has_sub)
                 this.question.formData = res
             }).catch(() => {
 

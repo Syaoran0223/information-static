@@ -2,7 +2,7 @@
 
   <div class="panel panel-default" v-if="$route.params.quest_id == ':quest_id'">
     <div class="panel-body">
-      <p class="text-center">请前往待录题菜单选择题目</p>
+      <p class="text-center">请前往待作答菜单选择题目</p>
     </div>
   </div>
   <template v-else>
@@ -19,31 +19,37 @@
     </div>
     <file-upload :items.sync="edit.formData.images" :state.sync="edit.uploadState" :readonly="true"></file-upload>
     <div class="row">
-      <div class="col-sm-7">
+      <div class="col-sm-12">
         <div class="panel panel-default" v-if="edit.formData.selected_id == 0">
           <form class="form-horizontal" @submit.prevent="on_edit_submit">
             <div class="panel-body">
               <div class="form-group">
                 <label for="" class="control-label col-sm-1">题型:</label>
                 <div class="col-sm-11">
-                  <tag-selector const="quest_types" :value.sync="edit.formData.quest_type_id" :required="true"></tag-selector>
+                  <button type="button" class="btn btn-sm btn-primary">
+                    {{edit.formData.quest_type_id | get_const_value 'quest_types'}}
+                  </button>
                 </div>
               </div>
 
               <select-quest
                 :value.sync="edit.formData"
                 :options.sync="edit.formData.options"
+                :readonly="true"
                 v-if="edit.formData.quest_type_id==1">
               </select-quest>
               <blank-quest
+                :readonly="true"
                 :value.sync="edit.formData"
                 v-if="edit.formData.quest_type_id==2">
               </blank-quest>
               <understand-quest
+                :readonly="true"
                 :value.sync="edit.formData"
                 v-if="edit.formData.quest_type_id==3">
               </understand-quest>
               <sub-quest
+                :readonly="true"
                 :value.sync="edit.formData"
                 v-if="edit.formData.quest_type_id==4">
               </sub-quest>
@@ -81,24 +87,6 @@
           </form>
         </div>
       </div>
-      <div class="col-sm-5">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-                <div class="form-group has-success has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess2" v-model="edit.formData.quest_content">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>
-              </div>
-            </div>
-            <search-view
-              :value.sync="edit.formData.quest_content"
-              :selected_id.sync="edit.formData.selected_id">
-            </search-view>
-          </div>
-        </div>
-      </div>
     </div>
     
   </template>
@@ -109,12 +97,11 @@
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
   import router from 'router'
-  import SearchView from './search.vue'
 
   const { accept, reject } = actions
 
   export default {
-    name: 'PaperInput',
+    name: 'PaperAnswer',
     extends: configBaseComponent({ state, actions }),
     ready() {
       let id = this.$route.params.quest_id
@@ -129,9 +116,6 @@
         })
         return data
       }
-    },
-    components: {
-      SearchView
     }
   }
 </script>

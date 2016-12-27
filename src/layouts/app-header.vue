@@ -20,6 +20,8 @@
           <ac id="PaperInput"><li><a v-link="{ name: 'PaperInput' }">题目录入</a></li></ac>
           <ac id="InputList"><li><a v-link="{ name: 'InputList' }">录题记录</a></li></ac>
           <ac id="WaitAnswer"><li><a v-link="{ name: 'WaitAnswer' }">待解答</a></li></ac>
+          <ac id="PaperAnswer"><li><a v-link="{ name: 'PaperAnswer' }">题目解答</a></li></ac>
+          <ac id="AnswerList"><li><a v-link="{ name: 'AnswerList' }">答题记录</a></li></ac>
           <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>

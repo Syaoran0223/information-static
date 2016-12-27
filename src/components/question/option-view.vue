@@ -3,7 +3,7 @@
     <div class="form-group">
       <label for="" class="control-label col-sm-1">选项:</label>
       <div class="col-sm-11">
-        <div class="mg-t-7" v-if="!value.length">
+        <div class="mg-t-7" v-if="!value.length && !readonly">
           <button class="btn btn-default btn-xs" @click.prevent="insert()">
             新增
           </button>
@@ -12,9 +12,12 @@
           <div class="inline">
             <div class="mg-t-7">{{item.sort}}</div>
           </div>
-          <div class="inline">
+          <div class="inline" v-if="!readonly">
             <input-alert :value.sync="item.content" placehold="点击此处输入选项">
             </input-alert>
+          </div>
+          <div class="inline" v-else>
+            {{{item.content}}}
           </div>
           <div class="inline">
             <div class="checkbox">
@@ -23,7 +26,7 @@
               </label>
             </div>
           </div>
-          <div class="inline" style="margin-top: 7px;">
+          <div class="inline" style="margin-top: 7px;" v-if="!readonly">
             <button class="btn btn-default btn-xs" @click.prevent="remove(item._id)">
               删除
             </button>
@@ -54,6 +57,10 @@
       value: {
         type: Array,
         twoWay: true
+      },
+      readonly: {
+        type: Boolean,
+        default: false
       }
     },
     components: {

@@ -22,7 +22,6 @@ const module_actions = {
               quest_no: 0,
               quest_type_id: 1,
               option_count: 0,
-              has_sub: '0',
               quest_image: [],
               answer_image: []
             },
@@ -31,7 +30,6 @@ const module_actions = {
           })
         } else {
             _.forEach(state.edit.formData.quest_list, (item) => {
-                item.has_sub = String(item.has_sub)
                 let data = {
                     id: _.uniqueId(),
                     formData: item,

@@ -3,7 +3,11 @@
     <div class="form-group">
       <label for="" class="control-label col-sm-1">母题:</label>
       <div class="col-sm-11">
+        <div class="mg-t-7" v-if="readonly">
+          <p>{{{value.quest_content_html}}}</p>
+        </div>
         <input-alert
+            v-else
             :value.sync="value.quest_content_html"
             :origin_value.sync="value.quest_content"
             placehold="点击此处输入大小题的母题题干">
@@ -27,6 +31,7 @@
         </div>
 
         <select-quest
+          :readonly="readonly"
           :value.sync="item"
           :options.sync="item.options"
           v-if="item.quest_type_id==1"
@@ -34,6 +39,7 @@
         </select-quest>
 
         <blank-quest
+          :readonly="readonly"
           :value.sync="item"
           :answer_list="item.answer_list"
           v-if="item.quest_type_id==2"
@@ -41,6 +47,7 @@
         </blank-quest>
 
         <understand-quest
+          :readonly="readonly"
           :value.sync="item"
           v-if="item.quest_type_id==3"
           :is-sub="true">
@@ -114,6 +121,10 @@
       value: {
         type: Object,
         twoWay: true
+      },
+      readonly: {
+        type: Boolean,
+        default: false
       }
     },
     components: {

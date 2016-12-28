@@ -18,15 +18,25 @@
     <hr/>
     <div class="panel panel-default" v-for="item in value.sub_items">
       <div class="panel-body">
-        <div class="close-position">
+        <div class="close-position" v-show="!readonly">
           <button type="button" class="close" @click.prevent="remove(item._id)">&times;</button>
         </div>
-        <div class="form-group">
+        <div class="form-group" v-if="!readonly">
           <label for="" class="control-label col-sm-3">({{item.sort}}) 请选择子题类型:</label>
+          
           <div class="col-sm-8">
+            
             <tag-selector
               const="sub_quest_types" :value.sync="item.quest_type_id" :required="true">
             </tag-selector>
+          </div>
+        </div>
+        <div class="form-group" v-else>
+          <label for="" class="control-label col-sm-2">({{item.sort}}) 子题类型:</label>
+          <div class="col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary">
+              {{item.quest_type_id | get_const_value 'quest_types'}}
+            </button>
           </div>
         </div>
 
@@ -54,7 +64,7 @@
         </understand-quest>
       </div>
     </div>
-    <div><button class="btn btn-primary btn-xs" @click.prevent="insert">新增子题</button></div>
+    <div v-show="!readonly"><button class="btn btn-primary btn-xs" @click.prevent="insert">新增子题</button></div>
     <hr/>
 
     <div class="form-group">

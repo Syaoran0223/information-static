@@ -36,11 +36,14 @@ const module_actions = {
                     quest_type_id: d.qtype_id,
                     quest_content_html: d.quest_content_html,
                     quest_content: d.quest_content,
-                    quest_option_html: d.quest_option_html,
-                    quest_answer: '',
-                    answer_list: [],
-                    options: [],
-                    _id: _.uniqueId('sub_item_')
+                    id: d.id
+                }
+                if (d.qtype_id == 1) {
+                    data.options = d.options
+                } else if (d.qtype_id == 2) {
+                    data.answer_list = d.answer_list
+                } else if (d.qtype_id == 3) {
+                    data.quest_answer = d.correct_answer
                 }
                 return data
             })

@@ -16,7 +16,7 @@
             <input-alert :value.sync="item.content" placehold="点击此处输入选项">
             </input-alert>
           </div>
-          <div class="inline" v-else>
+          <div class="p-inline" v-else>
             {{{item.content}}}
           </div>
           <div class="inline">
@@ -105,5 +105,10 @@
   .inline {
     float: left !important;
     margin: 0px 10px 0px 10px;
+  }
+  .p-inline {
+    float: left !important;
+    margin: 0px 10px;
+    padding-top: 5px;
   }
 </style>

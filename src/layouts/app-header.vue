@@ -22,6 +22,7 @@
           <ac id="WaitAnswer"><li><a v-link="{ name: 'WaitAnswer' }">待解答</a></li></ac>
           <ac id="PaperAnswer"><li><a v-link="{ name: 'PaperAnswer' }">题目解答</a></li></ac>
           <ac id="AnswerList"><li><a v-link="{ name: 'AnswerList' }">答题记录</a></li></ac>
+          <ac id="WaitCheck"><li><a v-link="{ name: 'WaitCheck' }">待检查</a></li></ac>
           <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>

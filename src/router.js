@@ -25,6 +25,8 @@ import WaitAnswer from 'modules/wait-answer/index.vue'
 import PaperAnswer from 'modules/paper-answer/index.vue'
 import AnswerList from 'modules/answer-list/index.vue'
 
+import WaitCheck from 'modules/wait-check/index.vue'
+
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
 import MessageList from 'modules/user-manage/message-list/index.vue'
@@ -94,6 +96,10 @@ let map = {
   'answer-list': {
     name: 'AnswerList',
     component: AnswerList
+  },
+  'wait-check': {
+    name: 'WaitCheck',
+    component: WaitCheck
   },
 
   '/play': {

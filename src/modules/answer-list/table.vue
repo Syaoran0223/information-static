@@ -14,7 +14,7 @@
         <div class="grid-cell">第 {{item.quest_no}} 题</div>
         <div class="grid-cell cell-btn-group">
           <div class="grid-cell cell-label">{{item.state | get_const_value 'question_state'}}</div>
-          <button v-if="item.state=='5'" class="btn btn-link"
+          <button v-if="item.state=='4'" class="btn btn-link"
               @click="on_item_edit_click(item)"
           >
             <span>继续处理</span>

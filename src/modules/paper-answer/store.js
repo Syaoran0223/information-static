@@ -42,7 +42,13 @@ const module_actions = {
                 if (d.qtype_id == 1) {
                     data.options = d.options
                 } else if (d.qtype_id == 2) {
-                    data.answer_list = d.answer_list
+                    let answer_list = _.map(d.answer_list, (item)=> {
+                        return {
+                            _id: _.uniqueId('b_answer_'),
+                            content: item
+                        }
+                    })
+                    data.answer_list = answer_list
                 } else if (d.qtype_id == 3) {
                     data.quest_answer = d.correct_answer
                 }

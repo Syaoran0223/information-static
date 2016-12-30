@@ -7,6 +7,9 @@ import router from 'router'
 const module_state = {
     config: {
         api: 'api/paper/answer/check'
+    },
+    edit: {
+        answer_saving: false
     }
 }
 
@@ -48,36 +51,43 @@ const module_actions = {
                 if (d.qtype_id == 1) {
                     data.options = d.options
                 } else if (d.qtype_id == 2) {
-                    data.answer_list = d.answer_list
+                    let answer_list = _.map(d.answer_list, (item)=> {
+                        return {
+                            _id: _.uniqueId('b_answer_'),
+                            content: item
+                        }
+                    })
+                    data.answer_list = answer_list
                 } else if (d.qtype_id == 3) {
                     data.quest_answer = d.correct_answer
                 }
                 return data
             })
+            data.sub_items2 = _.cloneDeep(data.sub_items)
         }
         data.is_error = 0
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {
         if (state.edit.formData.quest_type_id == '1') {
-            let query = _.chain(state.edit.formData.options)
+            let query = _.chain(state.edit.formData.options2)
                 .filter((item)=> {
                     return item._selected
                 })
-            let correct_answer = query.map((item)=> {
+            let correct_answer2 = query.map((item)=> {
                     return item.sort
                 })
                 .value()
-            state.edit.formData.correct_answer = correct_answer.join('')
+            state.edit.formData.correct_answer2 = correct_answer2.join('')
         }
         if (state.edit.formData.quest_type_id == '2') {
-            let correct_answer = _.map(state.edit.formData.answer_list, (item)=> {
+            let correct_answer2 = _.map(state.edit.formData.answer_list2, (item)=> {
                 return item.content
             })
-            state.edit.formData.correct_answer = correct_answer
+            state.edit.formData.correct_answer2 = correct_answer2
         }
         if (state.edit.formData.quest_type_id == '4') {
-            _.forEach(state.edit.formData.sub_items, (item)=> {
+            _.forEach(state.edit.formData.sub_items2, (item)=> {
                 if (item.quest_type_id == '1') {
                     let correct_answer = _.chain(item.options)
                         .filter((d) => {
@@ -120,7 +130,7 @@ const module_actions = {
             })
             setTimeout(() => {
                 router.go({
-                    name: 'AnswerList'
+                    name: 'CheckList'
                 })
               }, 300)
         }).catch(() => {
@@ -144,7 +154,26 @@ const module_actions = {
             totalCount: data.totalCount,
             totalPage: data.totalPage
         }
-    }
+    },
+    on_answer_right({ state, actions }) {
+        let api = `${ api_host }/api/paper/answer/check/right/${ state.edit.params.id }`
+        if (state.edit.answer_saving) return
+        state.edit.answer_saving = true
+        PUT(api).then((res) => {
+            notify_ok({
+                title: '保存成功'
+            })
+            setTimeout(() => {
+                router.go({
+                    name: 'CheckList'
+                })
+              }, 300)
+        }).catch(() => {
+
+        }).then(() => {
+            state.edit.answer_saving = false
+        })
+      }
 }
 
 const { state, actions } = createStore(module_state, module_actions)

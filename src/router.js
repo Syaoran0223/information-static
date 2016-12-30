@@ -29,6 +29,8 @@ import WaitCheck from 'modules/wait-check/index.vue'
 import QuestCheck from 'modules/quest-check/index.vue'
 import CheckList from 'modules/check-list/index.vue'
 
+import WaitJudge from 'modules/wait-judge/index.vue'
+
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
 import MessageList from 'modules/user-manage/message-list/index.vue'
@@ -110,6 +112,10 @@ let map = {
   'check-list': {
     name: 'CheckList',
     component: CheckList
+  },
+  'wait-judge': {
+    name: 'WaitJudge',
+    component: WaitJudge
   },
 
   '/play': {

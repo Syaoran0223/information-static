@@ -20,7 +20,7 @@
     <file-upload :items.sync="edit.formData.images" :state.sync="edit.uploadState" :readonly="true"></file-upload>
     
     <div class="panel panel-default">
-      <form class="form-horizontal" @submit.prevent="on_edit_submit">
+      <form class="form-horizontal" @submit.prevent="on_answer_right">
         <div class="panel-body">
           <div class="form-group">
             <label for="" class="control-label col-sm-1">题型:</label>
@@ -58,8 +58,8 @@
         <div class="modal-footer">
           <button class="btn btn-danger" @click.prevent="edit.formData.is_error=1">答案错误</button>
           <button type="submit" class="btn btn-success"
-                  :disabled="edit.saving">
-            <span v-if="edit.saving">保存中...</span>
+                  :disabled="edit.answer_saving">
+            <span v-if="edit.answer_saving">保存中...</span>
             <span v-else>答案正确</span>
           </button>
         </div>
@@ -89,6 +89,44 @@
               </input-alert>
             </div>
           </div>
+          
+          <div v-if="edit.formData.quest_type_id==4">
+            <div class="panel panel-default" v-for="item in edit.formData.sub_items2">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="" class="control-label col-sm-2">({{item.sort}}) 子题类型:</label>
+                  <div class="col-sm-10">
+                    <button type="button" class="btn btn-sm btn-primary">
+                      {{item.quest_type_id | get_const_value 'quest_types'}}
+                    </button>
+                  </div>
+                </div>
+
+                <select-quest
+                  :readonly="true"
+                  :value.sync="item"
+                  :options.sync="item.options"
+                  v-if="item.quest_type_id==1"
+                  :is-sub="true">
+                </select-quest>
+
+                <blank-quest
+                  :readonly="true"
+                  :value.sync="item"
+                  :answer_list="item.answer_list"
+                  v-if="item.quest_type_id==2"
+                  :is-sub="true">>
+                </blank-quest>
+
+                <understand-quest
+                  :readonly="true"
+                  :value.sync="item"
+                  v-if="item.quest_type_id==3"
+                  :is-sub="true">
+                </understand-quest>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="modal-footer">
@@ -110,6 +148,7 @@
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
   import router from 'router'
+  const {on_answer_right} = actions
 
   const { accept, reject } = actions
 
@@ -126,6 +165,9 @@
       is_error() {
         return this.edit.formData.is_error
       }
+    },
+    methods: {
+      on_answer_right
     }
   }
 </script>

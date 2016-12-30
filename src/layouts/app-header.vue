@@ -25,6 +25,7 @@
           <ac id="WaitCheck"><li><a v-link="{ name: 'WaitCheck' }">待检查</a></li></ac>
           <ac id="QuestCheck"><li><a v-link="{ name: 'QuestCheck' }">答案检查</a></li></ac>
           <ac id="CheckList"><li><a v-link="{ name: 'CheckList' }">检查记录</a></li></ac>
+          <ac id="WaitJudge"><li><a v-link="{ name: 'WaitJudge' }">待裁定</a></li></ac>
           <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>

@@ -26,6 +26,8 @@ import PaperAnswer from 'modules/paper-answer/index.vue'
 import AnswerList from 'modules/answer-list/index.vue'
 
 import WaitCheck from 'modules/wait-check/index.vue'
+import QuestCheck from 'modules/quest-check/index.vue'
+import CheckList from 'modules/check-list/index.vue'
 
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
@@ -100,6 +102,14 @@ let map = {
   'wait-check': {
     name: 'WaitCheck',
     component: WaitCheck
+  },
+  'quest-check/:quest_id': {
+    name: 'QuestCheck',
+    component: QuestCheck
+  },
+  'check-list': {
+    name: 'CheckList',
+    component: CheckList
   },
 
   '/play': {

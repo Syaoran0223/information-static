@@ -6,7 +6,7 @@ import router from 'router'
 
 const module_state = {
     config: {
-        api: 'api/paper/answer'
+        api: 'api/paper/answer/check'
     }
 }
 
@@ -21,6 +21,11 @@ const module_actions = {
                 d.content = d.qopt
                 return d
             })
+            let options = _.cloneDeep(data.options)
+            data.options2 = _.map(options, (d)=> {
+                d._selected = false
+                return d
+            })
         } else if(data.quest_type_id == '2') {
             data.answer_list = _.map(data.correct_answer, (d)=> {
                 return {
@@ -28,6 +33,7 @@ const module_actions = {
                     content: d
                 }
             })
+            data.answer_list2 = []
         } else if (data.quest_type_id == '3') {
             data.quest_answer = data.correct_answer
         } else if (data.quest_type_id == '4') {
@@ -49,7 +55,7 @@ const module_actions = {
                 return data
             })
         }
-        data.selected_id = 0
+        data.is_error = 0
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {

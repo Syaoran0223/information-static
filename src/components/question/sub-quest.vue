@@ -15,57 +15,59 @@
       </div>
     </div>
 
-    <hr/>
-    <div class="panel panel-default" v-for="item in value.sub_items">
-      <div class="panel-body">
-        <div class="close-position" v-show="!readonly">
-          <button type="button" class="close" @click.prevent="remove(item._id)">&times;</button>
-        </div>
-        <div class="form-group" v-if="!readonly">
-          <label for="" class="control-label col-sm-3">({{item.sort}}) 请选择子题类型:</label>
-          
-          <div class="col-sm-8">
+    <div v-if="show_sub">
+      <hr/>
+      <div class="panel panel-default" v-for="item in sub_items">
+        <div class="panel-body">
+          <div class="close-position" v-show="!readonly">
+            <button type="button" class="close" @click.prevent="remove(item._id)">&times;</button>
+          </div>
+          <div class="form-group" v-if="!readonly">
+            <label for="" class="control-label col-sm-3">({{item.sort}}) 请选择子题类型:</label>
             
-            <tag-selector
-              const="sub_quest_types" :value.sync="item.quest_type_id" :required="true">
-            </tag-selector>
+            <div class="col-sm-8">
+              
+              <tag-selector
+                const="sub_quest_types" :value.sync="item.quest_type_id" :required="true">
+              </tag-selector>
+            </div>
           </div>
-        </div>
-        <div class="form-group" v-else>
-          <label for="" class="control-label col-sm-2">({{item.sort}}) 子题类型:</label>
-          <div class="col-sm-10">
-            <button type="button" class="btn btn-sm btn-primary">
-              {{item.quest_type_id | get_const_value 'quest_types'}}
-            </button>
+          <div class="form-group" v-else>
+            <label for="" class="control-label col-sm-2">({{item.sort}}) 子题类型:</label>
+            <div class="col-sm-10">
+              <button type="button" class="btn btn-sm btn-primary">
+                {{item.quest_type_id | get_const_value 'quest_types'}}
+              </button>
+            </div>
           </div>
+
+          <select-quest
+            :readonly="readonly"
+            :value.sync="item"
+            :options.sync="item.options"
+            v-if="item.quest_type_id==1"
+            :is-sub="true">
+          </select-quest>
+
+          <blank-quest
+            :readonly="readonly"
+            :value.sync="item"
+            :answer_list.sync="item.answer_list"
+            v-if="item.quest_type_id==2"
+            :is-sub="true">>
+          </blank-quest>
+
+          <understand-quest
+            :readonly="readonly"
+            :value.sync="item"
+            v-if="item.quest_type_id==3"
+            :is-sub="true">
+          </understand-quest>
         </div>
-
-        <select-quest
-          :readonly="readonly"
-          :value.sync="item"
-          :options.sync="item.options"
-          v-if="item.quest_type_id==1"
-          :is-sub="true">
-        </select-quest>
-
-        <blank-quest
-          :readonly="readonly"
-          :value.sync="item"
-          :answer_list="item.answer_list"
-          v-if="item.quest_type_id==2"
-          :is-sub="true">>
-        </blank-quest>
-
-        <understand-quest
-          :readonly="readonly"
-          :value.sync="item"
-          v-if="item.quest_type_id==3"
-          :is-sub="true">
-        </understand-quest>
       </div>
+      <div v-show="!readonly"><button class="btn btn-primary btn-xs" @click.prevent="insert">新增子题</button></div>
+      <hr/>
     </div>
-    <div v-show="!readonly"><button class="btn btn-primary btn-xs" @click.prevent="insert">新增子题</button></div>
-    <hr/>
 
     <div class="form-group">
       <label for="" class="control-label col-sm-1">解答:</label>
@@ -132,9 +134,17 @@
         type: Object,
         twoWay: true
       },
+      sub_items: {
+        type: Array,
+        twoWay: true
+      },
       readonly: {
         type: Boolean,
         default: false
+      },
+      show_sub: {
+        type: Boolean,
+        default: true
       }
     },
     components: {
@@ -144,15 +154,15 @@
       UnderstandQuest
     },
     watch: {
-      'value.sub_items'(val) {
-        _.forEach(this.value.sub_items, (item, key) => {
+      'sub_items'(val) {
+        _.forEach(this.sub_items, (item, key) => {
           item.sort = key + 1
         })
       }
     },
     methods: {
       insert() {
-        this.value.sub_items.push(
+        this.sub_items.push(
           {
             sort: 0,
             quest_type_id: 0,
@@ -167,11 +177,11 @@
         )
       },
       remove(_id) {
-        let items = _.clone(this.value.sub_items)
+        let items = _.clone(this.sub_items)
         _.remove(items, (d)=> {
           return d._id == _id
         })
-        this.value.sub_items = items
+        this.sub_items = items
       }
     }
   }

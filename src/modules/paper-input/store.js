@@ -13,7 +13,7 @@ const module_state = {
 const module_actions = {
     parse_edit_init_data: ({ state }, data) => {
         data.images = data.quest_image.concat(data.answer_image)
-        data.options = [
+        data.options1 = [
           {
             sort: 'A',
             content: '',
@@ -28,13 +28,11 @@ const module_actions = {
           }
         ]
         data.selected_id = 0
-        data.sub_items = []
-        data.answer_list = []
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {
         if (state.edit.formData.quest_type_id == '1') {
-            let correct_answer = _.chain(state.edit.formData.options)
+            let correct_answer1 = _.chain(state.edit.formData.options1)
                 .filter((item)=> {
                     return item._selected
                 })
@@ -42,16 +40,16 @@ const module_actions = {
                     return item.sort
                 })
                 .value()
-            state.edit.formData.correct_answer = correct_answer.join('')
+            state.edit.formData.correct_answer1 = correct_answer1.join('')
         }
         if (state.edit.formData.quest_type_id == '2') {
-            let correct_answer = _.map(state.edit.formData.answer_list, (item)=> {
+            let correct_answer1 = _.map(state.edit.formData.answer_list1, (item)=> {
                 return item.content
             })
-            state.edit.formData.correct_answer = correct_answer
+            state.edit.formData.correct_answer1 = correct_answer1
         }
         if (state.edit.formData.quest_type_id == '4') {
-            _.forEach(state.edit.formData.sub_items, (item)=> {
+            _.forEach(state.edit.formData.sub_items1, (item)=> {
                 if (item.quest_type_id == '1') {
                     let correct_answer = _.chain(item.options)
                         .filter((d) => {

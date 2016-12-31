@@ -6,19 +6,13 @@ import router from 'router'
 
 const module_state = {
     config: {
-        api: 'api/paper/answer/check'
-    },
-    edit: {
-        answer_saving: false
+        api: 'api/quest/judge'
     }
 }
 
 const module_actions = {
     parse_edit_init_data: ({ state }, data) => {
         data.images = data.quest_image.concat(data.answer_image)
-        if (data.quest_type_id == '3') {
-            data.quest_answer = data.correct_answer1
-        }
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {
@@ -107,26 +101,7 @@ const module_actions = {
             totalCount: data.totalCount,
             totalPage: data.totalPage
         }
-    },
-    on_answer_right({ state, actions }) {
-        let api = `${ api_host }/api/paper/answer/check/right/${ state.edit.params.id }`
-        if (state.edit.answer_saving) return
-        state.edit.answer_saving = true
-        PUT(api).then((res) => {
-            notify_ok({
-                title: '保存成功'
-            })
-            setTimeout(() => {
-                router.go({
-                    name: 'CheckList'
-                })
-              }, 300)
-        }).catch(() => {
-
-        }).then(() => {
-            state.edit.answer_saving = false
-        })
-      }
+    }
 }
 
 const { state, actions } = createStore(module_state, module_actions)

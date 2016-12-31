@@ -16,7 +16,7 @@
     </div>
 
     <blank-answer
-      :value.sync="value.answer_list">
+      :value.sync="answer_list">
     </blank-answer>
     
 

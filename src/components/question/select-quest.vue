@@ -23,6 +23,7 @@
     </div>
 
     <option-view
+        v-if="show_answer"
         :readonly="readonly"
         :value.sync="options">
     </option-view>
@@ -90,6 +91,10 @@
       readonly: {
         type: Boolean,
         default: false
+      },
+      show_answer: {
+        type: Boolean,
+        default: true
       }
     },
     data() {

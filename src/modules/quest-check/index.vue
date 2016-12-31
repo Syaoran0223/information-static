@@ -33,13 +33,14 @@
 
           <select-quest
             :value.sync="edit.formData"
-            :options.sync="edit.formData.options"
+            :options.sync="edit.formData.options1"
             :readonly="true"
             v-if="edit.formData.quest_type_id==1">
           </select-quest>
           <blank-quest
             :readonly="true"
             :value.sync="edit.formData"
+            :answer_list.sync="edit.formData.answer_list1"
             v-if="edit.formData.quest_type_id==2">
           </blank-quest>
           <understand-quest
@@ -50,6 +51,7 @@
           <sub-quest
             :readonly="true"
             :value.sync="edit.formData"
+            :sub_items.sync="edit.formData.sub_items1"
             v-if="edit.formData.quest_type_id==4">
           </sub-quest>
 
@@ -113,7 +115,7 @@
                 <blank-quest
                   :readonly="true"
                   :value.sync="item"
-                  :answer_list="item.answer_list"
+                  :answer_list.sync="item.answer_list"
                   v-if="item.quest_type_id==2"
                   :is-sub="true">>
                 </blank-quest>
@@ -147,10 +149,7 @@
 <script>
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
-  import router from 'router'
   const {on_answer_right} = actions
-
-  const { accept, reject } = actions
 
   export default {
     name: 'QuestCheck',

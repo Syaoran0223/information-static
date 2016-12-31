@@ -13,71 +13,31 @@ const module_state = {
 const module_actions = {
     parse_edit_init_data: ({ state }, data) => {
         data.images = data.quest_image.concat(data.answer_image)
-        // 选择题
-        if (data.quest_type_id == '1') {
-            data.options = _.map(data.options, (d)=> {
-                d.sort = d.qsn
-                d._selected = d.qok
-                d.content = d.qopt
-                return d
-            })
-        } else if(data.quest_type_id == '2') {
-            data.answer_list = _.map(data.correct_answer, (d)=> {
-                return {
-                    _id: _.uniqueId('b_answer_'),
-                    content: d
-                }
-            })
-        } else if (data.quest_type_id == '3') {
-            data.quest_answer = data.correct_answer
-        } else if (data.quest_type_id == '4') {
-            data.sub_items = _.map(data.sub_items, (d)=> {
-                let data = {
-                    sort: d.quest_no,
-                    quest_type_id: d.qtype_id,
-                    quest_content_html: d.quest_content_html,
-                    quest_content: d.quest_content,
-                    id: d.id
-                }
-                if (d.qtype_id == 1) {
-                    data.options = d.options
-                } else if (d.qtype_id == 2) {
-                    let answer_list = _.map(d.answer_list, (item)=> {
-                        return {
-                            _id: _.uniqueId('b_answer_'),
-                            content: item
-                        }
-                    })
-                    data.answer_list = answer_list
-                } else if (d.qtype_id == 3) {
-                    data.quest_answer = d.correct_answer
-                }
-                return data
-            })
+        if (data.quest_type_id == '3') {
+            data.quest_answer = data.correct_answer1
         }
-        data.selected_id = 0
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {
         if (state.edit.formData.quest_type_id == '1') {
-            let query = _.chain(state.edit.formData.options)
+            let correct_answer1 = _.chain(state.edit.formData.options1)
                 .filter((item)=> {
                     return item._selected
                 })
-            let correct_answer = query.map((item)=> {
+                .map((item)=> {
                     return item.sort
                 })
                 .value()
-            state.edit.formData.correct_answer = correct_answer.join('')
+            state.edit.formData.correct_answer1 = correct_answer1.join('')
         }
         if (state.edit.formData.quest_type_id == '2') {
-            let correct_answer = _.map(state.edit.formData.answer_list, (item)=> {
+            let correct_answer1 = _.map(state.edit.formData.answer_list1, (item)=> {
                 return item.content
             })
-            state.edit.formData.correct_answer = correct_answer
+            state.edit.formData.correct_answer1 = correct_answer1
         }
         if (state.edit.formData.quest_type_id == '4') {
-            _.forEach(state.edit.formData.sub_items, (item)=> {
+            _.forEach(state.edit.formData.sub_items1, (item)=> {
                 if (item.quest_type_id == '1') {
                     let correct_answer = _.chain(item.options)
                         .filter((d) => {

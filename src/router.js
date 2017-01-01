@@ -33,6 +33,10 @@ import WaitJudge from 'modules/wait-judge/index.vue'
 import QuestJudge from 'modules/quest-judge/index.vue'
 import JudgeList from 'modules/judge-list/index.vue'
 
+import WaitVerify from 'modules/wait-verify/index.vue'
+import QuestVerify from 'modules/quest-verify/index.vue'
+import VerifyList from 'modules/verify-list/index.vue'
+
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
 import MessageList from 'modules/user-manage/message-list/index.vue'
@@ -126,6 +130,18 @@ let map = {
   'judge-list': {
     name: 'JudgeList',
     component: JudgeList
+  },
+  'wait-verify': {
+    name: 'WaitVerify',
+    component: WaitVerify
+  },
+  'quest-verify/:quest_id': {
+    name: 'QuestVerify',
+    component: QuestVerify
+  },
+  'verify-list': {
+    name: 'VerifyList',
+    component: VerifyList
   },
 
   '/play': {

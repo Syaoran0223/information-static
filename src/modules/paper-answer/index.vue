@@ -20,7 +20,7 @@
     <file-upload :items.sync="edit.formData.images" :state.sync="edit.uploadState" :readonly="true"></file-upload>
     <div class="row">
       <div class="col-sm-12">
-        <div class="panel panel-default" v-if="edit.formData.selected_id == 0">
+        <div class="panel panel-default">
           <form class="form-horizontal" @submit.prevent="on_edit_submit">
             <div class="panel-body">
               <div class="form-group">
@@ -66,28 +66,6 @@
             </div>
           </form>
         </div>
-        <div class="panel panel-default" v-else>
-          <form class="form-horizontal" @submit.prevent="on_edit_submit">
-            <div class="panel-body">
-              <p>{{{selected_item.qtxt}}}</p>
-              <div v-for="d in selected_item.qopt">
-                <span style="float: left">{{d.Key}}:&nbsp;&nbsp;</span> {{{d.Value | trim}}}
-              </div>
-              <p class="text-right">
-                <button class="btn btn-primary btn-xs">{{selected_item.name}}</button>
-                <button class="btn btn-primary btn-xs">{{selected_item.subject_name}}</button>
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-success" @click.prevent="edit.formData.selected_id=0">取消选择</button>
-              <button type="submit" class="btn btn-primary"
-                      :disabled="edit.saving">
-                <span v-if="edit.saving">保存中...</span>
-                <span v-else>保存</span>
-              </button>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
     
@@ -109,14 +87,6 @@
       let id = this.$route.params.quest_id
       if (id != ':quest_id') {
         actions.on_item_edit_click({}, {id})
-      }
-    },
-    computed: {
-      selected_item() {
-        let data = _.find(this.page.table.items, (d)=> {
-          return d.qid == this.edit.formData.selected_id
-        })
-        return data
       }
     }
   }

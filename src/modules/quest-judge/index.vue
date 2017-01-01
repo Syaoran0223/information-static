@@ -71,7 +71,8 @@
             </option-view-sm>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(1)"
                     :disabled="edit.accept_1">
               <span v-if="edit.accept_1">保存中...</span>
               <span v-else>采纳</span>
@@ -88,7 +89,8 @@
             </option-view-sm>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(2)"
                     :disabled="edit.accept_2">
               <span v-if="edit.accept_2">保存中...</span>
               <span v-else>采纳</span>
@@ -107,7 +109,8 @@
             </blank-answer-sm> 
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(1)"
                     :disabled="edit.accept_1">
               <span v-if="edit.accept_1">保存中...</span>
               <span v-else>采纳</span>
@@ -123,7 +126,8 @@
             </blank-answer-sm> 
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(2)"
                     :disabled="edit.accept_2">
               <span v-if="edit.accept_2">保存中...</span>
               <span v-else>采纳</span>
@@ -145,7 +149,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(1)"
                     :disabled="edit.accept_1">
               <span v-if="edit.accept_1">保存中...</span>
               <span v-else>采纳</span>
@@ -164,7 +169,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(2)"
                     :disabled="edit.accept_2">
               <span v-if="edit.accept_2">保存中...</span>
               <span v-else>采纳</span>
@@ -183,7 +189,8 @@
             </sub-quest-answer>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(1)"
                     :disabled="edit.accept_1">
               <span v-if="edit.accept_1">保存中...</span>
               <span v-else>采纳</span>
@@ -199,7 +206,8 @@
             </sub-quest-answer>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
+            <button type="button" class="btn btn-primary"
+                    @click="accept(2)"
                     :disabled="edit.accept_2">
               <span v-if="edit.accept_2">保存中...</span>
               <span v-else>采纳</span>
@@ -217,6 +225,7 @@
 <script>
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
+  const {accept} = actions
 
   export default {
     name: 'QuestJudge',
@@ -231,6 +240,9 @@
       is_error() {
         return this.edit.formData.is_error
       }
+    },
+    methods: {
+      accept
     }
   }
 </script>

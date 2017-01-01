@@ -108,13 +108,12 @@ const module_actions = {
         return `${ api_host }/api/paper/search`
     },
     on_edit_submit ({ state, actions }, customFormData) {
-        if (state.edit.loading) return
+        if (state.edit.saving) return
         state.edit.saving = true
 
         let data = actions.parse_edit_submit_data(customFormData)
 
-        let api_method = state.edit.is_new ? POST : PUT
-        api_method(actions.get_item_submit_url(customFormData), {
+        PUT(actions.get_item_submit_url(customFormData), {
             data
         }).then((res) => {
             notify_ok({
@@ -129,7 +128,6 @@ const module_actions = {
 
         }).then(() => {
             state.edit.saving = false
-            state.edit.open = false
         })
     },
     parse_table_query_fetched ({ state }, data) {

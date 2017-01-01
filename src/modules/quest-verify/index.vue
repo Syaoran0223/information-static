@@ -57,6 +57,12 @@
             <span v-if="edit.verify_saving">保存中...</span>
             <span v-else>准确无误</span>
           </button>
+          <button type="button" class="btn btn-primary"
+                  @click="on_edit_submit"
+                  :disabled="edit.saving">
+            <span v-if="edit.saving">保存中...</span>
+            <span v-else>提交修改</span>
+          </button>
         </div>
       </form>
     </div>
@@ -72,7 +78,7 @@
   import UnderstandVerify from './understand-verify.vue'
   import SubVerify from './sub-verify.vue'
 
-  const {on_verify_right} = actions
+  const {on_verify_right, on_edit_submit} = actions
 
   export default {
     name: 'QuestVerify',

@@ -9,6 +9,9 @@
               <a @click.prevent="remove(file)" v-show="file.status!='pending'" style="cursor:pointer;"><span class="glyphicon glyphicon-trash img-tag"></span></a>
               <a @click.prevent="reupload(file.id)" v-show="file.status=='error'" style="cursor:pointer;"><span class="glyphicon glyphicon-repeat img-tag"></span></a>
             </div>
+            <div class="img-bar" v-show="file.status!='pending' && readonly && !this.isTrue(file.can_preview)">
+              <a v-bind:href="file.url" target="_blank" v-show="file.status=='success'" style="cursor:pointer;"><span class="glyphicon glyphicon-download-alt img-tag"></span></a>
+            </div>
             <p class="title" style="z-index: 2000;">{{file.name}}</p>
             <p v-show="this.isTrue(file.can_preview) && (file.status=='success' || file.status=='complete')" class="imgWrap">
               <a v-bind:href="file.url" target="_blank">

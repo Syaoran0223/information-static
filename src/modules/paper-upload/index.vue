@@ -47,6 +47,18 @@
                 </div>
               </div>
               <div class="form-group">
+                <label for="" class="control-label col-sm-2">考试时间</label>
+                <div class="col-sm-9">
+                  <datetime-picker
+                    :required="true"
+                    :value.sync="edit.formData.exam_date"
+                    format="YYYY-MM-DD"
+                    width="100%"
+                    >
+                  </datetime-picker>
+                </div>
+              </div>
+              <div class="form-group">
                 <label for="" class="control-label col-sm-2">省</label>
                 <div class="col-sm-4">
                   <selector

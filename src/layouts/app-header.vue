@@ -6,8 +6,6 @@
       </div>
       <nav>
         <ul class="nav navbar-nav nav-pills app-header-nav">
-          <li><a v-link="{ name: 'play' }">demo</a></li>
-          <li><a v-link="{ name: 'home' }">待办</a></li>
           <ac id="PaperUpload"><li><a v-link="{ name: 'PaperUpload' }">试卷上传</a></li></ac>
           <ac id="PaperUploadList"><li><a v-link="{ name: 'PaperUploadList' }">上传记录</a></li></ac>
           <ac id="WaitConfirm"><li><a v-link="{ name: 'WaitConfirm' }">待审核</a></li></ac>
@@ -41,7 +39,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a>个人中心</a>
+              <a v-link="{ name: 'UserManage' }">个人中心</a>
             </li>
             <li role="separator" class="divider"></li>
             <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> 注销</a></li>

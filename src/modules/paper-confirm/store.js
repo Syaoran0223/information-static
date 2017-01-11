@@ -1,6 +1,8 @@
 import createStore from 'store/createStore'
 import { PUT } from 'utils/ajax'
 import { notify_ok } from 'utils/notification'
+import { date_format } from 'utils/filter'
+import router from 'router'
 
 const module_state = {
     config: {
@@ -15,6 +17,9 @@ const module_state = {
             saving: false
         },
         acception: {
+            saving: false
+        },
+        usage: {
             saving: false
         }
     }
@@ -38,6 +43,7 @@ const module_actions = {
             id: data.school_id,
             text: data.school_name
         }
+        data.exam_date = date_format(data.exam_date, 'YYYY-MM-DD')
         return data
     },
     reject ({state, actions}) {
@@ -51,6 +57,11 @@ const module_actions = {
             notify_ok({
               title: '保存成功'
             })
+            setTimeout(() => {
+                router.go({
+                    name: 'ConfirmList'
+                })
+              }, 300)
             
           }).catch(() => {
 
@@ -62,6 +73,29 @@ const module_actions = {
         if (state.edit.acception.saving) return
         state.edit.acception.saving = true
         let data = state.edit.confirmData
+        data.state = 5
+        PUT(actions.get_item_submit_url({}), {
+            data
+          }).then((res) => {
+            notify_ok({
+              title: '保存成功'
+            })
+            setTimeout(() => {
+                router.go({
+                    name: 'ConfirmList'
+                })
+              }, 300)
+            
+          }).catch(() => {
+
+          }).then(() => {
+            state.edit.acception.saving = false
+          })
+    },
+    use ({state, actions}) {
+        if (state.edit.usage.saving) return
+        state.edit.usage.saving = true
+        let data = state.edit.confirmData
         data.state = 2
         PUT(actions.get_item_submit_url({}), {
             data
@@ -69,11 +103,16 @@ const module_actions = {
             notify_ok({
               title: '保存成功'
             })
+            setTimeout(() => {
+                router.go({
+                    name: 'ConfirmList'
+                })
+              }, 300)
             
           }).catch(() => {
 
           }).then(() => {
-            state.edit.acception.saving = false
+            state.edit.usage.saving = false
           })
     }
 }

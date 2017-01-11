@@ -68,8 +68,11 @@
                 <span style="float: left">{{d.Key}}:&nbsp;&nbsp;</span> {{{d.Value | trim}}}
               </div>
               <p class="text-right">
-                <button class="btn btn-primary btn-xs">{{selected_item.name}}</button>
-                <button class="btn btn-primary btn-xs">{{selected_item.subject_name}}</button>
+                <span class="label label-primary">{{selected_item.name}}</span>
+                <span class="label label-primary">{{selected_item.subject_name}}</span>
+              </p>
+              <p class="text-right">
+                <a href="http://i3ke.com/question/detail/{{selected_item.qid}}" target="blank">[查看详情]</a>
               </p>
             </div>
             <div class="modal-footer">

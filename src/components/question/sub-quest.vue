@@ -6,12 +6,12 @@
         <div class="mg-t-7" v-if="readonly">
           <p>{{{value.quest_content_html}}}</p>
         </div>
-        <input-alert
+        <input-tag
             v-else
             :value.sync="value.quest_content_html"
             :origin_value.sync="value.quest_content"
             placehold="点击此处输入大小题的母题题干">
-        </input-alert>
+        </input-tag>
       </div>
     </div>
 

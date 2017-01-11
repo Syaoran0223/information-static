@@ -1,4 +1,5 @@
 import createStore from 'store/createStore'
+import {date_format} from 'utils/filter'
 
 const module_state = {
     config: {
@@ -28,6 +29,7 @@ const module_actions = {
             id: data.school_id,
             text: data.school_name
         }
+        data.exam_date = date_format(data.exam_date, 'YYYY-MM-DD')
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {

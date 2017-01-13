@@ -1,8 +1,9 @@
 import createStore from 'store/createStore'
-import { PUT } from 'utils/ajax'
+import { PUT, GET } from 'utils/ajax'
 import { notify_ok } from 'utils/notification'
 import { date_format } from 'utils/filter'
 import router from 'router'
+import { api_host } from 'config'
 
 const module_state = {
     config: {
@@ -26,6 +27,18 @@ const module_state = {
 }
 
 const module_actions = {
+    table_query({ state, actions }, exam_id) {
+        state.table.loading = true
+        state.table.items = []
+        let api = `${ api_host }/${ state.config.api }/${exam_id}/history`
+        GET(api, {
+            data: actions.get_table_query_params()
+        }).then(res => {
+            state.table.loading = false
+            _.assign(state.table, actions.parse_table_query_fetched(res))
+            state.table.empty = !state.table.items.length
+        })
+    },
     parse_edit_init_data ({ state }, data) {
         data.province_id = {
             id: data.province_id,

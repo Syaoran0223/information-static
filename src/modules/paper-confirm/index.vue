@@ -199,7 +199,7 @@
       <div class="col-sm-4">
         <div class="panel panel-default">
           <div class="panel-body">
-            list
+            <table-view></table-view>
           </div>
         </div>
       </div>
@@ -213,6 +213,7 @@
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
   import router from 'router'
+  import TableView from './table.vue'
   const { accept, reject, use } = actions
 
   export default {
@@ -232,12 +233,16 @@
       let id = this.$route.params.paper_id
       if (id != ':paper_id') {
         actions.on_item_edit_click({}, {id})
+        actions.table_query(id)
       }
     },
     methods: {
       accept,
       reject,
       use
+    },
+    components: {
+      TableView
     }
   }
 </script>

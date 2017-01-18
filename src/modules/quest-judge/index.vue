@@ -23,6 +23,12 @@
       <form class="form-horizontal">
         <div class="panel-body">
           <div class="form-group">
+            <label for="" class="control-label col-sm-1">性质:</label>
+            <div class="col-sm-11">
+              <tag-selector const="has_sub" :value.sync="edit.formData.has_sub" :required="true"></tag-selector>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="" class="control-label col-sm-1">题型:</label>
             <div class="col-sm-11">
               <button type="button" class="btn btn-sm btn-primary">
@@ -36,32 +42,32 @@
             :options.sync="edit.formData.options1"
             :readonly="true"
             :show_answer="false"
-            v-if="edit.formData.quest_type_id==1">
+            v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
           </select-quest>
           <blank-quest
             :readonly="true"
             :value.sync="edit.formData"
             :answer_list.sync="edit.formData.answer_list1"
-            v-if="edit.formData.quest_type_id==2">
+            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
           </blank-quest>
           <understand-quest
             :readonly="true"
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==3">
+            v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
           </understand-quest>
           <sub-quest
             :readonly="true"
             :value.sync="edit.formData"
             :sub_items.sync="edit.formData.sub_items1"
             :show_sub="false"
-            v-if="edit.formData.quest_type_id==4">
+            v-if="edit.formData.has_sub">
           </sub-quest>
 
         </div>
       </form>
     </div>
     <form class="form-horizontal">
-    <div class="row" v-if="edit.formData.quest_type_id=='1'">
+    <div class="row" v-if="edit.formData.quest_type_id=='1' && !edit.formData.has_sub">
       <div class="col-sm-6">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -100,7 +106,7 @@
       </div>
     </div>
 
-    <div class="row" v-if="edit.formData.quest_type_id=='2'">
+    <div class="row" v-if="edit.formData.quest_type_id=='2' && !edit.formData.has_sub">
       <div class="col-sm-6">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -137,7 +143,7 @@
       </div>
     </div>
 
-    <div class="row" v-if="edit.formData.quest_type_id=='3'">
+    <div class="row" v-if="edit.formData.quest_type_id=='3' && !edit.formData.has_sub">
       <div class="col-sm-6">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -180,7 +186,7 @@
       </div>
     </div>
 
-    <div class="row" v-if="edit.formData.quest_type_id=='4'">
+    <div class="row" v-if="edit.formData.has_sub">
       <div class="col-sm-6">
         <div class="panel panel-default">
           <div class="panel-body">

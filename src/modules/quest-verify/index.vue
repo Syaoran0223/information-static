@@ -23,6 +23,12 @@
       <form class="form-horizontal">
         <div class="panel-body">
           <div class="form-group">
+            <label for="" class="control-label col-sm-1">性质:</label>
+            <div class="col-sm-11">
+              <tag-selector const="has_sub" :value.sync="edit.formData.has_sub" :required="true"></tag-selector>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="" class="control-label col-sm-1">题型:</label>
             <div class="col-sm-11">
               <button type="button" class="btn btn-sm btn-primary">
@@ -33,19 +39,19 @@
 
           <select-verify
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==1">
+            v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
           </select-verify>
           <blank-verify
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==2">
+            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
           </blank-verify>
           <understand-verify
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==3">
+            v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
           </understand-verify>
           <sub-verify
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==4">
+            v-if="edit.formData.has_sub">
           </sub-verify>
 
         </div>

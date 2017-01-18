@@ -351,16 +351,20 @@ export const question_state = {
   '99': '结束录题'
 }
 
-export const has_sub = {
-  '0' : '非大小题',
-  '1' : '大小题'
-}
+// export const has_sub = {
+//   0 : '非大小题',
+//   1 : '大小题'
+// }
+
+export const has_sub = [
+  '非大小题',
+  '大小题'
+]
 
 export const quest_types = {
   '1': '选择题',
   '2': '填空题',
-  '3': '解答题',
-  '4': '大小题'
+  '3': '解答题'
 }
 
 export const sub_quest_types = {

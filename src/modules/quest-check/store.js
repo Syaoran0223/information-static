@@ -17,44 +17,29 @@ const module_actions = {
     parse_edit_init_data: ({ state }, data) => {
         data.images = data.quest_image.concat(data.answer_image)
         data.is_error = false
-        if (data.quest_type_id == '1') {
-            let options = _.cloneDeep(data.options1)
-            data.options2 = _.map(options, (d)=> {
-                d._selected = false
-                return d
-            })
-        } else if (data.quest_type_id == '2') {
-            let answer_list = _.cloneDeep(data.answer_list1)
-            data.answer_list2 = _.map(answer_list, (d)=> {
-                d.content = ''
-                return d
-            })
-        }else if (data.quest_type_id == '3') {
-            data.quest_answer = data.correct_answer1
-        } else if (data.quest_type_id == '4') {
+        if (data.has_sub) {
             data.sub_items2 = _.cloneDeep(data.sub_items1)
+        } else {
+            if (data.quest_type_id == '1') {
+                let options = _.cloneDeep(data.options1)
+                data.options2 = _.map(options, (d)=> {
+                    d._selected = false
+                    return d
+                })
+            } else if (data.quest_type_id == '2') {
+                let answer_list = _.cloneDeep(data.answer_list1)
+                data.answer_list2 = _.map(answer_list, (d)=> {
+                    d.content = ''
+                    return d
+                })
+            }else if (data.quest_type_id == '3') {
+                data.quest_answer = data.correct_answer1
+            }
         }
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {
-        if (state.edit.formData.quest_type_id == '1') {
-            let query = _.chain(state.edit.formData.options2)
-                .filter((item)=> {
-                    return item._selected
-                })
-            let correct_answer2 = query.map((item)=> {
-                    return item.sort
-                })
-                .value()
-            state.edit.formData.correct_answer2 = correct_answer2.join('')
-        }
-        if (state.edit.formData.quest_type_id == '2') {
-            let correct_answer2 = _.map(state.edit.formData.answer_list2, (item)=> {
-                return item.content
-            })
-            state.edit.formData.correct_answer2 = correct_answer2
-        }
-        if (state.edit.formData.quest_type_id == '4') {
+        if (state.edit.formData.has_sub) {
             _.forEach(state.edit.formData.sub_items2, (item)=> {
                 if (item.quest_type_id == '1') {
                     let correct_answer = _.chain(item.options)
@@ -77,6 +62,24 @@ const module_actions = {
                     item.correct_answer = item.quest_answer
                 }
             })
+        } else {
+            if (state.edit.formData.quest_type_id == '1') {
+                let query = _.chain(state.edit.formData.options2)
+                    .filter((item)=> {
+                        return item._selected
+                    })
+                let correct_answer2 = query.map((item)=> {
+                        return item.sort
+                    })
+                    .value()
+                state.edit.formData.correct_answer2 = correct_answer2.join('')
+            }
+            if (state.edit.formData.quest_type_id == '2') {
+                let correct_answer2 = _.map(state.edit.formData.answer_list2, (item)=> {
+                    return item.content
+                })
+                state.edit.formData.correct_answer2 = correct_answer2
+            }
         }
         return customFormData || state.edit.formData
     },

@@ -23,6 +23,12 @@
       <form class="form-horizontal" @submit.prevent="on_answer_right">
         <div class="panel-body">
           <div class="form-group">
+            <label for="" class="control-label col-sm-1">性质:</label>
+            <div class="col-sm-11">
+              <tag-selector const="has_sub" :value.sync="edit.formData.has_sub" :required="true"></tag-selector>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="" class="control-label col-sm-1">题型:</label>
             <div class="col-sm-11">
               <button type="button" class="btn btn-sm btn-primary">
@@ -35,24 +41,24 @@
             :value.sync="edit.formData"
             :options.sync="edit.formData.options1"
             :readonly="true"
-            v-if="edit.formData.quest_type_id==1">
+            v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
           </select-quest>
           <blank-quest
             :readonly="true"
             :value.sync="edit.formData"
             :answer_list.sync="edit.formData.answer_list1"
-            v-if="edit.formData.quest_type_id==2">
+            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
           </blank-quest>
           <understand-quest
             :readonly="true"
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==3">
+            v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
           </understand-quest>
           <sub-quest
             :readonly="true"
             :value.sync="edit.formData"
             :sub_items.sync="edit.formData.sub_items1"
-            v-if="edit.formData.quest_type_id==4">
+            v-if="edit.formData.has_sub">
           </sub-quest>
 
         </div>
@@ -72,17 +78,17 @@
       <form class="form-horizontal" @submit.prevent="on_edit_submit">
         <div class="panel-body">
           <option-view
-              v-if="edit.formData.quest_type_id==1"
+              v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub"
               :readonly="true"
               :value.sync="edit.formData.options2">
           </option-view>
 
           <blank-answer
-            v-if="edit.formData.quest_type_id==2"
+            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub"
             :value.sync="edit.formData.answer_list2">
           </blank-answer>
 
-          <div class="form-group" v-if="edit.formData.quest_type_id==3">
+          <div class="form-group" v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
             <label for="" class="control-label col-sm-1">答案:</label>
             <div class="col-sm-11">
               <input-alert
@@ -92,7 +98,7 @@
             </div>
           </div>
           
-          <div v-if="edit.formData.quest_type_id==4">
+          <div v-if="edit.formData.has_sub">
             <div class="panel panel-default" v-for="item in edit.formData.sub_items2">
               <div class="panel-body">
                 <div class="form-group">

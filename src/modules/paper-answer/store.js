@@ -19,24 +19,7 @@ const module_actions = {
         return data
     },
     parse_edit_submit_data ({ state }, customFormData) {
-        if (state.edit.formData.quest_type_id == '1') {
-            let correct_answer1 = _.chain(state.edit.formData.options1)
-                .filter((item)=> {
-                    return item._selected
-                })
-                .map((item)=> {
-                    return item.sort
-                })
-                .value()
-            state.edit.formData.correct_answer1 = correct_answer1.join('')
-        }
-        if (state.edit.formData.quest_type_id == '2') {
-            let correct_answer1 = _.map(state.edit.formData.answer_list1, (item)=> {
-                return item.content
-            })
-            state.edit.formData.correct_answer1 = correct_answer1
-        }
-        if (state.edit.formData.quest_type_id == '4') {
+        if (state.edit.formData.has_sub) {
             _.forEach(state.edit.formData.sub_items1, (item)=> {
                 if (item.quest_type_id == '1') {
                     let correct_answer = _.chain(item.options)
@@ -59,7 +42,26 @@ const module_actions = {
                     item.correct_answer = item.quest_answer
                 }
             })
+        } else {
+            if (state.edit.formData.quest_type_id == '1') {
+                let correct_answer1 = _.chain(state.edit.formData.options1)
+                    .filter((item)=> {
+                        return item._selected
+                    })
+                    .map((item)=> {
+                        return item.sort
+                    })
+                    .value()
+                state.edit.formData.correct_answer1 = correct_answer1.join('')
+            }
+            if (state.edit.formData.quest_type_id == '2') {
+                let correct_answer1 = _.map(state.edit.formData.answer_list1, (item)=> {
+                    return item.content
+                })
+                state.edit.formData.correct_answer1 = correct_answer1
+            }
         }
+        
         return customFormData || state.edit.formData
     },
     get_table_query_url({ state }) {

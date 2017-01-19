@@ -4,21 +4,36 @@
     @page-index-change="page_index_change"
   >
 
-    <div class="">
-<div class="flex-grid" v-for="item in table.items">
+    <div class="" v-for="item in table.items">
+      <div class="flex-grid"  @click="item.open=!item.open">
         <div class="grid-cell">{{item.exam.year}} {{item.exam.section | get_const_value 'section'}}</div>
         <div class="grid-cell">{{item.exam.school_name}}</div>
         <div class="grid-cell cell-label">{{item.exam.grade | get_const_value 'grade'}}</div>
         <div class="grid-cell cell-label">{{item.exam.subject | get_const_value 'subject'}}</div>
         <div class="grid-cell">{{item.exam.name}}</div>
-        <div class="grid-cell">第 {{item.quest_no}} 题</div>
         <div class="grid-cell cell-btn-group">
-          <div class="grid-cell cell-label">{{item.state | get_const_value 'question_state'}}</div>
-          <button v-if="item.state=='6'" class="btn btn-link"
-              @click="on_item_edit_click(item)"
-          >
-            <span>继续处理</span>
-          </button>
+          <div class="grid-cell cell-label">
+            <span class="glyphicon glyphicon-chevron-up" v-show="item.open"></span>
+            <span class="glyphicon glyphicon-chevron-down" v-show="!item.open"></span>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default" v-show="item.open">
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tr v-for="data in item.items">
+              <td>第 {{data.quest_no}} 题</td>
+              <td>{{data.question.quest_type_id | get_const_value 'quest_types'}}</td>
+              <td>{{data.question.has_sub | get_const_value 'has_sub'}}</td>
+              <td>{{data.state | get_const_value 'question_state'}}</td>
+              <td>
+                <button v-if="data.state=='1'" class="btn btn-link"
+                  @click="on_item_edit_click(data)">
+                  <span>继续处理</span>
+                </button>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>

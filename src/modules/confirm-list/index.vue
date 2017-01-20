@@ -4,6 +4,7 @@
     <div class="panel-body">
 
       <table-view></table-view>
+      <edit-view></edit-view>
 
     </div>
   </div>
@@ -13,12 +14,14 @@
   import configBaseComponent from 'components/base/index'
   import { state, actions } from './store'
   import TableView from './table'
+  import EditView from './edit'
 
   export default {
     name: 'ConfirmList',
     extends: configBaseComponent({ state, actions }),
     components: {
-      TableView
+      TableView,
+      EditView
     }
   }
 </script>

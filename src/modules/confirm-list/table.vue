@@ -14,9 +14,14 @@
         <div class="grid-cell cell-btn-group">
           <div class="grid-cell cell-label">{{item.review_state | get_const_value 'paper_state'}}</div>
           <button v-if="item.review_state=='1'" class="btn btn-link"
-              @click="on_item_edit_click(item)"
+              @click="on_item_edit_click2(item)"
           >
             <span>继续审核</span>
+          </button>
+          <button class="btn btn-link"
+              @click="on_item_edit_click(item)"
+          >
+            <span>查看</span>
           </button>
         </div>
       </div>

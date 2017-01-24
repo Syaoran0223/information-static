@@ -25,7 +25,7 @@ function copyStatic() {
 }
 
 function copyDistToPublic() {
-  var publicPath = path.resolve(__dirname, '../gyx_web/src/public/teacher')
+  var publicPath = path.resolve(__dirname, '../information/app/static/public')
 
   console.log('copying dist to', publicPath)
 

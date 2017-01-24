@@ -153,6 +153,7 @@
 <script>
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
+  const {init_edit} = actions
 
   export default {
     name: 'PaperUpload',
@@ -167,6 +168,12 @@
       'edit.formData.area_id'(val) {
         this.schoolForm.ctid = val
       }
+    },
+    ready() {
+      this.init_edit()
+    },
+    methods: {
+      init_edit
     },
     data() {
       return {

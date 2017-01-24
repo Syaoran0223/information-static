@@ -22,23 +22,8 @@
       :readonly="true"
     ></file-upload>
     
-    <template v-for="question in questions">
-      <edit-view :question.sync="question" :exam_id="$route.params.paper_id"></edit-view>
-    </template>
+    <struct-view :current-step="edit.formData.has_struct"></struct-view>
     
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="text-center">
-          <button type="button" @click.prevent="add_question" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
-          <button type="button" @click.prevent="complete" class="btn btn-success">
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <span v-show="completeState.saving">正在处理...</span>
-          <span v-else>处理完成</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          </button>
-        </div>
-      </div>
-    </div>
   </template>
   
 
@@ -51,6 +36,7 @@
   import { POST } from 'utils/ajax'
   import { notify_ok } from 'utils/notification'
   import { api_host } from 'config'
+  import StructView from './struct'
 
   export default {
     name: 'PaperDeal',
@@ -73,7 +59,8 @@
       }
     },
     components: {
-      EditView
+      EditView,
+      StructView
     },
     methods: {
       add_question() {

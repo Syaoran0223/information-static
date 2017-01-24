@@ -1,6 +1,5 @@
 <template>
 <div class="panel panel-default" style="margin-top: 20px;">
-    <div class="success-tag" v-show="!!question.formData.id">保存成功</div>
     <div class="panel-body">
     <form class="form-horizontal" @submit.prevent="submit_data">
 

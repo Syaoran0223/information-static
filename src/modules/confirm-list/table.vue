@@ -32,7 +32,12 @@
 <script type="text/babel">
   import { state, actions } from './store'
   import configBaseComponent from 'components/base/table'
+  const {on_item_edit_click2} = actions
+
   export default {
-    extends: configBaseComponent({ state, actions })
+    extends: configBaseComponent({ state, actions }),
+    methods: {
+      on_item_edit_click2
+    }
   }
 </script>

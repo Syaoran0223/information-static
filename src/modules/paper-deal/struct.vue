@@ -184,7 +184,7 @@ export default {
             return
           }
           for (var i=0; i<this.tips.length; i++) {
-            if (this.tips[i].formData.start_no == 0 || this.tips[i].formData.end_no == 0 || this.tips[i].formData.start_no < this.tips[i].formData.end_no) {
+            if (this.tips[i].formData.start_no == 0 || this.tips[i].formData.end_no == 0 || this.tips[i].formData.start_no > this.tips[i].formData.end_no) {
               notify_error({
                 title: '题号输入有误'
               })

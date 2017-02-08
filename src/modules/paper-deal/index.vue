@@ -22,7 +22,7 @@
       :readonly="true"
     ></file-upload>
     
-    <struct-view :current-step="edit.formData.has_struct"></struct-view>
+    <struct-view :current-step="edit.formData.has_struct" :attachments="edit.formData.attachments"></struct-view>
     
   </template>
   

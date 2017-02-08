@@ -108,6 +108,22 @@ export default {
     props: {
       currentStep: {
         default: 0
+      },
+      attachments: {
+        type: Array,
+        default() {
+          return []
+        }
+      }
+    },
+    computed: {
+      is_word() {
+        for (var i=0; i<this.attachments.length; i++) {
+          if (this.attachments[i].name.endsWith('.doc') || this.attachments[i].name.endsWith('.docx')) {
+            return true
+          }
+        }
+        return false
       }
     },
     data() {
@@ -138,11 +154,13 @@ export default {
           })
         },
         add_question() {
+          let question_len = this.questions.length
+          let start_no = question_len ? Number(this.questions[question_len-1].end_no) + 1 : 1
           this.questions.push({
             _id: _.uniqueId('quest_'),
             quest_no: '',
             title: '',
-            start_no: 0,
+            start_no: start_no,
             end_no: 0
           })
         },
@@ -158,9 +176,26 @@ export default {
         },
         next_step() {
           if (this.step.saving) return
+          for (var i=0; i<this.questions.length; i++) {
+            if (this.questions[i].start_no > this.questions[i].end_no) {
+              notify_error({
+                title: '小题题号输入不符合规则'
+              })
+              return
+            }
+            if (i+1 < this.questions.length) {
+              if (this.questions[i].end_no != this.questions[i+1].start_no-1) {
+                notify_error({
+                  title: '小题题号输入不符合规则'
+                })
+                return
+              }
+            }
+          }
+
           this.step.saving = true
 
-          let data = {struct: this.questions}
+          let data = {struct: this.questions, is_word: this.is_word, attachments: this.attachments}
 
           PUT(`${api_host}/api/paper/preprocess/struct/${this.$route.params.paper_id}`, {
               data
@@ -168,7 +203,15 @@ export default {
               notify_ok({
                 title: '保存成功'
               })
-              this.currentStep = 1
+              if (this.is_word) {
+                setTimeout(() => {
+                  router.go({
+                      name: 'DealList'
+                  })
+                }, 300)
+              } else {
+                this.currentStep = 1
+              }
           }).catch(() => {
 
           }).then(() => {

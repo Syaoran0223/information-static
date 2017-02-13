@@ -13,12 +13,24 @@
             <div class="mg-t-7">{{item.sort}}</div>
           </div>
           <div class="inline" v-if="!readonly">
-            <input-alert :value.sync="item.content" placehold="点击此处输入选项">
+            <input-alert
+              :value.sync="item.content"
+              placehold="点击此处输入选项">
             </input-alert>
           </div>
-          <div class="p-inline" v-else>
-            {{{item.content}}}
-          </div>
+          <template v-else>
+            <div class="p-inline" v-if="!show_wrong">
+              {{{item.content}}}
+            </div>
+            <div class="inline" v-else>
+              <input-alert
+                :value.sync="item.content"
+                :show_wrong="show_wrong"
+                placehold="点击此处输入选项">
+              </input-alert>
+            </div>
+          </template>
+          
           <div class="inline">
             <div class="checkbox">
               <label>
@@ -59,6 +71,10 @@
         twoWay: true
       },
       readonly: {
+        type: Boolean,
+        default: false
+      },
+      show_wrong: {
         type: Boolean,
         default: false
       }

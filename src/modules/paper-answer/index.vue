@@ -42,21 +42,25 @@
                 :value.sync="edit.formData"
                 :options.sync="edit.formData.options1"
                 :readonly="true"
+                :show_wrong="true"
                 v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
               </select-quest>
               <blank-quest
                 :readonly="true"
+                :show_wrong="true"
                 :value.sync="edit.formData"
                 :answer_list.sync="edit.formData.answer_list1"
                 v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
               </blank-quest>
               <understand-quest
                 :readonly="true"
+                :show_wrong="true"
                 :value.sync="edit.formData"
                 v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
               </understand-quest>
               <sub-quest
                 :readonly="true"
+                :show_wrong="true"
                 :value.sync="edit.formData"
                 :sub_items.sync="edit.formData.sub_items1"
                 v-if="edit.formData.has_sub">

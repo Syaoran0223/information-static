@@ -3,15 +3,25 @@
     <div class="form-group">
       <label for="" class="control-label col-sm-1">题目:</label>
       <div class="col-sm-11">
-        <div class="mg-t-7" v-if="readonly">
-          <p>{{{value.quest_content_html}}}</p>
-        </div>
-        <input-tag
-            v-else
+        <template v-if="show_wrong">
+          <input-alert
             :value.sync="value.quest_content_html"
             :origin_value.sync="value.quest_content"
+            :show_wrong="true"
             placehold="点击此处输入题干">
-        </input-tag>
+          </input-alert>
+        </template>
+        <template v-else>
+          <div class="mg-t-7" v-if="readonly">
+            <p>{{{value.quest_content_html}}}</p>
+          </div>
+          <input-tag
+              v-else
+              :value.sync="value.quest_content_html"
+              :origin_value.sync="value.quest_content"
+              placehold="点击此处输入题干">
+          </input-tag>
+        </template>
       </div>
     </div>
 
@@ -25,6 +35,7 @@
     <option-view
         v-if="show_answer"
         :readonly="readonly"
+        :show_wrong="show_wrong"
         :value.sync="options">
     </option-view>
 
@@ -95,6 +106,10 @@
       show_answer: {
         type: Boolean,
         default: true
+      },
+      show_wrong: {
+        type: Boolean,
+        default: false  
       }
     },
     data() {

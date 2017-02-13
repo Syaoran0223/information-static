@@ -1,9 +1,20 @@
 <template>
   <div>
-    <div class="mg-t-7">
-      <p class="placehold" v-if="!value" @click="open=true">{{placehold}}</p>
-      <p v-else @click="open=true">{{{value}}}</p>
-    </div>
+    <template v-if="show_wrong">
+      <div class="mg-t-7 pull-left">
+        <p class="placehold" v-if="!value">{{placehold}}</p>
+        <p v-else>{{{value}}}</p>
+      </div>
+      <div class="mg-t-7 pull-left" style="margin-left: 15px;">
+        <span><a href="#" @click.prevent="open=true">纠错</a></span>
+      </div>
+    </template>
+    <template v-else>
+      <div class="mg-t-7">
+        <p class="placehold" v-if="!value" @click="open=true">{{placehold}}</p>
+        <p v-else @click="open=true">{{{value}}}</p>
+      </div>
+    </template>
     
     <modal
       :open.sync="open"
@@ -38,6 +49,10 @@
       origin_value: {
         twoWay: true,
         default: ''
+      },
+      show_wrong: {
+        type: Boolean,
+        default: false
       }
     },
     data() {

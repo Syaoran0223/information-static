@@ -3,15 +3,25 @@
     <div class="form-group">
       <label for="" class="control-label col-sm-1">母题:</label>
       <div class="col-sm-11">
-        <div class="mg-t-7" v-if="readonly">
-          <p>{{{value.quest_content_html}}}</p>
-        </div>
-        <input-tag
-            v-else
+        <template v-if="show_wrong">
+          <input-alert
             :value.sync="value.quest_content_html"
             :origin_value.sync="value.quest_content"
-            placehold="点击此处输入大小题的母题题干">
-        </input-tag>
+            :show_wrong="true"
+            placehold="点击此处输入题干">
+          </input-alert>
+        </template>
+        <template v-else>
+          <div class="mg-t-7" v-if="readonly">
+            <p>{{{value.quest_content_html}}}</p>
+          </div>
+          <input-tag
+              v-else
+              :value.sync="value.quest_content_html"
+              :origin_value.sync="value.quest_content"
+              placehold="点击此处输入题干">
+          </input-tag>
+        </template>
       </div>
     </div>
 
@@ -45,6 +55,7 @@
             :readonly="readonly"
             :value.sync="item"
             :options.sync="item.options"
+            :show_wrong="show_wrong"
             v-if="item.quest_type_id==1"
             :is-sub="true">
           </select-quest>
@@ -54,6 +65,7 @@
             :value.sync="item"
             :answer_list.sync="item.answer_list"
             v-if="item.quest_type_id==2"
+            :show_wrong="show_wrong"
             :is-sub="true">>
           </blank-quest>
 
@@ -61,6 +73,7 @@
             :readonly="readonly"
             :value.sync="item"
             v-if="item.quest_type_id==3"
+            :show_wrong="show_wrong"
             :is-sub="true">
           </understand-quest>
         </div>
@@ -145,6 +158,10 @@
       show_sub: {
         type: Boolean,
         default: true
+      },
+      show_wrong: {
+        type: Boolean,
+        default: false  
       }
     },
     components: {

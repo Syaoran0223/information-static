@@ -1,6 +1,6 @@
 import createStore from 'store/createStore'
 import { PUT, POST } from 'utils/ajax'
-import { notify_ok } from 'utils/notification'
+import { notify_ok, notify_error } from 'utils/notification'
 import {api_host} from 'config'
 import router from 'router'
 
@@ -83,6 +83,30 @@ const module_actions = {
         state.edit.saving = true
 
         let data = actions.parse_edit_submit_data(customFormData)
+        // 验证选项个数
+        if (data.has_sub) {
+            for (var i=0; i<data.sub_items1.length; i++) {
+                if (data.sub_items1[i].quest_type_id == '1') {
+                    if (!data.sub_items1[i].options.length) {
+                        notify_error({
+                            title: '请输入选择题选项'
+                        })
+                        state.edit.saving = false
+                        return
+                    }
+                }
+            }
+        } else {
+            if (data.quest_type_id == '1') {
+                if (!data.options1.length) {
+                    notify_error({
+                        title: '请输入选择题选项'
+                    })
+                    state.edit.saving = false
+                    return
+                }
+            }
+        }
 
         let api_method = state.edit.is_new ? POST : PUT
         api_method(actions.get_item_submit_url(customFormData), {

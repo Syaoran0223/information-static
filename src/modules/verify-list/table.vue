@@ -27,7 +27,7 @@
               <td>{{data.question.has_sub | get_const_value 'has_sub'}}</td>
               <td>{{data.state | get_const_value 'question_state'}}</td>
               <td>
-                <button v-if="data.state=='1'" class="btn btn-link"
+                <button v-if="data.state=='10'" class="btn btn-link"
                   @click="on_item_edit_click(data)">
                   <span>继续处理</span>
                 </button>

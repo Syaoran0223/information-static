@@ -24,6 +24,12 @@
           <form class="form-horizontal" @submit.prevent="on_edit_submit">
             <div class="panel-body">
               <div class="form-group">
+                <label for="" class="control-label col-sm-1">题号:</label>
+                <div class="col-sm-11">
+                  <p class="form-control-static">{{edit.formData.quest_no}}</p>
+                </div>
+              </div>
+              <div class="form-group">
                 <label for="" class="control-label col-sm-1">性质:</label>
                 <div class="col-sm-11">
                   <tag-selector const="has_sub" :value.sync="edit.formData.has_sub" :required="true"></tag-selector>

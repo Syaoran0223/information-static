@@ -21,12 +21,14 @@ require('select2')
 require('eonasdan-bootstrap-datetimepicker')
 require('bootstrap-daterangepicker')
 require('webuploader')
+require('cropper')
 
 require('select2/dist/css/select2.css')
 require('select2-bootstrap-theme/dist/select2-bootstrap.css')
 require('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')
 require('bootstrap-daterangepicker/daterangepicker.css')
 require('assets/scss/app.scss')
+require('cropper/dist/cropper.css')
 
 moment.locale('zh-cn')
 

@@ -52,20 +52,14 @@
                   <div class="form-group">
                   <label for="" class="control-label col-sm-2">题目图片</label>
                   <div class="col-sm-9">
-                      <file-upload
-                      :items.sync="tip.formData.quest_image"
-                      :state.sync="tip.uploadState"
-                      ></file-upload>
+                      <cropper-view :images="attachments"></cropper-view>
                   </div>
                   </div>
 
                   <div class="form-group">
                   <label for="" class="control-label col-sm-2">答案图片</label>
                   <div class="col-sm-9">
-                      <file-upload
-                      :items.sync="tip.formData.answer_image"
-                      :state.sync="tip.uploadState"
-                      ></file-upload>
+                      <cropper-view :images="attachments"></cropper-view>
                   </div>
                   </div>
 
@@ -102,9 +96,13 @@ import { POST, PUT, DELETE } from 'utils/ajax'
 import { api_host } from 'config'
 import { notify_ok, notify_error } from 'utils/notification'
 import router from 'router'
+import CropperView from './cropper'
 
 export default {
     name: 'Struct',
+    components: {
+      CropperView
+    },
     props: {
       currentStep: {
         default: 0

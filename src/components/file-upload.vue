@@ -12,9 +12,9 @@
             <div class="img-bar" v-show="file.status!='pending' && readonly && !this.isTrue(file.can_preview)">
               <a v-bind:href="file.url" target="_blank" v-show="file.status=='success'" style="cursor:pointer;"><span class="glyphicon glyphicon-download-alt img-tag"></span></a>
             </div>
-            <p class="title" style="z-index: 2000;">{{file.name}}</p>
+            <p class="title" style="z-index: 1000;">{{file.name}}</p>
             <p v-show="this.isTrue(file.can_preview) && (file.status=='success' || file.status=='complete')" class="imgWrap">
-              <a v-bind:href="file.url" target="_blank">
+              <a href="#" @click.prevent="open_modal(file.url)">
                 <img v-bind:src="file.url" width="110" height="110" />
               </a>
             </p>
@@ -36,6 +36,19 @@
       </div>
     </div>
   </div>
+  <modal
+    width="900px"
+    :open.sync="modal_open">
+    <div class="modal-header">
+      <button type="button" class="close" @click="close_modal"><span>&times;</span></button>
+      <h4 class="modal-title">截图</h4>
+    </div>
+    <div class="modal-body">
+      <img id="image" v-bind:src="open_url" style="max-width: 100%;"/>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </modal>
 </template>
 
 <script type="text/babel">
@@ -72,6 +85,10 @@
       readonly: {
         type: Boolean,
         default: false
+      },
+      cutable: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -97,11 +114,19 @@
         fileOpt: {
           count: 0
         },
-        uploader: {}
+        uploader: {},
+        modal_open: false,
+        open_url: '',
+        $image: null,
+        cropBoxData: null,
+        canvasData: null
       }
     },
     ready() {
       window.setTimeout(this.init, 500)
+      if (this.cutable) {
+        this.$image = $('#image')
+      }
     },
     methods: {
       init() {
@@ -208,6 +233,27 @@
           return val
         } else {
           return val == 'true' ? true : false
+        }
+      },
+      open_modal(url) {
+        this.modal_open = true
+        this.open_url = url
+        if (this.cutable) {
+          Vue.nextTick(() => {
+            this.$image.cropper({
+              autoCropArea: 0.5,
+              ready: () => {
+                this.$image.cropper('setCanvasData', this.canvasData);
+                this.$image.cropper('setCropBoxData', this.cropBoxData);
+              }
+            })
+          })
+        }
+      },
+      close_modal() {
+        this.modal_open=false
+        if (this.cutable && this.$image) {
+          this.$image.cropper('destroy')
         }
       }
     }

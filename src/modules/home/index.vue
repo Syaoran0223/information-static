@@ -2,9 +2,9 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-
-      hello world
-
+      <div class="jumbotron">
+        <h4>思明教育--试卷收集系统</h4>
+      </div>
     </div>
   </div>
 

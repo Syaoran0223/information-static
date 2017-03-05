@@ -166,6 +166,8 @@
 
         }).then(() => {
           this.saving = false
+          this.open_url = ''
+          this.$image.cropper('destroy')
         })
       }
     }

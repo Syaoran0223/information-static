@@ -102,20 +102,20 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="" class="control-label col-sm-2">学科</label>
-                <div class="col-sm-4">
-                  <selector
-                    const="subject"
-                    :value.sync="edit.formData.subject"
-                    :required="true"
-                    width="100%"
-                  ></selector>
-                </div>
-                <label for="" class="control-label col-sm-1">年级</label>
+                <label for="" class="control-label col-sm-2">年级</label>
                 <div class="col-sm-4">
                   <selector
                     const="grade"
                     :value.sync="edit.formData.grade"
+                    :required="true"
+                    width="100%"
+                  ></selector>
+                </div>
+                <label for="" class="control-label col-sm-1">学科</label>
+                <div class="col-sm-4">
+                  <selector
+                    const="subject"
+                    :value.sync="edit.formData.subject"
                     :required="true"
                     width="100%"
                   ></selector>

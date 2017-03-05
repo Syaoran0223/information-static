@@ -140,10 +140,12 @@ export default {
     },
     methods: {
         add_tip() {
+          let tips_len = this.tips.length
+          let start_no = tips_len ? Number(this.tips[tips_len-1].formData.end_no) + 1 : 1
           this.tips.push({
               id: _.uniqueId('tip_'),
               formData: {
-                start_no: 0,
+                start_no: start_no,
                 end_no: 0,
                 quest_image: [],
                 answer_image: []

@@ -1,6 +1,6 @@
 <template>
   <div class="row" style="margin-bottom: 10px">
-    <div class="col-sm-2" v-for="url in dest_image.list">
+    <div class="col-sm-2" v-for="url in dest_images">
       <a href="#" @click.prevent="open_dest_modal(url)">
         <img class="img-thumbnail" v-bind:src="url"  width="70" height="70"/>
       </a>
@@ -70,6 +70,13 @@
     props: {
       images: {
         type: Array,
+        default() {
+          return []
+        }
+      },
+      dest_images: {
+        type: Array,
+        twoWay: true,
         default() {
           return []
         }
@@ -154,7 +161,7 @@
           data
         }).then((res) => {
           console.log(res)
-          this.dest_image.list.push(res.url)
+          this.dest_images.push(res.url)
           notify_ok({
             title: '切割成功'
           }, {

@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <file-upload :items.sync="edit.formData.images" :state.sync="edit.uploadState" :readonly="true"></file-upload>
+    <file-upload :items.sync="edit.formData.images" :readonly="true"></file-upload>
     <div class="row">
       <div class="col-sm-7">
         <div class="panel panel-default" v-if="edit.formData.selected_id == 0">

@@ -52,14 +52,14 @@
                   <div class="form-group">
                   <label for="" class="control-label col-sm-2">题目图片</label>
                   <div class="col-sm-9">
-                      <cropper-view :images="attachments"></cropper-view>
+                      <cropper-view :images="attachments" :dest_images.sync="tip.formData.quest_image"></cropper-view>
                   </div>
                   </div>
 
                   <div class="form-group">
                   <label for="" class="control-label col-sm-2">答案图片</label>
                   <div class="col-sm-9">
-                      <cropper-view :images="attachments"></cropper-view>
+                      <cropper-view :images="attachments" :dest_images.sync="tip.formData.answer_image"></cropper-view>
                   </div>
                   </div>
 
@@ -235,8 +235,38 @@ export default {
             }
           }
           this.step.saving = true
+          
+          let tips = _.map(this.tips, (tip)=> {
+            tip.formData.quest_image = _.map(tip.formData.quest_image,(img)=> {
+              return {
+                can_preview:true,
+                error_msg: '',
+                id: _.uniqueId('upfile_'),
+                name: '切割图片-题目',
+                percentage: '100%',
+                serverCode: 0,
+                status: 'success',
+                url: img
+              }
+            })
+            tip.formData.answer_image = _.map(tip.formData.answer_image,(img)=> {
+              return {
+                can_preview:true,
+                error_msg: '',
+                id: _.uniqueId('upfile_'),
+                name: '切割图片-答案',
+                percentage: '100%',
+                serverCode: 0,
+                status: 'success',
+                url: img
+              }
+            })
+            return tip
+          })
 
-          let data = {tips: this.tips, exam_id: this.$route.params.paper_id}
+          debugger
+          
+          let data = {tips: tips, exam_id: this.$route.params.paper_id}
 
           POST(`${api_host}/api/paper/preprocess/tips`, {
               data

@@ -128,6 +128,9 @@
                     :items.sync="edit.formData.attachments"
                     :state.sync="edit.uploadState"
                   ></file-upload>
+                  <span id="helpBlock2" class="help-block">
+                    请上传试卷文件，如有答案文件请一并上传
+                  </span>
                 </div>
               </div>
               

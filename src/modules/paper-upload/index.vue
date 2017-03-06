@@ -114,7 +114,7 @@
                 <label for="" class="control-label col-sm-1">学科</label>
                 <div class="col-sm-4">
                   <selector
-                    const="subject"
+                    :init-items="subjects"
                     :value.sync="edit.formData.subject"
                     :required="true"
                     width="100%"
@@ -157,6 +157,7 @@
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
   const {init_edit} = actions
+  import { subject_by_grade } from 'utils/consts'
 
   export default {
     name: 'PaperUpload',
@@ -170,6 +171,11 @@
       },
       'edit.formData.area_id'(val) {
         this.schoolForm.ctid = val
+      }
+    },
+    computed: {
+      subjects() {
+        return this.edit.formData.grade < 7 ? _.slice(subject_by_grade, 0, 3) : subject_by_grade
       }
     },
     ready() {

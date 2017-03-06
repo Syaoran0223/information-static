@@ -1,9 +1,18 @@
 <template>
-  <div class="row" style="margin-bottom: 10px">
-    <div class="col-sm-2" v-for="url in dest_images">
-      <a href="#" @click.prevent="open_dest_modal(url)">
-        <img class="img-thumbnail" v-bind:src="url"  width="70" height="70"/>
-      </a>
+  <div class="fileupload">
+    <div class="files">
+      <ul v-for="url in dest_images" class="filelist" style="display: block;">
+        <li>
+          <div class="img-bar">
+            <a @click.prevent="remove($index)" style="cursor:pointer;"><span class="glyphicon glyphicon-trash img-tag"></span></a>
+          </div>
+          <p class="imgWrap">
+            <a href="#" @click.prevent="open_dest_modal(url)">
+              <img v-bind:src="url" width="100" height="100" />
+            </a>
+          </p>
+        </li>
+      </ul>
     </div>
   </div>
   <button class="btn btn-primary" @click.prevent="img_list_open=true">在线切图</button>
@@ -43,6 +52,9 @@
       <button @click.prevent="save" class="btn btn-primary">
         <span v-if="saving">正在切图...</span>
         <span v-else>切图</span>
+      </button>
+      <button @click.prevent="save_whole" class="btn btn-primary">
+        <span>截取整张</span>
       </button>
     </div>
   </modal>
@@ -145,6 +157,9 @@
         let lower = ((box.lower-canvas.top)/canvas.height) * canvas.naturalHeight
         return [left, top, right, lower]
       },
+      remove(index) {
+        this.dest_images.splice(index, 1);
+      },
       save() {
         let canvasData = this.$image.cropper('getCanvasData')
         let boxData = this.$image.cropper('getCropBoxData')
@@ -176,6 +191,18 @@
           this.open_url = ''
           this.$image.cropper('destroy')
         })
+      },
+      save_whole() {
+        this.dest_images.push(this.open_url)
+        notify_ok({
+          title: '切割成功'
+        }, {
+          z_index: '3000'
+        })
+        this.img_open = false
+        this.img_list_open = false
+        this.open_url = ''
+        this.$image.cropper('destroy')
       }
     }
   }

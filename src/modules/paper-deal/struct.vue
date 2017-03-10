@@ -97,6 +97,8 @@ import { api_host } from 'config'
 import { notify_ok, notify_error } from 'utils/notification'
 import router from 'router'
 import CropperView from './cropper'
+import { scrollToBottom } from 'utils/index'
+
 
 export default {
     name: 'Struct',
@@ -151,6 +153,10 @@ export default {
                 answer_image: []
               },
               uploadState: 'done'
+          })
+          Vue.nextTick(() => {
+            scrollToBottom()
+            // document.body.scrollTop = document.body.scrollHeight
           })
         },
         add_question() {

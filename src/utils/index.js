@@ -55,3 +55,21 @@ export const has_permission = (id) => {
 export const get_current_year = () => {
   return moment().format('YYYY')
 }
+
+
+let delay = 10  //in milliseconds
+let scroll_amount = 4  // in pixels
+let interval
+
+
+let scroller = () => {
+    let old = document.body.scrollTop;//保存当前滚动条到顶端的距离
+    document.body.scrollTop += scroll_amount;//让滚动条继续往下滚动
+    if (document.body.scrollTop == old) {//到底部后就无法再增加scrollTop的值
+        clearInterval(interval);
+    }
+}
+
+export const scrollToBottom = () => {
+    interval = setInterval(scroller, delay);
+}

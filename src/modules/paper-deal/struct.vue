@@ -1,6 +1,6 @@
 <template>
 <div class="panel panel-default" style="margin-top: 20px;" v-if="currentStep == 0" style="margin-top: 20px;">
-  <form @submit.prevent="next_step">
+  <form>
     <div class="panel-heading">
         试卷结构
     </div>
@@ -17,7 +17,7 @@
     <div class="panel-footer">
         <div class="text-center">
           <button type="button" @click.prevent="add_question" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
-          <button type="submit" class="btn btn-success">
+          <button @click.prevent="step.nextStepOpen=true" class="btn btn-success">
           &nbsp;&nbsp;&nbsp;&nbsp;
           <span v-show="step.saving">正在处理...</span>
           <span v-else>下一步</span>
@@ -28,8 +28,9 @@
   </form>
 </div>
 <div class="panel panel-default" v-if="currentStep==1" style="margin-top: 20px;">
-  <form class="form-horizontal" @submit.prevent="submit_data">
+  <form class="form-horizontal">
     <div class="panel-heading">
+      <a href="#" class="btn btn-xs btn-default" @click.prevent="last_step"><<返回</a>
       试卷切割
     </div>
     <div class="panel-body">
@@ -77,7 +78,7 @@
     <div class="panel-footer">
       <div class="text-center">
         <button type="button" @click.prevent="add_tip" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;&nbsp;</button>
-          <button type="submit" class="btn btn-success">
+          <button @click.prevent="step.submitOpen=true" class="btn btn-success">
           &nbsp;&nbsp;&nbsp;&nbsp;
           <span v-show="step.saving">正在处理...</span>
           <span v-else>保存</span>
@@ -88,6 +89,8 @@
   </form>
   
 </div>
+<confirm :open.sync="step.nextStepOpen" @confirm="next_step" title="确认执行下一步" :saving.sync="step.saving"></confirm>
+<confirm :open.sync="step.submitOpen" @confirm="submit_data" title="确认提交切题结果" :saving.sync="step.saving"></confirm>
 
 </template>
 
@@ -129,7 +132,9 @@ export default {
     data() {
         return {
             step: {
-              saving: false
+              saving: false,
+              nextStepOpen: false,
+              submitOpen: false
             },
             removeConfirm: {
                 open: false,
@@ -180,8 +185,17 @@ export default {
             return d.id != tip.id
           })
         },
+        last_step() {
+          this.currentStep = 0
+        },
         next_step() {
           if (this.step.saving) return
+          if (_.isEmpty(this.questions)) {
+            notify_error({
+              title: '请录入试卷结构'
+            })
+            return
+          }
           for (var i=0; i<this.questions.length; i++) {
             if (this.questions[i].start_no > this.questions[i].end_no) {
               notify_error({
@@ -200,29 +214,30 @@ export default {
           }
 
           this.step.saving = true
-
-          let data = {struct: this.questions, is_word: this.is_word, attachments: this.attachments}
-
-          PUT(`${api_host}/api/paper/preprocess/struct/${this.$route.params.paper_id}`, {
-              data
-          }).then((res) => {
-              notify_ok({
-                title: '保存成功'
-              })
-              if (this.is_word) {
+          if (this.is_word) {
+            let data = {struct: this.questions, is_word: true, attachments: this.attachments}
+            PUT(`${api_host}/api/paper/preprocess/struct/${this.$route.params.paper_id}`, {
+                data
+            }).then((res) => {
+                notify_ok({
+                  title: '保存成功'
+                })
                 setTimeout(() => {
                   router.go({
                       name: 'DealList'
                   })
                 }, 300)
-              } else {
-                this.currentStep = 1
-              }
-          }).catch(() => {
+            }).catch(() => {
 
-          }).then(() => {
-              this.step.saving = false
-          })
+            }).then(() => {
+                this.step.saving = false
+                this.step.nextStepOpen = false
+            })
+          } else {
+            this.step.saving = false
+            this.step.nextStepOpen = false
+            this.currentStep = 1
+          }
         },
         submit_data() {
           if (this.step.saving) return
@@ -269,10 +284,8 @@ export default {
             })
             return tip
           })
-
-          debugger
           
-          let data = {tips: tips, exam_id: this.$route.params.paper_id}
+          let data = {tips: tips, exam_id: this.$route.params.paper_id, struct: this.questions}
 
           POST(`${api_host}/api/paper/preprocess/tips`, {
               data
@@ -289,6 +302,7 @@ export default {
 
           }).then(() => {
               this.step.saving = false
+              this.step.submitOpen = false
           })
         }
     }

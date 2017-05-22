@@ -30,7 +30,7 @@
 <div class="panel panel-default" v-if="currentStep==1" style="margin-top: 20px;">
   <form class="form-horizontal">
     <div class="panel-heading">
-      <a href="#" class="btn btn-xs btn-default" @click.prevent="last_step"><<返回</a>
+      <a href="#" class="btn btn-xs btn-default" @click.prevent="last_step">&lsaquo;&lsaquo;返回</a>
       试卷切割
     </div>
     <div class="panel-body">

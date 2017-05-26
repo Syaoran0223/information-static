@@ -93,8 +93,9 @@
               <button type="submit" class="btn btn-primary"
                       :disabled="edit.saving">
                 <span v-if="edit.saving">保存中...</span>
-                <span v-else>保存</span>
+                <span v-else>完全一致</span>
               </button>
+              <button class="btn btn-primary" @click.prevent="question_update">略作修改</button>
             </div>
           </form>
         </div>
@@ -146,6 +147,24 @@
           return d.qid == this.edit.formData.selected_id
         })
         return data
+      }
+    },
+    methods: {
+      question_update() {
+        let selected_item = this.selected_item
+        this.edit.formData.selected_id = 0
+        this.edit.formData.quest_content_html = selected_item.qtxt
+        this.edit.formData.quest_content = selected_item.qword
+        this.edit.formData.kaodian = selected_item.kaodian
+        this.edit.formData.options1 = _.map(selected_item.qopt, (op)=> {
+          return {
+            sort: op.Key,
+            content: op.Value,
+            _id: _.uniqueId('option_'),
+            _selected: false
+          }
+        })
+        console.log(selected_item)
       }
     },
     components: {

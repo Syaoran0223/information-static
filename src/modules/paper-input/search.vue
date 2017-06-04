@@ -21,6 +21,7 @@
 <script>
   import { state, actions } from './store'
   import configBaseComponent from 'components/base/table'
+  import { subject } from 'utils/consts'
 
   const { table_query } = actions
   export default {
@@ -43,7 +44,9 @@
       table_query,
       change_search_param(val) {
         this.search.formData = {
-          q: val
+          q: val,
+          qtype_id: this.page.edit.formData.quest_type_id,
+          subject: subject[this.page.edit.formData.exam.subject]
         }
         this.table_query()
       },

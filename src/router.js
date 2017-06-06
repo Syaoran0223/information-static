@@ -39,6 +39,7 @@ import VerifyList from 'modules/verify-list/index.vue'
 
 import UserManage from 'modules/user-manage/index.vue'
 import UserInfo from 'modules/user-manage/user-info/index.vue'
+import UserWork from 'modules/user-manage/user-work/index.vue'
 import MessageList from 'modules/user-manage/message-list/index.vue'
 import ScoreList from 'modules/user-manage/score-list/index.vue'
 
@@ -155,6 +156,10 @@ let map = {
       '/user_info': {
         name: 'UserInfo',
         component: UserInfo
+      },
+      '/user_work': {
+        name: 'UserWork',
+        component: UserWork
       },
       '/score_list': {
         name: 'ScoreList',

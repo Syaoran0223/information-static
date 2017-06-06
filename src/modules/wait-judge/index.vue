@@ -3,6 +3,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
 
+      <search-view></search-view>
       <table-view></table-view>
 
     </div>
@@ -13,12 +14,14 @@
   import configBaseComponent from 'components/base/index'
   import { state, actions } from './store'
   import TableView from './table'
+  import SearchView from './search'
 
   export default {
     name: 'WaitJudge',
     extends: configBaseComponent({ state, actions }),
     components: {
-      TableView
+      TableView,
+      SearchView
     }
   }
 </script>

@@ -158,6 +158,7 @@
   import { state, actions } from './store'
   const {init_edit} = actions
   import { subject_by_grade } from 'utils/consts'
+  import { subjects } from 'config'
 
   export default {
     name: 'PaperUpload',
@@ -175,7 +176,25 @@
     },
     computed: {
       subjects() {
-        return this.edit.formData.grade < 7 ? _.slice(subject_by_grade, 0, 3) : subject_by_grade
+        if (!this.edit.formData.grade) {
+          return []
+        }
+        let res = []
+        if (this.edit.formData.grade < 7) {
+          res = _.map(subjects[0].children, (data)=> {
+            return {id: data.id, text: data.label}
+          })
+        } else if (this.edit.formData.grade < 10) {
+          res =  _.map(subjects[1].children, (data)=> {
+            return {id: data.id, text: data.label}
+          })
+        } else {
+          res = _.map(subjects[2].children, (data)=> {
+            return {id: data.id, text: data.label}
+          })
+        }
+        res.unshift({id: null, text: '请选择'})
+        return res
       }
     },
     ready() {

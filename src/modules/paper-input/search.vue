@@ -46,7 +46,7 @@
         this.search.formData = {
           q: val,
           qtype_id: this.page.edit.formData.quest_type_id,
-          subject: subject[this.page.edit.formData.exam.subject]
+          subject_id: this.page.edit.formData.exam.subject
         }
         this.table_query()
       },

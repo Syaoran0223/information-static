@@ -1,16 +1,14 @@
-import { class_selector_items } from 'config'
+import { class_selector_items, subjects } from 'config'
 
-export const subject = {
-  'GS001': '语文',
-  'GS002': '数学',
-  'GS003': '英语',
-  'GS004': '生物',
-  'GS005': '地理',
-  'GS006': '历史',
-  'GS007': '政治',
-  'GS008': '物理',
-  'GS009': '化学'
-}
+export const subject = (()=> {
+  let res = {}
+  _.each(subjects, (data)=> {
+    _.each(data.children, (d)=> {
+      res[d.id] = d.label
+    })
+  })
+  return res
+})()
 
 export const subject_by_grade = [
   {id: 'GS001', text:'语文'},

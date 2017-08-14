@@ -13,17 +13,17 @@
           ></selector>
         </div>
         <div class="form-group">
-          <label for="">学科</label>
-          <selector
-            const="subject"
-            :value.sync="search.formData.subject"
-          ></selector>
-        </div>
-        <div class="form-group">
           <label for="">年级</label>
           <selector
             const="grade"
             :value.sync="search.formData.grade"
+          ></selector>
+        </div>
+        <div class="form-group">
+          <label for="">学科</label>
+          <selector
+            :init-items="subjects"
+            :value.sync="search.formData.subject"
           ></selector>
         </div>
         <div class="form-group">
@@ -51,6 +51,29 @@
   import configBaseComponent from 'components/base/search'
 
   export default {
+    computed: {
+      subjects() {
+        if (!this.search.formData.grade) {
+          return []
+        }
+        let res = []
+        if (this.search.formData.grade < 7) {
+          res = _.map(subjects[0].children, (data)=> {
+            return {id: data.id, text: data.label}
+          })
+        } else if (this.search.formData.grade < 10) {
+          res =  _.map(subjects[1].children, (data)=> {
+            return {id: data.id, text: data.label}
+          })
+        } else {
+          res = _.map(subjects[2].children, (data)=> {
+            return {id: data.id, text: data.label}
+          })
+        }
+        res.unshift({id: null, text: '请选择'})
+        return res
+      }
+    },
     extends: configBaseComponent({ state, actions })
   }
 </script>

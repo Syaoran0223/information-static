@@ -7,6 +7,7 @@
       <nav>
         <ul class="nav navbar-nav nav-pills app-header-nav">
           <ac id="PaperUpload"><li><a v-link="{ name: 'PaperUpload' }">试卷上传</a></li></ac>
+          <ac id="PaperIsFast"><li><a v-link="{ name: 'PaperIsFast' }">快速通道</a></li></ac>
           <ac id="PaperUploadList"><li><a v-link="{ name: 'PaperUploadList' }">上传记录</a></li></ac>
           <ac id="WaitConfirm"><li><a v-link="{ name: 'WaitConfirm' }">待审核</a></li></ac>
           <ac id="PaperConfirm"><li><a v-link="{ name: 'PaperConfirm' }">试卷审核</a></li></ac>

@@ -385,3 +385,8 @@ export const show_types = {
   'B': '两行显示',
   'C': '多行显示'
 }
+
+export const is_fast = {
+  '1': '是',
+  '0': '否'
+}

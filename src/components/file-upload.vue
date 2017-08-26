@@ -37,7 +37,7 @@
     </div>
   </div>
   <modal
-    width="900px"
+    width="100%"
     :open.sync="modal_open">
     <div class="modal-header">
       <button type="button" class="close" @click="close_modal"><span>&times;</span></button>

@@ -29,6 +29,7 @@ const module_actions = {
             area_id: {id: user.area_id, text: user.area_name},
             school_id: {id: user.school_id, text: user.school_name},
             grade: user.grade_id,
+            is_fast: '0'
         }
     },
     after_edit_done ({state, actions}) {

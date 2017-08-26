@@ -133,6 +133,13 @@
                   </span>
                 </div>
               </div>
+
+              <div class="form-group">
+                <label for="" class="control-label col-sm-2">快速通道</label>
+                <div class="col-sm-9">
+                  <tag-selector const="is_fast" :value.sync="edit.formData.is_fast" :required="true"></tag-selector>
+                </div>
+              </div>
               
 
             </div>

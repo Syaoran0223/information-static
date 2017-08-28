@@ -5,6 +5,7 @@
 
       <search-view></search-view>
       <table-view></table-view>
+      <edit-view></edit-view>
 
     </div>
   </div>
@@ -15,13 +16,15 @@
   import { state, actions } from './store'
   import TableView from './table'
   import SearchView from './search'
+  import EditView from './edit'
 
   export default {
     name: 'PaperIntoFast',
     extends: configBaseComponent({ state, actions }),
     components: {
       TableView,
-      SearchView
+      SearchView,
+      EditView
     }
   }
 </script>

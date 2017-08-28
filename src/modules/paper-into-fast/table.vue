@@ -14,6 +14,12 @@
         <div class="grid-cell cell-label">{{item.state | get_const_value 'paper_state'}}</div>
         <div class="grid-cell cell-btn-group">
           <button class="btn btn-link"
+              @click="on_item_edit_click(item)"
+          >
+            <span>查看</span>
+          </button>
+          
+          <button class="btn btn-link"
               @click="update_fast(item)"
           >
             <span v-if="item.saving">正在设置</span>

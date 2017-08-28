@@ -53,6 +53,7 @@ const module_actions = {
         let items = data.items || data
         items = _.map(items, (d)=> {
             d.saving = false
+            d.canceling = false
             return d
         })
         return {
@@ -77,6 +78,23 @@ const module_actions = {
 
         }).then(() => {
             item.saving = false
+        })
+    },
+    cancel_fast({ state, actions }, item) {
+        if (item.canceling) {
+            return
+        }
+        item.canceling = true
+        let url = `${ api_host }/api/paper/cancel_fast/${ item.id }`
+        PUT(url, {}).then((res) => {
+            notify_ok({
+                title: '保存成功'
+            })
+            actions.table_query({state, actions})
+        }).catch(() => {
+
+        }).then(() => {
+            item.canceling = false
         })
     }
 }

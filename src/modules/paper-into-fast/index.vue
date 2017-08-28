@@ -2,9 +2,10 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
+
       <search-view></search-view>
       <table-view></table-view>
-      <edit-view></edit-view>
+
     </div>
   </div>
 
@@ -13,15 +14,13 @@
   import configBaseComponent from 'components/base/index'
   import { state, actions } from './store'
   import TableView from './table'
-  import EditView from './edit'
   import SearchView from './search'
 
   export default {
-    name: 'PaperIsFast',
+    name: 'PaperIntoFast',
     extends: configBaseComponent({ state, actions }),
     components: {
       TableView,
-      EditView,
       SearchView
     }
   }

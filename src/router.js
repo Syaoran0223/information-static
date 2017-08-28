@@ -9,6 +9,7 @@ import Home from 'modules/home/index.vue'
 import PaperUpload from 'modules/paper-upload/index.vue'
 import PaperUploadList from 'modules/paper-upload-list/index.vue'
 import PaperIsFast from 'modules/paper-is-fast/index.vue'
+import PaperIntoFast from 'modules/paper-into-fast/index.vue'
 
 import WaitConfirm from 'modules/wait-confirm/index.vue'
 import PaperConfirm from 'modules/paper-confirm/index.vue'
@@ -60,6 +61,10 @@ let map = {
   '/paper-upload-list': {
     name: 'PaperUploadList',
     component: PaperUploadList
+  },
+  '/paper-into-fast': {
+    name: 'PaperIntoFast',
+    component: PaperIntoFast
   },
   '/paper-is-fast': {
     name: 'PaperIsFast',

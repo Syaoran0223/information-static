@@ -41,26 +41,13 @@
               <select-quest
                 :value.sync="edit.formData"
                 :options.sync="edit.formData.options1"
-                :readonly="true"
-                :show_wrong="true"
-                v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
+                v-if="is_selector && !edit.formData.has_sub">
               </select-quest>
-              <blank-quest
-                :readonly="true"
-                :show_wrong="true"
-                :value.sync="edit.formData"
-                :answer_list.sync="edit.formData.answer_list1"
-                v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
-              </blank-quest>
               <understand-quest
-                :readonly="true"
-                :show_wrong="true"
                 :value.sync="edit.formData"
-                v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
+                v-if="!is_selector && !edit.formData.has_sub">
               </understand-quest>
               <sub-quest
-                :readonly="true"
-                :show_wrong="true"
                 :value.sync="edit.formData"
                 :sub_items.sync="edit.formData.sub_items1"
                 v-if="edit.formData.has_sub">
@@ -86,6 +73,7 @@
 <script>
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
+  import {qtypes} from 'config'
   import router from 'router'
 
   const { accept, reject } = actions
@@ -97,6 +85,17 @@
       let id = this.$route.params.quest_id
       if (id != ':quest_id') {
         actions.on_item_edit_click({}, {id})
+      }
+    },
+    computed: {
+      is_selector() {
+        let quest_type = _.find(qtypes, (d)=> {
+          return d.id == this.edit.formData.quest_type_id
+        })
+        if (!quest_type) {
+          return false
+        }
+        return quest_type.text == '选择题' || quest_type.text == '单选题' || quest_type.text == '多选题' || quest_type.text == '不定项选择题' || quest_type.text == '双选题'
       }
     }
   }

@@ -42,18 +42,12 @@
             :options.sync="edit.formData.options1"
             :readonly="true"
             :show_answer="false"
-            v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
+            v-if="is_selector && !edit.formData.has_sub">
           </select-quest>
-          <blank-quest
-            :readonly="true"
-            :value.sync="edit.formData"
-            :answer_list.sync="edit.formData.answer_list1"
-            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
-          </blank-quest>
           <understand-quest
             :readonly="true"
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
+            v-if="!is_selector && !edit.formData.has_sub">
           </understand-quest>
           <sub-quest
             :readonly="true"
@@ -67,7 +61,7 @@
       </form>
     </div>
     <form class="form-horizontal">
-    <div class="row" v-if="edit.formData.quest_type_id=='1' && !edit.formData.has_sub">
+    <div class="row" v-if="is_selector && !edit.formData.has_sub">
       <div class="col-sm-6">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -106,44 +100,7 @@
       </div>
     </div>
 
-    <div class="row" v-if="edit.formData.quest_type_id=='2' && !edit.formData.has_sub">
-      <div class="col-sm-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <blank-answer-sm
-              :value.sync="edit.formData.answer_list1">
-            </blank-answer-sm> 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary"
-                    @click="accept(1)"
-                    :disabled="edit.accept_1">
-              <span v-if="edit.accept_1">保存中...</span>
-              <span v-else>采纳</span>
-            </button>
-          </div>
-        </div>
-      </div>
-       <div class="col-sm-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <blank-answer-sm
-              :value.sync="edit.formData.answer_list2">
-            </blank-answer-sm> 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary"
-                    @click="accept(2)"
-                    :disabled="edit.accept_2">
-              <span v-if="edit.accept_2">保存中...</span>
-              <span v-else>采纳</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row" v-if="edit.formData.quest_type_id=='3' && !edit.formData.has_sub">
+    <div class="row" v-if="!is_selector && !edit.formData.has_sub">
       <div class="col-sm-6">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -191,7 +148,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <sub-quest-answer
-              :sub_items="edit.formData.sub_items1">
+              :sub_items.sync="edit.formData.sub_items1">
             </sub-quest-answer>
           </div>
           <div class="modal-footer">
@@ -208,7 +165,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <sub-quest-answer
-              :sub_items="edit.formData.sub_items2">
+              :sub_items.sync="edit.formData.sub_items2">
             </sub-quest-answer>
           </div>
           <div class="modal-footer">
@@ -232,6 +189,7 @@
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
   const {accept} = actions
+  import {qtypes} from 'config'
 
   export default {
     name: 'QuestJudge',
@@ -245,6 +203,15 @@
     computed: {
       is_error() {
         return this.edit.formData.is_error
+      },
+      is_selector() {
+        let quest_type = _.find(qtypes, (d)=> {
+          return d.id == this.edit.formData.quest_type_id
+        })
+        if (!quest_type) {
+          return false
+        }
+        return quest_type.text == '选择题' || quest_type.text == '单选题' || quest_type.text == '多选题' || quest_type.text == '不定项选择题' || quest_type.text == '双选题'
       }
     },
     methods: {

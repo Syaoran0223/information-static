@@ -39,23 +39,18 @@
               <div class="form-group">
                 <label for="" class="control-label col-sm-1">题型:</label>
                 <div class="col-sm-11">
-                  <tag-selector const="quest_types" :value.sync="edit.formData.quest_type_id" :required="true"></tag-selector>
+                  <tag-selector @click="change_qtype" :init-items="quest_type" :value.sync="edit.formData.quest_type_id" :required="true"></tag-selector>
                 </div>
               </div>
 
               <select-quest
                 :value.sync="edit.formData"
                 :options.sync="edit.formData.options1"
-                v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
+                v-if="is_selector && !edit.formData.has_sub">
               </select-quest>
-              <blank-quest
-                :value.sync="edit.formData"
-                :answer_list.sync="edit.formData.answer_list1"
-                v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
-              </blank-quest>
               <understand-quest
                 :value.sync="edit.formData"
-                v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
+                v-if="!is_selector && !edit.formData.has_sub">
               </understand-quest>
               <sub-quest
                 :value.sync="edit.formData"
@@ -127,6 +122,7 @@
 <script>
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
+  import { qtypes } from 'config'
   import router from 'router'
   import SearchView from './search.vue'
 
@@ -135,6 +131,11 @@
   export default {
     name: 'PaperInput',
     extends: configBaseComponent({ state, actions }),
+    data() {
+      return {
+        is_selector: true
+      }
+    },
     ready() {
       let id = this.$route.params.quest_id
       if (id != ':quest_id') {
@@ -146,6 +147,10 @@
         let data = _.find(this.page.table.items, (d)=> {
           return d.qid == this.edit.formData.selected_id
         })
+        return data
+      },
+      quest_type() {
+        let data =  _.filter(qtypes, {subject_id: Number(this.edit.formData.exam.subject)})
         return data
       }
     },
@@ -164,7 +169,12 @@
             _selected: false
           }
         })
-        console.log(selected_item)
+      },
+      change_qtype() {  
+        let quest_type = _.find(this.quest_type, (d)=> {
+          return d._selected
+        })
+        this.is_selector = quest_type.text == '选择题' || quest_type.text == '单选题' || quest_type.text == '多选题' || quest_type.text == '不定项选择题' || quest_type.text == '双选题'
       }
     },
     components: {

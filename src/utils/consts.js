@@ -1,4 +1,4 @@
-import { class_selector_items, subjects } from 'config'
+import { class_selector_items, subjects, qtypes } from 'config'
 
 export const subject = (()=> {
   let res = {}
@@ -368,17 +368,13 @@ export const has_sub = [
   '大小题'
 ]
 
-export const quest_types = {
-  '1': '选择题',
-  '2': '填空题',
-  '3': '解答题'
-}
-
-export const sub_quest_types = {
-  '1': '选择题',
-  '2': '填空题',
-  '3': '解答题'
-}
+export const quest_types = (()=> {
+  let res = {}
+  _.each(qtypes, (data)=> {
+    res[data.id] = data.text
+  })
+  return res
+})()
 
 export const show_types = {
   'A': '一行显示',

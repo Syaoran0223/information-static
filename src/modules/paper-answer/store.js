@@ -1,7 +1,7 @@
 import createStore from 'store/createStore'
 import { PUT, POST } from 'utils/ajax'
 import { notify_ok } from 'utils/notification'
-import {api_host} from 'config'
+import {api_host, qtypes} from 'config'
 import router from 'router'
 
 const module_state = {
@@ -11,17 +11,26 @@ const module_state = {
 }
 
 const module_actions = {
-    parse_edit_init_data: ({ state }, data) => {
+    parse_edit_init_data: ({ state, actions }, data) => {
         data.images = data.quest_image.concat(data.answer_image)
-        if (data.quest_type_id == '3') {
+        if (!actions.is_selector(data.quest_type_id)) {
             data.quest_answer = data.correct_answer1
         }
         return data
     },
-    parse_edit_submit_data ({ state }, customFormData) {
+    is_selector({ state }, quest_type_id) {
+        let quest_type = _.find(qtypes, (d)=> {
+          return d.id==quest_type_id
+        })
+        if (!quest_type) {
+            return false
+        }
+        return quest_type.text == '选择题' || quest_type.text == '单选题' || quest_type.text == '多选题' || quest_type.text == '不定项选择题' || quest_type.text == '双选题'
+    },
+    parse_edit_submit_data ({ state, actions }, customFormData) {
         if (state.edit.formData.has_sub) {
             _.forEach(state.edit.formData.sub_items1, (item)=> {
-                if (item.quest_type_id == '1') {
+                if (actions.is_selector(item.quest_type_id)) {
                     let correct_answer = _.chain(item.options)
                         .filter((d) => {
                             return d._selected
@@ -32,18 +41,12 @@ const module_actions = {
                         .value()
                     item.correct_answer = correct_answer.join('')
                 }
-                if (item.quest_type_id == '2') {
-                    let correct_answer = _.map(item.answer_list, (d)=> {
-                        return d.content
-                    })
-                    item.correct_answer = correct_answer
-                }
-                if (item.quest_type_id == '3') {
+                else {
                     item.correct_answer = item.quest_answer
                 }
             })
         } else {
-            if (state.edit.formData.quest_type_id == '1') {
+            if (actions.is_selector(state.edit.formData.quest_type_id)) {
                 let correct_answer1 = _.chain(state.edit.formData.options1)
                     .filter((item)=> {
                         return item._selected
@@ -53,12 +56,6 @@ const module_actions = {
                     })
                     .value()
                 state.edit.formData.correct_answer1 = correct_answer1.join('')
-            }
-            if (state.edit.formData.quest_type_id == '2') {
-                let correct_answer1 = _.map(state.edit.formData.answer_list1, (item)=> {
-                    return item.content
-                })
-                state.edit.formData.correct_answer1 = correct_answer1
             }
         }
         

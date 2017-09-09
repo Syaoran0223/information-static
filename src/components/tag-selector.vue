@@ -29,6 +29,9 @@
       const: {
         type: String
       },
+      initItems: {
+        default: null
+      },
       value: {
         twoWay: true
       },
@@ -50,6 +53,14 @@
         this.remote = null
         this.items = _.map(constTypes[this.const], (text, id) => {
           return { id, text, _selected: false }
+        })
+        set_items_selected(this.items, { id: this.value })
+      }
+      if (this.initItems) {
+        this.remote = null
+        this.items = _.map(this.initItems, (d) => {
+          d._selected = false
+          return d
         })
         set_items_selected(this.items, { id: this.value })
       }

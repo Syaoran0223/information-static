@@ -39,15 +39,11 @@
 
           <select-verify
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
+            v-if="is_selector && !edit.formData.has_sub">
           </select-verify>
-          <blank-verify
-            :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
-          </blank-verify>
           <understand-verify
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
+            v-if="!is_selector && !edit.formData.has_sub">
           </understand-verify>
           <sub-verify
             :value.sync="edit.formData"
@@ -84,6 +80,7 @@
   import UnderstandVerify from './understand-verify.vue'
   import SubVerify from './sub-verify.vue'
 
+  import {qtypes} from 'config'
   const {on_verify_right, on_edit_submit} = actions
 
   export default {
@@ -93,6 +90,17 @@
       let id = this.$route.params.quest_id
       if (id != ':quest_id') {
         actions.on_item_edit_click({}, {id})
+      }
+    },
+    computed: {
+      is_selector() {
+        let quest_type = _.find(qtypes, (d)=> {
+          return d.id == this.edit.formData.quest_type_id
+        })
+        if (!quest_type) {
+          return false
+        }
+        return quest_type.text == '选择题' || quest_type.text == '单选题' || quest_type.text == '多选题' || quest_type.text == '不定项选择题' || quest_type.text == '双选题'
       }
     },
     components: {

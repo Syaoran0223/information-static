@@ -41,18 +41,12 @@
             :value.sync="edit.formData"
             :options.sync="edit.formData.options1"
             :readonly="true"
-            v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub">
+            v-if="is_selector && !edit.formData.has_sub">
           </select-quest>
-          <blank-quest
-            :readonly="true"
-            :value.sync="edit.formData"
-            :answer_list.sync="edit.formData.answer_list1"
-            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub">
-          </blank-quest>
           <understand-quest
             :readonly="true"
             :value.sync="edit.formData"
-            v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
+            v-if="!is_selector && !edit.formData.has_sub">
           </understand-quest>
           <sub-quest
             :readonly="true"
@@ -78,17 +72,12 @@
       <form class="form-horizontal" @submit.prevent="on_edit_submit">
         <div class="panel-body">
           <option-view
-              v-if="edit.formData.quest_type_id==1 && !edit.formData.has_sub"
+              v-if="is_selector && !edit.formData.has_sub"
               :readonly="true"
               :value.sync="edit.formData.options2">
           </option-view>
 
-          <blank-answer
-            v-if="edit.formData.quest_type_id==2 && !edit.formData.has_sub"
-            :value.sync="edit.formData.answer_list2">
-          </blank-answer>
-
-          <div class="form-group" v-if="edit.formData.quest_type_id==3 && !edit.formData.has_sub">
+          <div class="form-group" v-if="!is_selector && !edit.formData.has_sub">
             <label for="" class="control-label col-sm-1">答案:</label>
             <div class="col-sm-11">
               <input-alert
@@ -100,39 +89,14 @@
           
           <div v-if="edit.formData.has_sub">
             <div class="panel panel-default" v-for="item in edit.formData.sub_items2">
-              <div class="panel-body">
-                <div class="form-group">
-                  <label for="" class="control-label col-sm-2">({{item.sort}}) 子题类型:</label>
-                  <div class="col-sm-10">
-                    <button type="button" class="btn btn-sm btn-primary">
-                      {{item.quest_type_id | get_const_value 'quest_types'}}
-                    </button>
-                  </div>
-                </div>
-
-                <select-quest
-                  :readonly="true"
-                  :value.sync="item"
-                  :options.sync="item.options"
-                  v-if="item.quest_type_id==1"
-                  :is-sub="true">
-                </select-quest>
-
-                <blank-quest
-                  :readonly="true"
-                  :value.sync="item"
-                  :answer_list.sync="item.answer_list"
-                  v-if="item.quest_type_id==2"
-                  :is-sub="true">>
-                </blank-quest>
-
-                <understand-quest
-                  :readonly="true"
-                  :value.sync="item"
-                  v-if="item.quest_type_id==3"
-                  :is-sub="true">
-                </understand-quest>
-              </div>
+              <sub-quest-item
+                :value.sync="item"
+                :readonly="true"  
+                :sub_items.sync="edit.formData.sub_items2"
+                :show_wrong="false"
+                :subject="edit.formData.exam.subject"
+                >
+              </sub-quest-item>
             </div>
           </div>
         </div>
@@ -155,6 +119,7 @@
 <script>
   import configBaseComponent from 'components/base/edit'
   import { state, actions } from './store'
+  import {qtypes} from 'config'
   const {on_answer_right} = actions
 
   export default {
@@ -169,6 +134,15 @@
     computed: {
       is_error() {
         return this.edit.formData.is_error
+      },
+      is_selector() {
+        let quest_type = _.find(qtypes, (d)=> {
+          return d.id == this.edit.formData.quest_type_id
+        })
+        if (!quest_type) {
+          return false
+        }
+        return quest_type.text == '选择题' || quest_type.text == '单选题' || quest_type.text == '多选题' || quest_type.text == '不定项选择题' || quest_type.text == '双选题'
       }
     },
     methods: {

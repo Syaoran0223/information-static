@@ -14,36 +14,13 @@
 
     <hr>
       <div class="panel panel-default" v-for="data in value.sub_items">
-        <div class="panel-body">
-          <div class="form-group">
-            <label for="" class="control-label col-sm-2">({{data.sort}}) 子题类型:</label>
-            <div class="col-sm-10">
-              <button type="button" class="btn btn-sm btn-primary">
-                {{data.quest_type_id | get_const_value 'quest_types'}}
-              </button>
-            </div>
-          </div>
-
-          <select-verify
-            v-if="data.quest_type_id==1"
-            :value.sync="data"
-            :is-sub="true">
-          </select-verify>
-
-          <blank-verify
-            v-if="data.quest_type_id==2"
-            :value.sync="data"
-            :is-sub="true">
-          </blank-verify>
-
-          <understand-verify
-            v-if="data.quest_type_id==3"
-            :value.sync="data"
-            :is-sub="true">
-          </understand-verify>
-        </div>
+        <sub-quest-item
+          :value.sync="data"
+          :subject="value.exam.subject"
+          :readonly="true"
+          :sub_items.sync="value.sub_items">
+        </sub-quest-item>
       </div>
-
     <hr>
 
     <div class="form-group">

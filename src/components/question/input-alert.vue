@@ -3,7 +3,7 @@
     <template v-if="show_wrong">
       <div class="mg-t-7 pull-left">
         <p class="placehold" v-if="!value">{{placehold}}</p>
-        <p v-else>{{{value}}}</p>
+        <p id="test" v-else>{{{value}}}</p>
       </div>
       <div class="mg-t-7 pull-left" style="margin-left: 15px;">
         <span><a href="#" @click.prevent="open=true">纠错</a></span>
@@ -29,7 +29,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link"
-                @click="open=false">关闭</button>
+                @click="close_window">关闭</button>
       </div>
 
     </modal>
@@ -58,6 +58,12 @@
     data() {
       return {
         open: false
+      }
+    },
+    methods: {
+      close_window() {
+        this.open=false
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub])
       }
     }
   }

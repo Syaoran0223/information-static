@@ -19,6 +19,22 @@
     { name: 'document', items: [ 'Source' ] },
   ]
 
+  const toolbar_group = [
+		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+		{ name: 'forms' },
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+		{ name: 'links' },
+		{ name: 'insert' },
+		{ name: 'styles' },
+		{ name: 'colors' },
+		{ name: 'tools' },
+		{ name: 'others' },
+		{ name: 'about' }
+	]
+
   export default {
     props: {
       value: {
@@ -52,13 +68,21 @@
 
         this.editor = CKEDITOR.replace(el, {
           language: 'zh-cn',
-          toolbar: toolbar_base,
+          toolbarGroups: toolbar_group,
 
           //
-          extraPlugins: 'autogrow',
+          extraPlugins: 'kityformula,pastefromword,pastebase64',
           removePlugins: 'elementspath',
+          pasteFromWord_heuristicsEdgeList: false,
+          pasteFromWordPromptCleanup: false,
+          mathJaxLib: '/static/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
           autoGrow_maxHeight: 800,
           autoGrow_onStartup: true,
+          removeButtons: 'Cut,Copy,Paste,Anchor,Underline,Strike,Subscript,Superscript',
+          removeDialogTabs: 'link:advanced',
+          pasteFilter: 'semantic-content',
+          enterMode: CKEDITOR.ENTER_BR,
+          allowedContent: true,
           filebrowserUploadUrl: `${api_host}/teacher/upload/ckeditor?module=teacher&dirname=ckeditor`
         })
 

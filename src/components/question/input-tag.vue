@@ -11,7 +11,7 @@
       ></ckeditor>
       <div class="modal-footer">
         <button type="button" class="btn btn-link"
-                @click="open=false">关闭</button>
+                @click="close_window">关闭</button>
       </div>
     </div>
   </div>
@@ -35,6 +35,12 @@
     data() {
       return {
         open: false
+      }
+    },
+    methods: {
+      close_window() {
+        this.open=false
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub])
       }
     }
   }

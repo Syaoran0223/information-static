@@ -75,7 +75,7 @@
           removePlugins: 'elementspath',
           pasteFromWord_heuristicsEdgeList: false,
           pasteFromWordPromptCleanup: false,
-          mathJaxLib: '/static/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
+          mathJaxLib: 'http://www.i3ke.com/static/siming/base/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
           autoGrow_maxHeight: 800,
           autoGrow_onStartup: true,
           removeButtons: 'Cut,Copy,Paste,Anchor,Underline,Strike,Subscript,Superscript',

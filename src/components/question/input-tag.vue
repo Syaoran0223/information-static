@@ -19,6 +19,9 @@
 <script>
   export default {
     name: 'InputAlert',
+    ready() {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+    },
     props: {
       placehold: {
         type: String,

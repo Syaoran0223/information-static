@@ -66,25 +66,7 @@
       init () {
         let el = $(this.$el).find('textarea')[0]
 
-        this.editor = CKEDITOR.replace(el, {
-          language: 'zh-cn',
-          toolbarGroups: toolbar_group,
-
-          //
-          extraPlugins: 'kityformula,pastefromword,pastebase64',
-          removePlugins: 'elementspath',
-          pasteFromWord_heuristicsEdgeList: false,
-          pasteFromWordPromptCleanup: false,
-          mathJaxLib: 'http://www.i3ke.com/static/siming/base/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
-          autoGrow_maxHeight: 800,
-          autoGrow_onStartup: true,
-          removeButtons: 'Cut,Copy,Paste,Anchor,Underline,Strike,Subscript,Superscript',
-          removeDialogTabs: 'link:advanced',
-          pasteFilter: 'semantic-content',
-          enterMode: CKEDITOR.ENTER_BR,
-          allowedContent: true,
-          filebrowserUploadUrl: `${api_host}/teacher/upload/ckeditor?module=teacher&dirname=ckeditor`
-        })
+        this.editor = CKEDITOR.replace(el)
 
         this.editor.on('key', () => {
           setTimeout(this.on_change.bind(this), 0)

@@ -49,9 +49,6 @@
     methods: {
       init () {
         let el = $(this.$el).find('textarea')[0]
-        try {
-            CKEDITOR.instances[el].destroy(true);
-        } catch (e) { }
         this.editor = CKEDITOR.replace(el)
 
         this.editor.on('key', () => {

@@ -62,6 +62,7 @@
 </template>
 <script>
   import InputAlert from './input-alert.vue'
+  import MathJax from 'config'
 
   export default {
     name: 'OptionView',

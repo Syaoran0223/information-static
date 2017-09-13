@@ -34,6 +34,9 @@
 
   export default {
     name: 'OptionView',
+    ready() {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+    },
     props: {
       value: {
         type: Array,

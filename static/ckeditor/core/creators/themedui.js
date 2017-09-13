@@ -437,7 +437,7 @@ CKEDITOR.replaceClass = 'ckeditor';
 
 		// Make top and bottom spaces unelectable, but not content space,
 		// otherwise the editable area would be affected.
-		topHtml && editor.ui.space( 'top' ) && editor.ui.space( 'top' ).unselectable();
+		topHtml && editor.ui.space( 'top' ).unselectable();
 		bottomHtml && editor.ui.space( 'bottom' ).unselectable();
 
 		var width = editor.config.width, height = editor.config.height;

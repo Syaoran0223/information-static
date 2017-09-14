@@ -1,7 +1,7 @@
 import createStore from 'store/createStore'
 import {date_format} from 'utils/filter'
 import { api_host } from 'config'
-import { PUT } from 'utils/ajax'
+import { PUT, GET } from 'utils/ajax'
 import { notify_ok } from 'utils/notification'
 
 const module_state = {
@@ -53,6 +53,7 @@ const module_actions = {
         let items = data.items || data
         items = _.map(items, (d)=> {
             d.saving = false
+            d.pushing = false
             d.canceling = false
             return d
         })
@@ -61,6 +62,24 @@ const module_actions = {
             totalCount: data.totalCount,
             totalPage: data.totalPage
         }
+    },
+
+    push_attachments({ state, actions }, item) {
+        if (item.pushing) {
+            return
+        }
+        item.pushing = true
+        let url = `${ api_host }/api/paper/attachment/upload/${ item.id }`
+        GET(url, {data: {}}).then((res) => {
+            notify_ok({
+                title: '上传成功'
+            })
+            actions.table_query({state, actions})
+        }).catch(() => {
+
+        }).then(() => {
+            item.pushing = false
+        })
     },
 
     update_fast({ state, actions }, item) {

@@ -32,6 +32,14 @@
             <span v-else>取消快速通道</span>
           </button>
         </div>
+        <div class="grid-cell cell-btn-group">
+          <button class="btn btn-link"
+              @click="push_attachments(item)"
+          >
+            <span v-if="item.pushing">正在上传</span>
+            <span v-else>上报附件</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -45,7 +53,8 @@
     extends: configBaseComponent({ state, actions }),
     methods: {
       update_fast: actions.update_fast,
-      cancel_fast: actions.cancel_fast
+      cancel_fast: actions.cancel_fast,
+      push_attachments: actions.push_attachments
     }
   }
 </script>

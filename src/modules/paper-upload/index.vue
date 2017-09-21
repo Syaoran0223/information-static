@@ -129,7 +129,7 @@
                     :state.sync="edit.uploadState"
                   ></file-upload>
                   <span id="helpBlock2" class="help-block">
-                    请上传试卷文件，如有答案文件请一并上传
+                    请上传试卷文件，如有答案文件请一并上传(最大文件大小允许 20M)
                   </span>
                 </div>
               </div>

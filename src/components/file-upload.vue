@@ -47,6 +47,12 @@
       <img id="image" v-bind:src="open_url" style="max-width: 100%;"/>
     </div>
     <div class="modal-footer">
+      <div class="text-center">
+        <button class="btn btn-primary"
+                @click.prevent="rotate()">
+          <span>旋转</span>
+        </button>
+      </div>
     </div>
   </modal>
 </template>
@@ -124,9 +130,7 @@
     },
     ready() {
       window.setTimeout(this.init, 500)
-      if (this.cutable) {
-        this.$image = $('#image')
-      }
+      this.$image = $('#image')
     },
     methods: {
       init() {
@@ -235,6 +239,13 @@
           return val == 'true' ? true : false
         }
       },
+      rotate() {
+        this.$image.cropper('rotate', 90)
+        if (!this.cutable) {
+          this.$image.cropper('setDragMode', 'move')
+          this.$image.cropper('clear')
+        }
+      },
       open_modal(url) {
         this.modal_open = true
         this.open_url = url
@@ -247,6 +258,11 @@
                 this.$image.cropper('setCropBoxData', this.cropBoxData);
               }
             })
+          })
+        } else {
+          Vue.nextTick(() => {
+            this.$image.cropper('setDragMode', 'move')
+            this.$image.cropper('clear')
           })
         }
       },

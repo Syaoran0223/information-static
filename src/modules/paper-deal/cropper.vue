@@ -49,6 +49,7 @@
       </div>
     </div>
     <div class="modal-footer">
+      
       <button @click.prevent="save" class="btn btn-primary">
         <span v-if="saving">正在切图...</span>
         <span v-else>切图</span>
@@ -155,10 +156,14 @@
         let top = ((box.top-canvas.top)/canvas.height) * canvas.naturalHeight
         let right = ((box.right-canvas.left)/canvas.width)  * canvas.naturalWidth
         let lower = ((box.lower-canvas.top)/canvas.height) * canvas.naturalHeight
-        return [left, top, right, lower]
+        let degree = this.$image.cropper('getData')['rotate']
+        return [left, top, right, lower, degree]
       },
       remove(index) {
         this.dest_images.splice(index, 1);
+      },
+      rotate() {
+        this.$image.cropper('rotate', 90)
       },
       save() {
         let canvasData = this.$image.cropper('getCanvasData')

@@ -185,7 +185,7 @@
                   <span v-if="edit.acception.saving">保存中...</span>
                   <span v-else>通过</span>
                 </button>
-                <button class="btn btn-primary"
+                <button class="btn btn-success"
                         @click.prevent="use"
                         :disabled="edit.usage.saving">
                   <span v-if="edit.usage.saving">保存中...</span>

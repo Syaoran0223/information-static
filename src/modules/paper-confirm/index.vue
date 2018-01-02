@@ -192,6 +192,12 @@
                   <span v-else>采纳</span>
                 </button>
               </div>
+              <div class="row">
+                <div>
+                  <p>通过：确定该试卷具有一定采集价值，但不记录到信息库。</p>
+                  <p>采纳：确定该试卷具有较高采集价值，并记录到信息库中。</p>
+                </div>
+              </div>
             </form>
           </div>
         </div>

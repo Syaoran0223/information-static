@@ -36,6 +36,7 @@
           ></selector>
         </div>
 
+
         <div class="form-group">
           <label for="">学年</label>
           <selector
@@ -82,7 +83,7 @@
   import configBaseComponent from 'components/base/search'
 
   export default {
-    data() {
+      data() {
         return {
           cityForm: {
             pro_id: 0

@@ -54,6 +54,9 @@
         <span v-if="saving">正在切图...</span>
         <span v-else>切图</span>
       </button>
+      <button @click.prevent="rotate" class="btn btn-success">
+        <span>旋转</span>
+      </button>
       <button @click.prevent="save_whole" class="btn btn-primary">
         <span>截取整张</span>
       </button>
@@ -139,24 +142,33 @@
         this.dest_img_open = true
         this.dest_url = url
       },
-      gen_box(canvas, box) {
-        box.right = box.left + box.width
-        box.lower = box.top + box.height
+      // gen_box(canvas, box) {
+      //   box.right = box.left + box.width
+      //   box.lower = box.top + box.height
 
-        canvas.right = canvas.left + canvas.width
-        canvas.lower = canvas.top + canvas.height
+      //   canvas.right = canvas.left + canvas.width
+      //   canvas.lower = canvas.top + canvas.height
 
-        box.left = box.left < canvas.left ? canvas.left : box.left
-        box.top = box.top < canvas.top ? canvas.top : box.top
+      //   box.left = box.left < canvas.left ? canvas.left : box.left
+      //   box.top = box.top < canvas.top ? canvas.top : box.top
 
-        box.right = box.right > canvas.right ? canvas.right : box.right
-        box.lower = box.lower > canvas.lower ? canvas.lower : box.lower
+      //   box.right = box.right > canvas.right ? canvas.right : box.right
+      //   box.lower = box.lower > canvas.lower ? canvas.lower : box.lower
 
-        let left = ((box.left-canvas.left)/canvas.width) * canvas.naturalWidth
-        let top = ((box.top-canvas.top)/canvas.height) * canvas.naturalHeight
-        let right = ((box.right-canvas.left)/canvas.width)  * canvas.naturalWidth
-        let lower = ((box.lower-canvas.top)/canvas.height) * canvas.naturalHeight
-        let degree = this.$image.cropper('getData')['rotate']
+      //   let left = ((box.left-canvas.left)/canvas.width) * canvas.naturalWidth
+      //   let top = ((box.top-canvas.top)/canvas.height) * canvas.naturalHeight
+      //   let right = ((box.right-canvas.left)/canvas.width)  * canvas.naturalWidth
+      //   let lower = ((box.lower-canvas.top)/canvas.height) * canvas.naturalHeight
+      //   let degree = this.$image.cropper('getData')['rotate']
+      //   return [left, top, right, lower, degree]
+      // },
+      gen_box() {
+        let data = this.$image.cropper('getData')
+        let left = data['x']
+        let top = data['y']
+        let right = data['width'] + left
+        let lower = data['height'] + top
+        let degree = data['rotate']
         return [left, top, right, lower, degree]
       },
       remove(index) {
@@ -166,10 +178,10 @@
         this.$image.cropper('rotate', 90)
       },
       save() {
-        let canvasData = this.$image.cropper('getCanvasData')
-        let boxData = this.$image.cropper('getCropBoxData')
+        // let canvasData = this.$image.cropper('getCanvasData')
+        // let boxData = this.$image.cropper('getCropBoxData')
 
-        let box = this.gen_box(canvasData, boxData)
+        let box = this.gen_box()
 
         console.log(box)
         let data = {

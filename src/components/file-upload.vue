@@ -260,10 +260,10 @@
             })
           })
         } else {
-          Vue.nextTick(() => {
-            this.$image.cropper('setDragMode', 'move')
-            this.$image.cropper('clear')
-          })
+          // Vue.nextTick(() => {
+          //   this.$image.cropper('setDragMode', 'move')
+          //   this.$image.cropper('clear')
+          // })
         }
       },
       close_modal() {

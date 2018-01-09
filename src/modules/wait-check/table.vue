@@ -7,6 +7,9 @@
     <div class="">
       <div class="" v-for="item in table.items">
         <div class="flex-grid" @click="item.open=!item.open">
+        <div class="grid-cell">{{item.province_name}}</div>
+        <div class="grid-cell">{{item.city_name}}</div>
+        <div class="grid-cell">{{item.area_name}}</div>
           <div class="grid-cell">{{item.year}} {{item.section | get_const_value 'section'}}</div>
           <div class="grid-cell">{{item.school_name}}</div>
           <div class="grid-cell cell-label">{{item.grade | get_const_value 'grade'}}</div>

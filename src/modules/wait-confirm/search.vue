@@ -4,7 +4,29 @@
 
       <form class="form-inline"
         @submit.prevent="on_search_submit">
-
+        <div class="form-group">
+          <label for="">省</label>
+          <selector
+            remote="api/province"
+            :value.sync="search.formData.province_id"
+          ></selector>
+        </div>
+        <div class="form-group">
+          <label for="">市</label>
+          <selector
+            remote="api/city"
+            :remote-params.sync="cityForm"
+            :value.sync="search.formData.city_id"
+          ></selector>
+        </div>
+        <div class="form-group">
+          <label for="">县/区</label>
+          <selector
+            remote="api/area"
+            :value.sync="search.formData.area_id"
+            :remote-params.sync="areaForm"
+          ></selector>
+        </div>
         <div class="form-group">
           <label for="">学年</label>
           <selector
@@ -51,6 +73,30 @@
   import configBaseComponent from 'components/base/search'
 
   export default {
+    data() {
+        return {
+          cityForm: {
+            pro_id: 0
+          },
+          areaForm: {
+            city_id: 0
+          },
+          schoolForm: {
+            ctid: 0
+          }
+        }
+    },
+    watch: {
+      'search.formData.province_id'(val) {
+        this.cityForm.pro_id = val
+      },
+      'search.formData.city_id'(val) {
+        this.areaForm.city_id = val
+      },
+      'search.formData.area_id'(val) {
+        this.schoolForm.ctid = val
+      }
+    },
     computed: {
       subjects() {
         if (!this.search.formData.grade) {

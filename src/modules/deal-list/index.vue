@@ -2,7 +2,7 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-
+      <search-view></search-view>
       <table-view></table-view>
       <edit-view></edit-view>
 
@@ -15,13 +15,15 @@
   import { state, actions } from './store'
   import TableView from './table'
   import EditView from './edit'
+  import SearchView from './search'
 
   export default {
     name: 'DealList',
     extends: configBaseComponent({ state, actions }),
     components: {
       TableView,
-      EditView
+      EditView,
+      SearchView
     }
   }
 </script>

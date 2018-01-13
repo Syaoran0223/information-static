@@ -2,6 +2,7 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
+      <search-view></search-view>
       <table-view></table-view>
       <edit-view></edit-view>
 

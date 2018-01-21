@@ -44,6 +44,7 @@ import UserInfo from 'modules/user-manage/user-info/index.vue'
 import UserWork from 'modules/user-manage/user-work/index.vue'
 import MessageList from 'modules/user-manage/message-list/index.vue'
 import ScoreList from 'modules/user-manage/score-list/index.vue'
+import PaperCheck from 'modules/paper-check/index.vue'
 
 const router = new VueRouter({
   linkActiveClass: 'active'
@@ -109,6 +110,10 @@ let map = {
   'wait-answer': {
     name: 'WaitAnswer',
     component: WaitAnswer
+  },
+  'paper-check': {
+    name: 'PaperCheck',
+    component: PaperCheck
   },
   'paper-answer/:quest_id': {
     name: 'PaperAnswer',

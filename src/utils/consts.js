@@ -339,7 +339,9 @@ export const paper_state = {
   '2': '已采纳',
   '5': '审核通过',
   '3': '正在处理',
-  '4': '预处理完成'
+  '4': '预处理完成',
+  '6': '录题完成',
+  '7': '已同步'
 }
 
 export const question_state = {

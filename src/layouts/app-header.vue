@@ -31,6 +31,7 @@
           <ac id="WaitVerify"><li><a v-link="{ name: 'WaitVerify' }">待校对</a></li></ac>
           <ac id="QuestVerify"><li><a v-link="{ name: 'QuestVerify' }">题目校对</a></li></ac>
           <ac id="VerifyList"><li><a v-link="{ name: 'VerifyList' }">校对记录</a></li></ac>
+          <li><a v-link="{ name: 'PaperCheck' }">试卷校对</a></li>
           <li><a v-link="{ name: 'UserManage' }">用户中心</a></li>
         </ul>
       </nav>
